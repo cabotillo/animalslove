@@ -17,6 +17,6 @@ return [
     'reset' => '¡Su contraseña ha sido reestablecida!',
     'sent' => '¡Recordatorio de contraseña enviado!',
     'token' => 'Este token de reestablecimiento de contraseña es inválido.',
-    'user' => 'No se ha encontrado un usuario con esa dirección de correo.',
+    'user' => 'No se ha encontrado un usuario.blade.php con esa dirección de correo.',
 
 ];

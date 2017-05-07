@@ -44,7 +44,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;<li><a href="{{ route('home') }}">Inicio</a></li>
-                        &nbsp;<li><a href="{{ route('editarperfil') }}">Editar Perfil</a></li>
+                        &nbsp;<li><a href="{{ route('editarperfil.cuenta') }}">Editar Perfil</a></li>
                         <li><a href="{{ route('home') }}">Mensajes</a></li>
                     </ul>
 

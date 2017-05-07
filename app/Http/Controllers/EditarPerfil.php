@@ -30,7 +30,17 @@ class EditarPerfil extends Controller
         return view('editarperfil');
     }
 
-    public function update()
+    public function cuenta()
+    {
+        return view('editarperfil.cuenta');
+    }
+
+    public function premium()
+    {
+        return view('editarperfil.premium');
+    }
+
+    public function updateCuenta()
     {
 
         $validation = Validator::make(Input::all(), [
@@ -59,6 +69,41 @@ class EditarPerfil extends Controller
 
 
             return view('home')->with('mensaje', 'Perfil actualizado correctamente');
+        }
+    }
+
+    public function updatePremium()
+    {
+
+        $validation = Validator::make(Input::all(), [
+            'premium' => '',
+        ]);
+
+        if($validation->fails()) {
+            //withInput keep the users info
+            return Redirect::back()->withInput()->withErrors($validation->messages());
+        } else {
+
+            $user = Auth::user()->id;
+
+            $p = Input::get('premium');
+            if ($p == 'on'){
+                $p = 2;
+                $mensaje = 'Te has convertido el premium';
+            }
+
+            if ($p == ''){
+                $p = 1;
+                $mensaje = 'Ya no eres premium';
+            }
+
+
+            User::where('id', $user)->update(array(
+                'tipo' => $p,
+            ));
+
+
+            return view('home')->with('mensaje', $mensaje);
         }
     }
 }
