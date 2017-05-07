@@ -14,7 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/editarperfil', 'EditarPerfil@index')->name('editarperfil');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::post('/editarperfil', 'EditarPerfil@update')->name('editarperfil');

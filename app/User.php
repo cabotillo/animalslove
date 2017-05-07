@@ -26,4 +26,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    protected $table = 'users';
+
+    public function provincia(){
+        return $this->belongsTo('App\Provincias');
+    }
 }
