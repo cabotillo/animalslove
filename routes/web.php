@@ -24,3 +24,6 @@ Route::post('editarperfil/cuenta', ['as' => 'editarperfil.cuenta', 'uses' => 'Ed
 
 Route::get('editarperfil/premium', ['as' => 'editarperfil.premium', 'uses' => 'EditarPerfil@premium']);
 Route::post('editarperfil/premium', ['as' => 'editarperfil.premium', 'uses' => 'EditarPerfil@updatePremium']);
+
+Route::get('editarperfil/password', ['as' => 'editarperfil.password', 'uses' => 'EditarPerfil@password']);
+Route::post('editarperfil/password', ['as' => 'editarperfil.password', 'uses' => 'EditarPerfil@updatePassword']);

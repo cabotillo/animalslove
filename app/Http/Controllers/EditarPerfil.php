@@ -39,6 +39,10 @@ class EditarPerfil extends Controller
     {
         return view('editarperfil.premium');
     }
+    public function password()
+    {
+        return view('editarperfil.password');
+    }
 
     public function updateCuenta()
     {
@@ -107,6 +111,30 @@ class EditarPerfil extends Controller
 
 
             return view('home')->with('mensaje', $mensaje);
+        }
+    }
+
+    public function updatePassword()
+    {
+
+        $validation = Validator::make(Input::all(), [
+            'password' => 'required|min:6|confirmed',
+        ]);
+
+        if($validation->fails()) {
+            //withInput keep the users info
+            return Redirect::back()->withInput()->withErrors($validation->messages());
+        } else {
+
+            $user = Auth::user()->id;
+            $pass = Input::get('password');
+
+            User::where('id', $user)->update(array(
+                'password' => bcrypt($pass),
+            ));
+
+
+            return view('home')->with('mensaje', 'Contraseña modificada correctamente');
         }
     }
 }
