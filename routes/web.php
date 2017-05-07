@@ -27,3 +27,5 @@ Route::post('editarperfil/premium', ['as' => 'editarperfil.premium', 'uses' => '
 
 Route::get('editarperfil/password', ['as' => 'editarperfil.password', 'uses' => 'EditarPerfil@password']);
 Route::post('editarperfil/password', ['as' => 'editarperfil.password', 'uses' => 'EditarPerfil@updatePassword']);
+
+//Route::resource('mascota', 'MascotasController');

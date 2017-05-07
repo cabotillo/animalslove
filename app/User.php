@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Mascotas;
+use App\Provincias;
 
 class User extends Authenticatable
 {
@@ -15,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nombre', 'apellidos', 'login', 'email', 'password', 'telefono',
+        'id','nombre', 'apellidos', 'login', 'email', 'password', 'telefono', 'provincia', 'avatar', 'tipo',
     ];
 
     /**
@@ -30,5 +32,9 @@ class User extends Authenticatable
 
     public function provincia(){
         return $this->belongsTo('App\Provincias');
+    }
+
+    public function mascotas(){
+        return $this->hasMany('App\Mascotas');
     }
 }
