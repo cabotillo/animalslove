@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mascotas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
@@ -42,6 +43,16 @@ class EditarPerfil extends Controller
     public function password()
     {
         return view('editarperfil.password');
+    }
+
+    public function mascotas()
+    {
+        return view('editarperfil.mascotas')->with('num', Auth::user()->mascotas);
+    }
+
+    public function editarMascota($id)
+    {
+        return view('editarperfil.editarmascota')->with('mascota',Mascotas::find($id));
     }
 
     public function updateCuenta()

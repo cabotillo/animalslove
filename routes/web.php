@@ -28,4 +28,9 @@ Route::post('editarperfil/premium', ['as' => 'editarperfil.premium', 'uses' => '
 Route::get('editarperfil/password', ['as' => 'editarperfil.password', 'uses' => 'EditarPerfil@password']);
 Route::post('editarperfil/password', ['as' => 'editarperfil.password', 'uses' => 'EditarPerfil@updatePassword']);
 
-//Route::resource('mascota', 'MascotasController');
+Route::get('editarperfil/mascotas', ['as' => 'editarperfil.mascotas', 'uses' => 'EditarPerfil@mascotas']);
+Route::get('editarperfil/editar/mascotas/{id}', ['as' => 'editarperfil.editarmascota', 'uses' => 'EditarPerfil@editarMascota']);
+
+Route::resource('mascota', 'MascotaController');
+Route::resource('raza', 'RazaController');
+Route::resource('animal', 'AnimalController');

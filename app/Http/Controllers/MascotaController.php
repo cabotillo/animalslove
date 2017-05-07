@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Mascotas;
 use Illuminate\Http\Request;
 
-class MascotasController extends Controller
+class MascotaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -47,6 +47,7 @@ class MascotasController extends Controller
     public function show(Mascotas $mascotas)
     {
         //
+
         dd($mascotas);
     }
 
