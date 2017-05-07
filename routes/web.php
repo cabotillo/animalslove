@@ -30,6 +30,7 @@ Route::post('editarperfil/password', ['as' => 'editarperfil.password', 'uses' =>
 
 Route::get('editarperfil/mascotas', ['as' => 'editarperfil.mascotas', 'uses' => 'EditarPerfil@mascotas']);
 Route::get('editarperfil/editar/mascotas/{id}', ['as' => 'editarperfil.editarmascota', 'uses' => 'EditarPerfil@editarMascota']);
+Route::post('editarperfil/editar/mascotas/{id}', ['as' => 'editarperfil.editarmascota', 'uses' => 'EditarPerfil@updateMascota']);
 
 Route::resource('mascota', 'MascotaController');
 Route::resource('raza', 'RazaController');

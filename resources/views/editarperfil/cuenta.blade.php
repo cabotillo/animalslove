@@ -71,16 +71,12 @@
                                 <input type="file" name="img">
                             </div>
                         </div>
-
                         <div class="col-lg-12">
                             <input type="submit" class="btn btn-primary" value="Guardar Cambios">
                         </div>
                     </form>
                     </div>
                 </div>
-                    <!-- /Datos Personales -->
-
-
             </div>
         </div>
     </div>

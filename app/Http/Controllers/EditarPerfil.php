@@ -148,4 +148,35 @@ class EditarPerfil extends Controller
             return view('home')->with('mensaje', 'Contraseña modificada correctamente');
         }
     }
+
+    public function updateMascota($id)
+    {
+
+        $validation = Validator::make(Input::all(), [
+            'nombre' => 'required|string|max:25',
+            'tamanyo' => 'required|string|max:25',
+            'edad' => 'required|integer',
+        ]);
+
+        if($validation->fails()) {
+            //withInput keep the users info
+            return Redirect::back()->withInput()->withErrors($validation->messages());
+        } else {
+
+
+            $nombre = Input::get('nombre');
+            $tamanyo = Input::get('tamanyo');
+            $edad = Input::get('edad');
+            $mascota = $id;
+
+            Mascotas::where('id', $mascota)->update(array(
+                'nombre' => $nombre,
+                'tamanyo' => $tamanyo,
+                'edad' => $edad,
+            ));
+
+
+            return view('home')->with('mensaje', 'La mascota ha sido editada correctamente');
+        }
+    }
 }

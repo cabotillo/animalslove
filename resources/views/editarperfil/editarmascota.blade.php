@@ -21,13 +21,18 @@
                             <li class="active"><a href="{{'../../mascotas'}}">Mascotas</a></li>
                             <li><a href="{{'../../premium'}}">Premium</a></li>
                         </ul>
-                        <form action="" method="post">
+                        <form action="{{route('editarperfil.editarmascota',$mascota->id)}}" method="post">
                             {{ csrf_field() }}
                             <div class=" row panel-body">
 
                                 <div class="form-group">
                                     <label class="control-label">Nombre</label>
                                     <input type="text" class="form-control" value="{{$mascota->nombre}}" name="nombre">
+                                    @if ($errors->has('nombre'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('nombre') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Animal</label>
@@ -50,10 +55,17 @@
                                         <option @if($mascota->tamanyo == 'Gigante') selected = "selected" @endif value="Gigante">Gigante</option>
 
                                     </select>
+
+
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Edad</label>
-                                    <input type="number" class="form-control" value="{{$mascota->edad}}">
+                                    <input type="number" class="form-control" value="{{$mascota->edad}}" name="edad">
+                                    @if ($errors->has('edad'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('edad') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Imagen de perfil</label>
@@ -65,7 +77,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
-                                    <br><a href="#" class="btn btn-primary"><i class="fa fa-check"></i>Guardar Cambios</a>
+                                    <input type="submit" class="btn btn-primary" value="Guardar Cambios">
                                 </div>
                             </div>
 
@@ -74,6 +86,6 @@
                 </div>
             </div>
         </div>
-
+    </div>
 
 @endsection
