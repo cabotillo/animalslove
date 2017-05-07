@@ -16,7 +16,7 @@
 
                     <div class="panel-body">
                         <ul class="nav nav-tabs nav-top-border">
-                            <li class="active"><a href="{{'usuario'}}">Datos Personales</a></li>
+                            <li class="active"><a href="{{'cuenta'}}">Datos Personales</a></li>
                             <li><a href="{{'home'}}">Contraseña</a></li>
                             <li><a href="{{'mascotas'}}">Mascotas</a></li>
                             <li><a href="{{'premium'}}">Premium</a></li>
@@ -42,7 +42,15 @@
                                         </span>
                             @endif
                         </div>
-
+                        <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
+                            <label class="control-label">Correo Electrónico</label>
+                            <input name="email" type="text" placeholder="Correo electrónico" class="form-control" value="{{Auth::user()->email}}">
+                            @if ($errors->has('email'))
+                                <span class="help-block">
+                                            <strong>{{ $errors->first('email') }}</strong>
+                                        </span>
+                            @endif
+                        </div>
                         <div class="form-group {{ $errors->has('telefono') ? ' has-error' : '' }}">
                             <label class="control-label">Telefono</label>
                             <input name="telefono" type="number" placeholder="666666666" class="form-control" value="{{Auth::user()->telefono}}">

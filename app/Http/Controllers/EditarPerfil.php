@@ -46,6 +46,7 @@ class EditarPerfil extends Controller
         $validation = Validator::make(Input::all(), [
             'nombre' => 'required|string|max:25',
             'apellidos' => 'required|string|max:25',
+            'email' => 'required|string|max:50',
             'telefono' => 'required|integer|min:9',
         ]);
 
@@ -57,6 +58,7 @@ class EditarPerfil extends Controller
             $user = Auth::user()->id;
 
             $nombre = Input::get('nombre');
+            $email = Input::get('email');
             $apellidos = Input::get('apellidos');
             $telefono = Input::get('telefono');
 
@@ -64,6 +66,7 @@ class EditarPerfil extends Controller
             User::where('id', $user)->update(array(
                 'nombre' => $nombre,
                 'apellidos' => $apellidos,
+                'email' => $email,
                 'telefono' => $telefono,
             ));
 
@@ -89,7 +92,7 @@ class EditarPerfil extends Controller
             $p = Input::get('premium');
             if ($p == 'on'){
                 $p = 2;
-                $mensaje = 'Te has convertido el premium';
+                $mensaje = 'Te has convertido en premium';
             }
 
             if ($p == ''){
