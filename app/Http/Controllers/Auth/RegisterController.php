@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -21,6 +22,16 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        return view('auth.register')->with('provincias',DB::table('provincias')->get());
+    }
 
     /**
      * Where to redirect users after registration.
@@ -53,6 +64,7 @@ class RegisterController extends Controller
             'login' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'provincia' => 'required|integer',
             'telefono' => 'required|integer',
         ]);
     }
@@ -71,6 +83,7 @@ class RegisterController extends Controller
             'login' => $data['login'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'provincia' => $data['provincia'],
             'telefono' => $data['telefono'],
         ]);
     }

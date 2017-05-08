@@ -88,6 +88,23 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('provincia') ? ' has-error' : '' }}">
+                            <label for="provincia" class="col-md-4 control-label">Provincia</label>
+
+                            <div class="col-md-6">
+                                <select class="form-control" name="provincia">
+
+                                    @foreach($provincias as $p)
+                                        <option @if( old('provincia') == $p->id) selected="selected" @endif value="{{$p->id}}">{{$p->nombre}}</option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('provincia'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('provincia') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
                         <div class="form-group{{ $errors->has('telefono') ? ' has-error' : '' }}">
                             <label for="telefono" class="col-md-4 control-label">Telefono</label>
 
@@ -102,22 +119,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('provincia') ? ' has-error' : '' }}">
-                            <label for="provincia" class="col-md-4 control-label">Provincia</label>
 
-                            <div class="col-md-6">
-                                <select class="form-control">
-                                    <option>Todavia no funciona, lo siento!</option>
-                                </select>
-
-
-                                @if ($errors->has('provincia'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('provincia') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
