@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Animal;
 use App\Mascotas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB;
 use Auth;
 use App\User;
 class EditarPerfil extends Controller
@@ -47,12 +49,28 @@ class EditarPerfil extends Controller
 
     public function mascotas()
     {
-        return view('editarperfil.mascotas')->with('num', Auth::user()->mascotas);
+        $data = array(
+
+            'num' => Auth::user()->mascotas,
+            'animales' => DB::table('animal')->get()
+
+        );
+        return view('editarperfil.mascotas')->with($data);
     }
 
     public function editarMascota($id)
     {
         return view('editarperfil.editarmascota')->with('mascota',Mascotas::find($id));
+    }
+    public function addMascota($id)
+    {
+        $data = array(
+            'animal' => DB::table('animal')->select('id','nombre')->where('id',$id)->get(),
+            'razas' => DB::table('razas')->select('id','nombre')->where('id_animal',$id)->get()
+
+
+        );
+        return view('editarperfil.addmascota')->with($data);
     }
 
     public function updateCuenta()
@@ -177,6 +195,48 @@ class EditarPerfil extends Controller
 
 
             return view('home')->with('mensaje', 'La mascota ha sido editada correctamente');
+        }
+    }
+
+    public function insertarMascota()
+    {
+        $validation = Validator::make(Input::all(), [
+            'nombre' => 'required|string|max:25',
+            'animal' => 'required|integer|max:10',
+            'raza' => 'required|integer|max:10',
+            'genero' => 'required|string|max:25',
+            'tamanyo' => 'required|string|max:25',
+            'edad' => 'required|integer:max:3',
+        ]);
+
+        if($validation->fails()) {
+            //withInput keep the users info
+            return Redirect::back()->withInput()->withErrors($validation->messages());
+        } else {
+
+            $nombre = Input::get('nombre');
+            $animal = Input::get('animal');
+            $raza = Input::get('raza');
+            $genero = Input::get('genero');
+            $tamanyo = Input::get('tamanyo');
+            $edad = Input::get('edad');
+            $user = Auth::user()->id;
+            print_r(Input::get(all()));
+
+            return Mascotas::create([
+                'user_id' => $user,
+                'nombre' => $nombre,
+                'animal_id' => $animal,
+                'raza_id' => $raza,
+                'tamanyo' => $tamanyo,
+                'genero' => $genero,
+                'avatar' => 'mascotas/avatar.jpg',
+                'edad' => $edad,
+                'updated_at' => time(),
+            ]);
+
+
+            //return view('home')->with('mensaje', 'La mascota ha sido añadida correctamente');
         }
     }
 }
