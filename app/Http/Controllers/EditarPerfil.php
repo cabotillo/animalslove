@@ -198,11 +198,10 @@ class EditarPerfil extends Controller
         }
     }
 
-    public function insertarMascota()
+    public function insertarMascota($id)
     {
         $validation = Validator::make(Input::all(), [
             'nombre' => 'required|string|max:25',
-            'animal' => 'required|integer|max:10',
             'raza' => 'required|integer|max:10',
             'genero' => 'required|string|max:25',
             'tamanyo' => 'required|string|max:25',
@@ -215,28 +214,41 @@ class EditarPerfil extends Controller
         } else {
 
             $nombre = Input::get('nombre');
-            $animal = Input::get('animal');
+            $animal = $id;
             $raza = Input::get('raza');
             $genero = Input::get('genero');
             $tamanyo = Input::get('tamanyo');
             $edad = Input::get('edad');
             $user = Auth::user()->id;
-            print_r(Input::get(all()));
 
-            return Mascotas::create([
+            $mascota = array(
                 'user_id' => $user,
                 'nombre' => $nombre,
                 'animal_id' => $animal,
                 'raza_id' => $raza,
-                'tamanyo' => $tamanyo,
                 'genero' => $genero,
+                'tamanyo' => $tamanyo,
+                'avatar' => 'mascotas/avatar.jpg',
+                'edad' => $edad,
+                'updated_at' => time()
+            );
+
+            DB::table('mascotas')->insert($mascota);
+
+            /*Mascotas::insert([
+                'user_id' => $user,
+                'nombre' => $nombre,
+                'animal_id' => $animal,
+                'raza_id' => $raza,
+                'genero' => $genero,
+                'tamanyo' => $tamanyo,
                 'avatar' => 'mascotas/avatar.jpg',
                 'edad' => $edad,
                 'updated_at' => time(),
-            ]);
+            ]);*/
 
 
-            //return view('home')->with('mensaje', 'La mascota ha sido añadida correctamente');
+            return view('home')->with('mensaje', 'La mascota ha sido añadida correctamente');
         }
     }
 }

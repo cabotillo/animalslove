@@ -9,10 +9,10 @@
 
                     <div class="panel-body">
                         <ul class="nav nav-tabs nav-top-border">
-                            <li><a href="{{'../cuenta'}}">Datos Personales</a></li>
-                            <li><a href="{{'../password'}}">Contraseña</a></li>
-                            <li class="active"><a href="{{'../mascotas'}}">Mascotas</a></li>
-                            <li><a href="{{'../premium'}}">Premium</a></li>
+                            <li><a href="{{'../../cuenta'}}">Datos Personales</a></li>
+                            <li><a href="{{'../../password'}}">Contraseña</a></li>
+                            <li class="active"><a href="{{'../../mascotas'}}">Mascotas</a></li>
+                            <li><a href="{{'../../premium'}}">Premium</a></li>
                         </ul>
                         <form action="" method="post">
                             {{ csrf_field() }}
@@ -29,14 +29,15 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Animal</label>
-                                    <input type="text" class="form-control" value="{{$animal[0]->nombre}}" name="animal" disabled>
+                                    <input type="text" class="form-control" value="{{$animal[0]->nombre}}"disabled>
 
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Raza</label>
-                                    <select class="form-control">
+                                    <select class="form-control" name="raza">
+
                                         @foreach($razas as $r)
-                                            <option>{{$r->nombre}}</option>
+                                            <option @if( old('raza') == $r->id) selected="selected" @endif value="{{$r->id}}">{{$r->nombre}}</option>
                                         @endforeach
                                     </select>
                                 </div>
