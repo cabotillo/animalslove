@@ -42,10 +42,12 @@
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
+                    @if (!Auth::guest())
                     <ul class="nav navbar-nav">
-                        &nbsp;<li><a href="{{ route('home') }}">Inicio</a></li>
-                        &nbsp;<li><a href="{{ route('editarperfil.cuenta') }}">Editar Perfil</a></li>
+                        <li><a href="{{ route('home') }}">Inicio</a></li>
+                        <li><a href="{{ route('editarperfil.cuenta') }}">Editar Perfil</a></li>
                         <li><a href="{{ route('home') }}">Mensajes</a></li>
+                    @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
