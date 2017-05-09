@@ -10,17 +10,9 @@
     @endif
     <div class="row">
         <!-- Menu izquierdo -->
-        <div class="col-sm-3" id="usuario">
-            <div class="text-center">
-                <img src="storage/{{ Auth::user()->avatar }}" class="img-responsive"><br>
-                <!--<p>{{Auth::user()->nombre}}</p>
-                <p>{{Auth::user()->login}}</p>-->
-                <p><a href="{{'perfil/',Auth::user()->login}}{{Auth::user()->login}}">Mi perfil</a></p>
-                <p><a href="mispublicaciones">Mis Publicaciones</a></p>
-            </div>
-
+        <div class="col-sm-3">
             <div id="buscar">
-
+                @if(Auth::user())<h1><a href="{{'perfil/',Auth::user()->login}}{{Auth::user()->login}}">Mi perfil</a></h1>@endif
                 <h1><small>Filtrar Mascotas</small></h1>
                 <form method="post" action="">
                 <span>Animal</span>

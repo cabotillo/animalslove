@@ -10,9 +10,17 @@
     @endif
     <div class="row">
 
-        <h1>Perfil de <span class="text-capitalize">{{\Illuminate\Support\Facades\Auth::user()->login}}</span></h1>
+        <div class="col-sm-3">
+            <h1>Perfil de <span class="text-capitalize">{{$usuario[0]->nombre}}</span></h1>
+            <img src="../storage/{{ $usuario[0]->avatar }}" class="img-responsive"><br>
+            <p>{{$usuario[0]->nombre}}</p>
+            <p class="text-capitalize">{{$usuario[0]->login}}</p>
+            <button class="form-control"><a href="#">Compartir perfil</a></button>
 
-        <div>
+
+        </div>
+
+        <div class="col-sm-9">
             @if(!$tuspublicaciones == '')
 
                 <h2>Sus Publicaciones</h2>

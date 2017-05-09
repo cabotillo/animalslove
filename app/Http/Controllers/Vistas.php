@@ -11,11 +11,13 @@ class Vistas extends Controller
     //
 
     public function miperfil($login){
-        $id = DB::table('users')->where('login',$login)->pluck('id');
+        $user = DB::table('users')->where('login',$login)->get();
+        $id = $user[0]->id;
 
         $data = array(
             'tusmascotas' => DB::table('mascotas')->where('user_id',$id)->get(),
             'tuspublicaciones' => DB::table('publicaciones')->where('user_id',$id)->get(),
+            'usuario' => $user
 
         );
 

@@ -35,19 +35,24 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                    <a class="navbar-brand" href="{{ url('/home') }}">
+                        {{ config('app.name', 'AnimalsLove') }}
                     </a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
-                    @if (!Auth::guest())
                     <ul class="nav navbar-nav">
+                    @if (!Auth::guest())
+
                         <li><a href="{{ route('home') }}">Inicio</a></li>
-                        <li><a href="{{ route('editarperfil.cuenta') }}">Editar Perfil</a></li>
+                        <li><a href="{{ route('editarperfil.cuenta')}}">Editar Perfil</a></li>
+                        <!--<li><a href="">Mi Perfil</a></li>-->
                         <li><a href="{{ route('home') }}">Mensajes</a></li>
+                        @else
+                            <li><a href="{{ route('home') }}">Inicio</a></li>
                     @endif
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->
