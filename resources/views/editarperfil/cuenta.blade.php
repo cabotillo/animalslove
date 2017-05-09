@@ -22,7 +22,7 @@
                             <li><a href="{{'premium'}}">Premium</a></li>
                         </ul>
 
-                    <form role="form" action="{{route('editarperfil.cuenta')}}" method="post">
+                    <form role="form" action="{{route('editarperfil.cuenta')}}" method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="form-group {{ $errors->has('nombre') ? ' has-error' : '' }}">
                             <label class="control-label">Nombre</label>
@@ -68,7 +68,7 @@
                                 <img src="../storage/{{ Auth::user()->avatar }}" width="50%" height="50%"></img>
                             </div>
                             <div class="col-md-6">
-                                <input type="file" name="img">
+                                <input type="file" name="avatar">
                             </div>
                         </div>
                         <div class="col-lg-12">

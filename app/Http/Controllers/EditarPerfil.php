@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Animal;
 use App\Mascotas;
+use Carbon\Carbon;
+use Faker\Provider\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
@@ -81,6 +84,7 @@ class EditarPerfil extends Controller
             'apellidos' => 'required|string|max:25',
             'email' => 'required|string|max:50',
             'telefono' => 'required|integer|min:9',
+            'avatar' => 'image'
         ]);
 
         if($validation->fails()) {
@@ -94,6 +98,11 @@ class EditarPerfil extends Controller
             $email = Input::get('email');
             $apellidos = Input::get('apellidos');
             $telefono = Input::get('telefono');
+            $avatar = Input::get('avatar');
+
+            $file = $_REQUEST->file('avatar');
+
+            $file->image->store('public');
 
 
             User::where('id', $user)->update(array(
@@ -101,6 +110,7 @@ class EditarPerfil extends Controller
                 'apellidos' => $apellidos,
                 'email' => $email,
                 'telefono' => $telefono,
+                'avatar' => 'usuarios/'.$avatar
             ));
 
 
@@ -202,7 +212,7 @@ class EditarPerfil extends Controller
     {
         $validation = Validator::make(Input::all(), [
             'nombre' => 'required|string|max:25',
-            'raza' => 'required|integer|max:10',
+            'raza' => 'required|integer',
             'genero' => 'required|string|max:25',
             'tamanyo' => 'required|string|max:25',
             'edad' => 'required|integer:max:3',
@@ -232,7 +242,6 @@ class EditarPerfil extends Controller
                 'edad' => $edad,
                 'updated_at' => time()
             );
-
             DB::table('mascotas')->insert($mascota);
 
             /*Mascotas::insert([
@@ -248,7 +257,7 @@ class EditarPerfil extends Controller
             ]);*/
 
 
-            return view('home')->with('mensaje', 'La mascota ha sido añadida correctamente');
+            return view('home')->with('mensaje', print_r($mascota));//'La mascota ha sido añadida correctamente');
         }
     }
 }
