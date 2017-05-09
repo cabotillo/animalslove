@@ -9,6 +9,9 @@
 
     </script>
     <div class="container">
+
+
+
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
@@ -59,6 +62,22 @@
                                             <strong>{{ $errors->first('telefono') }}</strong>
                                         </span>
                             @endif
+                        </div>
+
+                        <div class="form-group{{ $errors->has('provincia') ? ' has-error' : '' }}">
+                            <label class="control-label">Provincia</label>
+
+                                <select class="form-control" name="provincia">
+
+                                    @foreach($provincias as $p)
+                                        <option @if( old('provincia') == $p->id || Auth::user()->provincia == $p->id) selected="selected" @endif value="{{$p->id}}">{{$p->nombre}}</option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('provincia'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('provincia') }}</strong>
+                                    </span>
+                                @endif
                         </div>
 
                         <div class="form-group">

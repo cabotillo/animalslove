@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use Auth;
 use App\User;
+use View;
+
 class EditarPerfil extends Controller
 {
     /**
@@ -38,7 +40,7 @@ class EditarPerfil extends Controller
 
     public function cuenta()
     {
-        return view('editarperfil.cuenta');
+        return view('editarperfil.cuenta')->with('provincias',DB::table('provincias')->get());
     }
 
     public function premium()
@@ -84,7 +86,7 @@ class EditarPerfil extends Controller
             'apellidos' => 'required|string|max:25',
             'email' => 'required|string|max:50',
             'telefono' => 'required|integer|min:9',
-            'avatar' => 'image'
+            'provincia' => 'required|integer'
         ]);
 
         if($validation->fails()) {
@@ -98,23 +100,18 @@ class EditarPerfil extends Controller
             $email = Input::get('email');
             $apellidos = Input::get('apellidos');
             $telefono = Input::get('telefono');
-            $avatar = Input::get('avatar');
-
-            $file = $_REQUEST->file('avatar');
-
-            $file->image->store('public');
-
+            $provincia = Input::get('provincia');
 
             User::where('id', $user)->update(array(
                 'nombre' => $nombre,
                 'apellidos' => $apellidos,
                 'email' => $email,
                 'telefono' => $telefono,
-                'avatar' => 'usuarios/'.$avatar
+                'provincia' => $provincia
             ));
 
 
-            return view('home')->with('mensaje', 'Perfil actualizado correctamente');
+            return view('welcome')->with('mensaje', 'Perfil actualizado correctamente');
         }
     }
 
@@ -149,7 +146,8 @@ class EditarPerfil extends Controller
             ));
 
 
-            return view('home')->with('mensaje', $mensaje);
+            return view('welcome')->with('mensaje', $mensaje);
+
         }
     }
 
@@ -173,7 +171,7 @@ class EditarPerfil extends Controller
             ));
 
 
-            return view('home')->with('mensaje', 'Contraseña modificada correctamente');
+            return view('welcome')->with('mensaje', 'Contraseña modificada correctamente');
         }
     }
 
@@ -204,7 +202,7 @@ class EditarPerfil extends Controller
             ));
 
 
-            return view('home')->with('mensaje', 'La mascota ha sido editada correctamente');
+            return view('welcome')->with('mensaje', 'La mascota ha sido editada correctamente');
         }
     }
 
@@ -257,7 +255,7 @@ class EditarPerfil extends Controller
             ]);*/
 
 
-            return view('home')->with('mensaje', 'La mascota ha sido añadida correctamente');
+            return view('welcome')->with('mensaje', 'La mascota ha sido añadida correctamente');
         }
     }
 }
