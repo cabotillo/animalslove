@@ -257,7 +257,7 @@ class EditarPerfil extends Controller
             ]);*/
 
 
-            return view('home')->with('mensaje', print_r($mascota));//'La mascota ha sido añadida correctamente');
+            return view('home')->with('mensaje', 'La mascota ha sido añadida correctamente');
         }
     }
 }

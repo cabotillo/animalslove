@@ -65,7 +65,7 @@
                             <label class="control-label">Imagen de perfil</label><br>
 
                             <div class="thumbnail col-md-6">
-                                <img src="../storage/{{ Auth::user()->avatar }}" width="50%" height="50%"></img>
+                                <img src="../storage/{{ Auth::user()->avatar }}" width="50%" height="50%" alt="avatar"></img>
                             </div>
                             <div class="col-md-6">
                                 <input type="file" name="avatar">
