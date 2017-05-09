@@ -49,6 +49,7 @@
                         <li><a href="{{ route('editarperfil.cuenta')}}">Editar Perfil</a></li>
                         <!--<li><a href="">Mi Perfil</a></li>-->
                         <li><a href="{{ route('home') }}">Mensajes</a></li>
+                        <li><a href="{{route('nuevapublicacion')}}">Nueva Publicación</a></li>
                         @else
                             <li><a href="{{ route('home') }}">Inicio</a></li>
                     @endif

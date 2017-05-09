@@ -66,7 +66,6 @@
 
                         <div class="form-group{{ $errors->has('provincia') ? ' has-error' : '' }}">
                             <label class="control-label">Provincia</label>
-
                                 <select class="form-control" name="provincia">
 
                                     @foreach($provincias as $p)

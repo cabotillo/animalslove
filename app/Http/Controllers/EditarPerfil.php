@@ -258,4 +258,43 @@ class EditarPerfil extends Controller
             return view('welcome')->with('mensaje', 'La mascota ha sido añadida correctamente');
         }
     }
+
+    public function addPublicacion(){
+
+        $data = array('mascotas' => DB::table('mascotas')->get());
+        return view('addpublicacion')->with($data);
+    }
+
+    public function insertarPublicacion()
+    {
+
+        $validation = Validator::make(Input::all(), [
+            'mascota' => 'required|integer',
+            'publicacion' => 'required|string',
+            'cuerpo' => 'required|string|max:250',
+        ]);
+
+        if ($validation->fails()) {
+            //withInput keep the users info
+            return Redirect::back()->withInput()->withErrors($validation->messages());
+        } else {
+
+            $mascota = Input::get('mascota');
+            $tipo = Input::get('publicacion');
+            $cuerpo = Input::get('cuerpo');
+
+
+            $publicacion = array(
+                'titulo' => '',
+                'cuerpo' => '',
+                'user_id' => '',
+                'mascota_id' => $mascota
+            );
+            DB::table('publicaciones')->insert($publicacion);
+
+
+            return view('welcome')->with('mensaje', 'La publicación ha sido añadida correctamente');
+
+        }
+    }
 }
