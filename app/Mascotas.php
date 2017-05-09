@@ -23,4 +23,8 @@ class Mascotas extends Model
         return $this->hasOne('App\Raza');
     }
 
+    public function publicaciones(){
+        return $this->hasMany('App\Publicaciones');
+    }
+
 }

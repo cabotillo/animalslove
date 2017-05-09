@@ -36,6 +36,8 @@ Route::post('editarperfil/editar/mascotas/{id}', ['as' => 'editarperfil.editarma
 Route::get('editarperfil/mascotas/add/{id}', ['as' => 'editarperfil.addmascota', 'uses' => 'EditarPerfil@addMascota']);
 Route::post('editarperfil/mascotas/add/{id}', ['as' => 'editarperfil.addmascota', 'uses' => 'EditarPerfil@insertarMascota']);
 
+Route::get('perfil/{login}', ['as' => 'miperfil', 'uses' => 'Vistas@miperfil']);
+
 Route::resource('mascota', 'MascotaController');
 Route::resource('raza', 'RazaController');
 Route::resource('animal', 'AnimalController');

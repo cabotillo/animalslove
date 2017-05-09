@@ -37,4 +37,8 @@ class User extends Authenticatable
     public function mascotas(){
         return $this->hasMany('App\Mascotas');
     }
+
+    public function publicaciones(){
+        return $this->hasMany('App\Publicaciones');
+    }
 }

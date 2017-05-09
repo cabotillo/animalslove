@@ -15,7 +15,7 @@
                 <img src="storage/{{ Auth::user()->avatar }}" class="img-responsive"><br>
                 <!--<p>{{Auth::user()->nombre}}</p>
                 <p>{{Auth::user()->login}}</p>-->
-                <p><a href="mismascotas">Mis Mascotas</a></p>
+                <p><a href="{{'perfil/',Auth::user()->login}}{{Auth::user()->login}}">Mi perfil</a></p>
                 <p><a href="mispublicaciones">Mis Publicaciones</a></p>
             </div>
 
