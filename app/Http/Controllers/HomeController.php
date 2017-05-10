@@ -24,10 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-
-        //DB::table('runs')->join('run_user', 'run_user.run_id', '=', 'runs.id')->where('run_user.user_id', '=', '2')->get();
-
-
         $mascotas = DB::table('mascotas')->join('animal', 'animal.id', '=', 'mascotas.animal_id')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->get();
         $publicaciones = DB::table('publicaciones')->join('tipopublicacion', 'tipopublicacion.id', '=', 'publicaciones.tipo_id')->get();
 

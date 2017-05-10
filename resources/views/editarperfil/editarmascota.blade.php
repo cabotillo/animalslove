@@ -21,6 +21,7 @@
                             <li class="active"><a href="{{'../../mascotas'}}">Mascotas</a></li>
                             <li><a href="{{'../../premium'}}">Premium</a></li>
                         </ul>
+
                         <form action="{{route('editarperfil.editarmascota',$mascota->id)}}" method="post">
                             {{ csrf_field() }}
                             <div class=" row panel-body">
@@ -36,11 +37,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Animal</label>
-                                    <input type="text" class="form-control" value="{{$mascota->animal_id}}" disabled>
+                                    <input type="text" class="form-control" value="{{$mascota->animal}}" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Raza</label>
-                                    <input type="text" class="form-control" value="{{$mascota->raza_id}}" disabled>
+                                    <input type="text" class="form-control" value="{{$mascota->raza}}" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Genero</label>
@@ -70,7 +71,7 @@
                                 <div class="form-group">
                                     <label class="control-label">Imagen de perfil</label>
                                     <div class="thumbnail ">
-                                        <img class="img-responsive" src="../../../storage/{{$mascota->avatar}}" alt="{{$mascota->raza_id}}">
+                                        <img class="img-responsive" src="../../../storage/{{$mascota->avatar}}" alt="{{$mascota->nombre}}">
                                     </div>
                                     <div class="col-md-6">
                                         <input type="file" name="img">

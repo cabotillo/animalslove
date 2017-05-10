@@ -2,12 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Animal;
 use App\Mascotas;
-use Carbon\Carbon;
-use Faker\Provider\Image;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
@@ -65,7 +60,9 @@ class EditarPerfil extends Controller
 
     public function editarMascota($id)
     {
-        return view('editarperfil.editarmascota')->with('mascota',Mascotas::find($id));
+        $mascota = DB::table('mascotas')->join('animal', 'animal.id', '=', 'mascotas.animal_id')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->where('mascotas.id',$id)->get()->first();
+
+        return view('editarperfil.editarmascota')->with('mascota',$mascota);
     }
     public function addMascota($id)
     {
@@ -96,6 +93,10 @@ class EditarPerfil extends Controller
         } else {
 
             //Recogo la imagen si la hay
+
+            if(request()->file('avatar') != ''){
+
+
             $login = Auth::user()->login;
 
             $file = request()->file('avatar');
@@ -125,6 +126,28 @@ class EditarPerfil extends Controller
 
 
             return view('welcome')->with('mensaje', 'Perfil actualizado correctamente');
+
+            }else{
+
+                $user = Auth::user()->id;
+
+                $nombre = Input::get('nombre');
+                $email = Input::get('email');
+                $apellidos = Input::get('apellidos');
+                $telefono = Input::get('telefono');
+                $provincia = Input::get('provincia');
+
+                User::where('id', $user)->update(array(
+                    'nombre' => $nombre,
+                    'apellidos' => $apellidos,
+                    'email' => $email,
+                    'telefono' => $telefono,
+                    'provincia_id' => $provincia
+                ));
+
+                return view('welcome')->with('mensaje', 'Perfil actualizado correctamente');
+
+            }
         }
     }
 
@@ -195,6 +218,7 @@ class EditarPerfil extends Controller
             'nombre' => 'required|string|max:25',
             'tamanyo' => 'required|string|max:25',
             'edad' => 'required|integer',
+
         ]);
 
         if($validation->fails()) {
@@ -202,20 +226,48 @@ class EditarPerfil extends Controller
             return Redirect::back()->withInput()->withErrors($validation->messages());
         } else {
 
+            if(request()->file('img') != '') {
 
             $nombre = Input::get('nombre');
             $tamanyo = Input::get('tamanyo');
             $edad = Input::get('edad');
             $mascota = $id;
 
+            $file = request()->file('img');
+            $ext = $file->guessClientExtension();
+
+            $carpeta = 'mascotas/';
+            $nombreFichero = $mascota.".".$ext;
+
+            $file->storeAs($carpeta.$mascota,$nombreFichero);
+
+
             Mascotas::where('id', $mascota)->update(array(
                 'nombre' => $nombre,
                 'tamanyo' => $tamanyo,
+                'avatar' => $nombreFichero,
                 'edad' => $edad,
             ));
 
 
             return view('welcome')->with('mensaje', 'La mascota ha sido editada correctamente');
+
+            }else{
+
+                $nombre = Input::get('nombre');
+                $tamanyo = Input::get('tamanyo');
+                $edad = Input::get('edad');
+                $mascota = $id;
+
+                Mascotas::where('id', $mascota)->update(array(
+                    'nombre' => $nombre,
+                    'tamanyo' => $tamanyo,
+                    'edad' => $edad
+                ));
+
+
+                return view('welcome')->with('mensaje', 'La mascota ha sido editada correctamente');
+           }
         }
     }
 
