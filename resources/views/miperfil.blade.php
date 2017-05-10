@@ -28,9 +28,9 @@
 
                 @foreach($tuspublicaciones as $p)
 
-                    <div class="media col-sm-6 col-md-4">
+                    <div class="media col-sm-6 col-md-6">
                         <div class="media-left"> <a href="#">
-                                <img alt="" class="media-object"  src="../storage/mascotas/avatar.jpg" data-holder-rendered="true" style="width: 64px; height: 64px;"> </a>
+                                <img alt="animal" class="media-object img-responsive"  src="../storage/mascotas/avatar.jpg" data-holder-rendered="true" > </a>
                         </div>
                         <div class="media-body">
                             <h4 class="media-heading">{{$p->titulo}}</h4>
@@ -49,12 +49,14 @@
                 <h2>Sus Mascotas</h2>
                 @foreach($tusmascotas as $m)
 
-                        <div class="col-sm-6 col-md-4">
+                        <div class="col-sm-9 col-md-3">
                             <div class="thumbnail" id="{{$m->animal_id}}">
-                                <img alt="" src="../storage/{{$m->avatar}}" data-holder-rendered="true" style="height: 200px; width: 100%;">
+                                <img alt="{{$m->nombre}}" src="../storage/{{$m->avatar}}" class="img-responsive" data-holder-rendered="true">
                                 <div class="caption">
                                     <h3>{{$m->nombre}}</h3>
-                                    <p>{{$m->animal}} -- {{$m->raza}} -- {{$m->genero}}</p>
+                                    <p>{{$m->animal}}</p>
+                                    <p>{{$m->raza}}</p>
+                                    <p>{{$m->genero}}</p>
                                     <!--<p><a href="#" class="btn btn-primary" role="button">Button</a>></p>-->
                                 </div>
                             </div>

@@ -29,6 +29,7 @@ class HomeController extends Controller
 
 
         $mascotas = DB::table('mascotas')->join('animal', 'animal.id', '=', 'mascotas.animal_id')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->get();
+        $publicaciones = DB::table('publicaciones')->join('tipopublicacion', 'tipopublicacion.id', '=', 'publicaciones.tipo_id')->get();
 
 
         $data = array(
@@ -36,7 +37,8 @@ class HomeController extends Controller
             //'mascotas' => DB::table('mascotas')->take(25)->get(),
             'animales' => DB::table('animal')->get(),
             'razas' => DB::table('razas')->get(),
-            'mascotas' => $mascotas
+            'mascotas' => $mascotas,
+            'publicaciones' => $publicaciones
 
         );
         return view('home')->with($data);

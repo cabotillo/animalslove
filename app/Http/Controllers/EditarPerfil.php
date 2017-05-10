@@ -119,7 +119,7 @@ class EditarPerfil extends Controller
                 'apellidos' => $apellidos,
                 'email' => $email,
                 'telefono' => $telefono,
-                'provincia' => $provincia,
+                'provincia_id' => $provincia,
                 'avatar' => $login."/".$nombreFichero
             ));
 

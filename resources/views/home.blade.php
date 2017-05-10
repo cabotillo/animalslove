@@ -45,22 +45,44 @@
         <div class="col-sm-9">
             <div class="row">
                 <h1 class="text-center">SLOGAN SUPER MEGA CHULO</h1>
+                <ul class="nav nav-tabs">
+                    <li role="presentation" class="active"><a href="#mascotas">Mascotas</a></li>
+                    <li role="presentation"><a href="#publicaciones">Publicaciones</a></li>
+                </ul>
             </div>
-            <div class="row" id="mascotas">
 
-                @foreach($mascotas as $m)
-                    <div class="mascotas col-sm-3" id="" style="border: 1px solid #98cbe8">
-                        <a style="text-decoration: none" href="{{'mascota/',$m->id}}{{$m->id}}"><p>{{$m->nombre}}</p>
-                            <img src="storage/{{$m->avatar}}" class="img-responsive">
-                            <p>{{$m->animal}}</p>
-                            <p>{{$m->raza}}</p>
-                            <p>{{$m->genero}}</p></a>
-                    </div>
-                @endforeach
 
+                <div class="row" id="mascotas">
+
+                    @foreach($mascotas as $m)
+                        <div class="mascotas col-sm-9 col-md-3" id="" style="border: 1px solid #98cbe8">
+                            <a style="text-decoration: none" href="{{'mascota/',$m->id}}{{$m->id}}"><p>{{$m->nombre}}</p>
+                                <img alt="{{$m->nombre}}" src="storage/{{$m->avatar}}" class="img-responsive">
+                                <p>{{$m->animal}}</p>
+                                <p>{{$m->raza}}</p>
+                                <p>{{$m->genero}}</p></a>
+                        </div>
+                    @endforeach
+                </div>
+
+                <div class="row" id="publicaciones">
+
+                    @foreach($publicaciones as $p)
+                        <div class="media col-sm-6 col-md-6">
+                            <div class="media-left"> <a href="#">
+                                    <img alt="animal" class="media-object" src="storage/mascotas/avatar.jpg" data-holder-rendered="true" style="width: 64px; height: 64px;"> </a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">{{$p->titulo}}</h4>
+                                {{$p->cuerpo}}
+                            </div>
+
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
-</div>
     </div>
 </div>
 @endsection
+
