@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Animal</label>
-                                    <input type="text" class="form-control" value="{{$animal[0]->nombre}}"disabled>
+                                    <input type="text" class="form-control" value="{{$animal[0]->animal}}"disabled>
 
                                 </div>
                                 <div class="form-group">
@@ -37,7 +37,7 @@
                                     <select class="form-control" name="raza">
 
                                         @foreach($razas as $r)
-                                            <option @if( old('raza') == $r->id) selected="selected" @endif value="{{$r->id}}">{{$r->nombre}}</option>
+                                            <option @if( old('raza') == $r->id) selected="selected" @endif value="{{$r->id}}">{{$r->raza}}</option>
                                         @endforeach
                                     </select>
                                 </div>

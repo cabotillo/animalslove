@@ -67,8 +67,8 @@ class EditarPerfil extends Controller
     public function addMascota($id)
     {
         $data = array(
-            'animal' => DB::table('animal')->select('id','nombre')->where('id',$id)->get(),
-            'razas' => DB::table('razas')->select('id','nombre')->where('id_animal',$id)->get()
+            'animal' => DB::table('animal')->select('id','animal')->where('id',$id)->get(),
+            'razas' => DB::table('razas')->select('id','raza')->where('id_animal',$id)->get()
 
 
         );
@@ -278,6 +278,7 @@ class EditarPerfil extends Controller
             'raza' => 'required|integer',
             'genero' => 'required|string|max:25',
             'tamanyo' => 'required|string|max:25',
+            'edad' => 'required|integer:max:3',
             'edad' => 'required|integer:max:3',
         ]);
 
