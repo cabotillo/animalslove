@@ -69,7 +69,7 @@
                                 <select class="form-control" name="provincia">
 
                                     @foreach($provincias as $p)
-                                        <option @if( old('provincia') == $p->id || Auth::user()->provincia == $p->id) selected="selected" @endif value="{{$p->id}}">{{$p->nombre}}</option>
+                                        <option @if( old('provincia') == $p->id || Auth::user()->provincia_id == $p->id) selected="selected" @endif value="{{$p->id}}">{{$p->provincia}}</option>
                                     @endforeach
                                 </select>
                                 @if ($errors->has('provincia'))

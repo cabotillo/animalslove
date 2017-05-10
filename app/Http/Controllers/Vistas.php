@@ -14,9 +14,12 @@ class Vistas extends Controller
         $user = DB::table('users')->where('login',$login)->get();
         $id = $user[0]->id;
 
+        $tusmascotas = DB::table('mascotas')->join('animal', 'animal.id', '=', 'mascotas.animal_id')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->where('user_id',$id)->get();
+        $tuspublicaciones = DB::table('publicaciones')->join('tipopublicacion', 'tipopublicacion.id', '=', 'publicaciones.tipo_id')->where('user_id',$id)->get();
+
         $data = array(
-            'tusmascotas' => DB::table('mascotas')->where('user_id',$id)->get(),
-            'tuspublicaciones' => DB::table('publicaciones')->where('user_id',$id)->get(),
+            'tusmascotas' => $tusmascotas,
+            'tuspublicaciones' => $tuspublicaciones,
             'usuario' => $user
 
         );

@@ -5,6 +5,7 @@
 
     <div class="row">
 
+
         <!-- Menu izquierdo -->
         <div class="col-sm-3">
             <div id="buscar">
@@ -14,14 +15,14 @@
                 <span>Animal</span>
                 <select class="form-control" name="animal">
                     @foreach($animales as $a)
-                        <option @if( old('animal') == $a->id) selected="selected" @endif value="{{$a->id}}">{{$a->nombre}}</option>
+                        <option @if( old('animal') == $a->id) selected="selected" @endif value="{{$a->id}}">{{$a->animal}}</option>
                     @endforeach
                 </select>
 
                 <span>Raza</span>
                 <select class="form-control" name="raza">
                     @foreach($razas as $r)
-                        <option @if( old('raza') == $r->id) selected="selected" @endif value="{{$r->id}}">{{$r->nombre}}</option>
+                        <option @if( old('raza') == $r->id) selected="selected" @endif value="{{$r->id}}">{{$r->raza}}</option>
                     @endforeach
                 </select>
 
@@ -48,12 +49,12 @@
             <div class="row" id="mascotas">
 
                 @foreach($mascotas as $m)
-                    <div class="mascotas col-sm-3" id="{{$m->animal_id}}" style="border: 1px solid #98cbe8">
-                        <a style="text-decoration: none" href="{{'mascota/',$m->id}}{{$m->id}}"><p>{{($m)->nombre}}</p>
-                        <img src="storage/{{$m->avatar}}" class="img-responsive">
-                        <p>{{($m)->animal_id}}</p>
-                        <p>{{($m)->raza_id}}</p>
-                        <p>{{($m)->genero}}</p></a>
+                    <div class="mascotas col-sm-3" id="" style="border: 1px solid #98cbe8">
+                        <a style="text-decoration: none" href="{{'mascota/',$m->id}}{{$m->id}}"><p>{{$m->nombre}}</p>
+                            <img src="storage/{{$m->avatar}}" class="img-responsive">
+                            <p>{{$m->animal}}</p>
+                            <p>{{$m->raza}}</p>
+                            <p>{{$m->genero}}</p></a>
                     </div>
                 @endforeach
 

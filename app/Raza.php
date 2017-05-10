@@ -8,7 +8,7 @@ class Raza extends Model
 {
     //
 
-    protected $fillable = ['id','id_animal', 'nombre'];
+    protected $fillable = ['id','id_animal', 'raza'];
 
     protected $table = 'razas';
 

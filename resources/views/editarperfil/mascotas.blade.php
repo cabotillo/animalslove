@@ -26,7 +26,7 @@
                         @endforeach
 
                         @foreach($animales as $a)
-                            <a href="{{'mascotas/add/',$a->id}}{{$a->id}}"><input class="btn" type="button" value="Añadir un nuevo {{$a->nombre}}"></a>
+                            <a href="{{'mascotas/add/',$a->id}}{{$a->id}}"><input class="btn" type="button" value="Añadir un nuevo {{$a->animal}}"></a>
                         @endforeach
                     </div>
                 </div>

@@ -9,7 +9,7 @@ class Provincias extends Model
     //
     protected $table = 'provincias';
 
-    protected $fillable = ['id', 'nombre',];
+    protected $fillable = ['id', 'provincia',];
 
     public  function users(){
         return $this->hasMany('App\User');

@@ -8,7 +8,7 @@ class Publicaciones extends Model
 {
     //
 
-    protected $fillable = ['id','titulo', 'cuerpo', 'user_id', 'mascota_id'];
+    protected $fillable = ['id','titulo', 'cuerpo', 'user_id', 'mascota_id','disponible'];
 
     protected $table = 'publicaciones';
 

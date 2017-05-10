@@ -24,11 +24,19 @@ class HomeController extends Controller
      */
     public function index()
     {
+
+        //DB::table('runs')->join('run_user', 'run_user.run_id', '=', 'runs.id')->where('run_user.user_id', '=', '2')->get();
+
+
+        $mascotas = DB::table('mascotas')->join('animal', 'animal.id', '=', 'mascotas.animal_id')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->get();
+
+
         $data = array(
 
-            'mascotas' => DB::table('mascotas')->take(25)->get(),
+            //'mascotas' => DB::table('mascotas')->take(25)->get(),
             'animales' => DB::table('animal')->get(),
             'razas' => DB::table('razas')->get(),
+            'mascotas' => $mascotas
 
         );
         return view('home')->with($data);

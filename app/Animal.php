@@ -9,7 +9,7 @@ class Animal extends Model
     //
 
     protected $fillable = [
-        'id','nombre',
+        'id','animal',
         ];
 
     protected $table = 'animal';

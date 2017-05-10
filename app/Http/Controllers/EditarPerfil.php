@@ -300,8 +300,10 @@ class EditarPerfil extends Controller
             $cuerpo = Input::get('cuerpo');
             $id = Auth::user()->id;
 
+            $tipovarchar = DB::table('tipopublicacion')->where('id' , $tipo)->value('tipo');
+
             $nombreM = DB::table('mascotas')->where('id',$mascota)->value('nombre');
-            $titulo = "Quiero ".$tipo." a ".$nombreM;
+            $titulo = "Quiero ".$tipovarchar." a ".$nombreM;
             $publicacion = array(
                 'titulo' => $titulo,
                 'cuerpo' => $cuerpo,

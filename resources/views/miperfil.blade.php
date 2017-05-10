@@ -54,7 +54,7 @@
                                 <img alt="" src="../storage/{{$m->avatar}}" data-holder-rendered="true" style="height: 200px; width: 100%;">
                                 <div class="caption">
                                     <h3>{{$m->nombre}}</h3>
-                                    <p>{{$m->animal_id}} -- {{$m->raza_id}} -- {{$m->genero}}</p>
+                                    <p>{{$m->animal}} -- {{$m->raza}} -- {{$m->genero}}</p>
                                     <!--<p><a href="#" class="btn btn-primary" role="button">Button</a>></p>-->
                                 </div>
                             </div>
