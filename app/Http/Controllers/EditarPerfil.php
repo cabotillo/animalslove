@@ -86,13 +86,25 @@ class EditarPerfil extends Controller
             'apellidos' => 'required|string|max:25',
             'email' => 'required|string|max:50',
             'telefono' => 'required|integer|min:9',
-            'provincia' => 'required|integer'
+            'provincia' => 'required|integer',
+            'avatar' => 'mimes:jpeg,bmp,png'
         ]);
 
         if($validation->fails()) {
             //withInput keep the users info
             return Redirect::back()->withInput()->withErrors($validation->messages());
         } else {
+
+            //Recogo la imagen si la hay
+            $login = Auth::user()->login;
+
+            $file = request()->file('avatar');
+            $ext = $file->guessClientExtension();
+
+            $carpeta = 'usuarios/';
+            $nombreFichero = $login.".".$ext;
+
+            $file->storeAs($carpeta.$login,$nombreFichero);
 
             $user = Auth::user()->id;
 
@@ -107,7 +119,8 @@ class EditarPerfil extends Controller
                 'apellidos' => $apellidos,
                 'email' => $email,
                 'telefono' => $telefono,
-                'provincia' => $provincia
+                'provincia' => $provincia,
+                'avatar' => $login."/".$nombreFichero
             ));
 
 
