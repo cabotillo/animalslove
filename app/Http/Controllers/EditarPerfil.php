@@ -261,7 +261,10 @@ class EditarPerfil extends Controller
 
     public function addPublicacion(){
 
-        $data = array('mascotas' => DB::table('mascotas')->get());
+        $data = array(
+                'mascotas' => DB::table('mascotas')->get(),
+                'tipop' => DB::table('tipopublicacion')->get(),
+            );
         return view('addpublicacion')->with($data);
     }
 
@@ -270,7 +273,7 @@ class EditarPerfil extends Controller
 
         $validation = Validator::make(Input::all(), [
             'mascota' => 'required|integer',
-            'publicacion' => 'required|string',
+            'publicacion' => 'required|integer',
             'cuerpo' => 'required|string|max:250',
         ]);
 
@@ -282,14 +285,19 @@ class EditarPerfil extends Controller
             $mascota = Input::get('mascota');
             $tipo = Input::get('publicacion');
             $cuerpo = Input::get('cuerpo');
+            $id = Auth::user()->id;
 
-
+            $nombreM = DB::table('mascotas')->where('id',$mascota)->value('nombre');
+            $titulo = "Quiero ".$tipo." a ".$nombreM;
             $publicacion = array(
-                'titulo' => '',
-                'cuerpo' => '',
-                'user_id' => '',
-                'mascota_id' => $mascota
+                'titulo' => $titulo,
+                'cuerpo' => $cuerpo,
+                'user_id' => $id,
+                'mascota_id' => $mascota,
+                'tipo_id' => $tipo,
+                'disponible' => 1
             );
+
             DB::table('publicaciones')->insert($publicacion);
 
 

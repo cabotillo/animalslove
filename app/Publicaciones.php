@@ -18,4 +18,7 @@ class Publicaciones extends Model
     public function mascota(){
         return $this->hasOne('App\Mascotas');
     }
+    public function tipoPublicacion(){
+        $this->hasOne('App\TipoPublicacion');
+    }
 }

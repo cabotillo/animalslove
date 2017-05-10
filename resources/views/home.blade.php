@@ -4,6 +4,7 @@
 <div class="container" xmlns:border="http://www.w3.org/1999/xhtml">
 
     <div class="row">
+
         <!-- Menu izquierdo -->
         <div class="col-sm-3">
             <div id="buscar">
