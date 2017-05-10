@@ -24,30 +24,47 @@
             @if(!$tuspublicaciones == '')
 
                 <h2>Sus Publicaciones</h2>
+
+
                 @foreach($tuspublicaciones as $p)
-                    <p>{{$p->titulo}}</p>
-                    <p>{{$p->cuerpo}}</p>
+
+                    <div class="media col-sm-6 col-md-4">
+                        <div class="media-left"> <a href="#">
+                                <img alt="" class="media-object"  src="../storage/mascotas/avatar.jpg" data-holder-rendered="true" style="width: 64px; height: 64px;"> </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">{{$p->titulo}}</h4>
+                            {{$p->cuerpo}}
+                        </div>
+
+                    </div>
 
                 @endforeach
             @endif
+            
+            <div class="clearfix"></div>
 
             @if(!$tusmascotas == '')
 
                 <h2>Sus Mascotas</h2>
                 @foreach($tusmascotas as $m)
-                <div class="mascotas col-sm-3" id="{{$m->animal_id}}" style="border: 1px solid #98cbe8">
-                    <p>{{($m)->nombre}}</p>
-                        <img src="../storage/{{$m->avatar}}" class="img-responsive">
-                        <p>{{($m)->animal_id}}</p>
-                        <p>{{($m)->raza_id}}</p>
-                        <p>{{($m)->genero}}</p>
-                </div>
+
+                        <div class="col-sm-6 col-md-4">
+                            <div class="thumbnail" id="{{$m->animal_id}}">
+                                <img alt="" src="../storage/{{$m->avatar}}" data-holder-rendered="true" style="height: 200px; width: 100%;">
+                                <div class="caption">
+                                    <h3>{{$m->nombre}}</h3>
+                                    <p>{{$m->animal_id}} -- {{$m->raza_id}} -- {{$m->genero}}</p>
+                                    <!--<p><a href="#" class="btn btn-primary" role="button">Button</a>></p>-->
+                                </div>
+                            </div>
+                        </div>
+
                 @endforeach
             @endif
-
         </div>
-
     </div>
 </div>
+
 
 @endsection
