@@ -56,6 +56,7 @@ class Vistas extends Controller
             $animal = Input::get('animal');
             $raza = Input::get('raza');
             $genero = Input::get('genero');
+            $mensaje = '';
 
             $resultados = DB::table('mascotas')->where([
                 ['animal_id', '=', $animal],
@@ -63,9 +64,14 @@ class Vistas extends Controller
                 ['genero', '=', $genero],
             ])->join('animal', 'animal.id', '=', 'mascotas.animal_id')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->get();
 
+            if(empty($resultados[0])){
+                $mensaje = 'No hay resultados';
+            }else{
+                $mensaje = 'Mascotas encontradas: '.count($resultados);
+            }
             $data = array(
                 'resultados' => $resultados,
-                'mensaje', 'La publicación ha sido añadida correctamente',
+                'mensaje'  =>$mensaje,
                 'tipo' => 'Mascotas Filtradas:',
                 'animales' => DB::table('animal')->get()
 

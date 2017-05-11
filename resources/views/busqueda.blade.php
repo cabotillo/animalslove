@@ -40,11 +40,15 @@
             <div class="row">
                 <h1 class="text-center">{{$tipo}}</h1>
 
+                @if(empty($resultados))
+
+                        <h2>{{$mensaje}}</h2>
+                    </div>
+                @else
             </div>
 
-
                 <div class="row" id="">
-
+                    <h2>{{$mensaje}}</h2>
                     @foreach($resultados as $r)
                         <div class="mascotas col-sm-9 col-md-3" id="" style="border: 1px solid #98cbe8">
                             <a style="text-decoration: none" href="{{'mascota/',$r->id}}{{$r->id}}"><p>{{$r->nombre}}</p>
@@ -54,11 +58,10 @@
                                 <p>{{$r->genero}}</p></a>
                         </div>
                     @endforeach
+                    @endif
                 </div>
             </div>
         </div>
-    </div>
-</div>
 @endsection
 
 @section('scripts')
