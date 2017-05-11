@@ -43,6 +43,8 @@ Route::post('nuevapublicacion', ['as' => 'nuevapublicacion', 'uses' => 'EditarPe
 
 Route::get('/filtrar', ['as' => 'filtrar', 'uses' => 'Vistas@selectRaza']);
 
+Route::post('/busqueda', ['as' => 'busqueda', 'uses' => 'Vistas@busqueda']);
+
 
 Route::resource('mascota', 'MascotaController');
 Route::resource('raza', 'RazaController');
