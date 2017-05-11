@@ -45,6 +45,8 @@ Route::get('/filtrar', ['as' => 'filtrar', 'uses' => 'Vistas@selectRaza']);
 
 Route::post('/busqueda', ['as' => 'busqueda', 'uses' => 'Vistas@busqueda']);
 
+Route::get('/admin', ['as' => 'admin', 'uses' => 'AdminController@index']);
+
 
 Route::resource('mascota', 'MascotaController');
 Route::resource('raza', 'RazaController');
