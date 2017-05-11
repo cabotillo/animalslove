@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
+use function Sodium\add;
 
 class Vistas extends Controller
 {
@@ -26,4 +29,18 @@ class Vistas extends Controller
 
         return view('miperfil')->with($data);
     }
+
+    public function selectRaza(Request $request)
+    {
+        $animal_id =  $request->animal_id;
+
+        $razas = DB::table('razas')->where('id_animal', $animal_id)->pluck('raza','id')->toArray();
+
+        return response()->json($razas);
+    }
 }
+
+
+
+
+

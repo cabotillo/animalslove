@@ -41,6 +41,7 @@ Route::get('perfil/{login}', ['as' => 'miperfil', 'uses' => 'Vistas@miperfil']);
 Route::get('nuevapublicacion', ['as' => 'nuevapublicacion', 'uses' => 'EditarPerfil@addPublicacion']);
 Route::post('nuevapublicacion', ['as' => 'nuevapublicacion', 'uses' => 'EditarPerfil@insertarPublicacion']);
 
+Route::get('/filtrar', ['as' => 'filtrar', 'uses' => 'Vistas@selectRaza']);
 
 
 Route::resource('mascota', 'MascotaController');
