@@ -13,20 +13,34 @@
                 <h1><small>Filtrar Mascotas</small></h1>
                 <form method="post" action="{{route('busqueda')}}">
                     {{ csrf_field() }}
-                <select class="form-control" name="animal" id="animal">
-                    <option selected="selected">Selecciona</option>
-                    @foreach($animales as $a)
-                        <option value="{{$a->id}}">{{$a->animal}}</option>
-                    @endforeach
-                </select>
+                    <select class="form-control" name="animal" id="animal">
+                        <option selected="selected">Selecciona</option>
+                        @foreach($animales as $a)
+                            <option value="{{$a->id}}">{{$a->animal}}</option>
+                        @endforeach
+                    </select>
 
-                <span>Raza</span>
-                <select class="form-control" name="raza" id="raza"></select>
+                    <div class="form-group{{ $errors->has('raza') ? ' has-error' : '' }}">
+                        <label class="control-label">Raza</label>
+                        <select class="form-control" name="raza" id="raza"></select>
+                        @if ($errors->has('raza'))
+                            <span class="help-block">
+                            <strong>{{ $errors->first('raza') }}</strong>
+                        </span>
+                        @endif
+                    </div>
 
-                <span>Genero</span>
-                    <div class="radio"><label><input type="radio" name="genero" value="Macho"> Macho</label></div>
-                    <div class="radio"><label><input type="radio" name="genero" value="Hembra"> Hembra</label></div>
-                    <br><input class="form-control" type="button" value="Filtrar" name="submit">
+                    <div class="form-group{{ $errors->has('genero') ? ' has-error' : '' }}">
+                        <label class="control-label">Genero</label>
+                        <div class="radio"><input type="radio" name="genero" value="Macho"> Macho</div>
+                        <div class="radio"><input type="radio" name="genero" value="Hembra"> Hembra</div>
+                        @if ($errors->has('genero'))
+                            <span class="help-block">
+                            <strong>{{ $errors->first('genero') }}</strong>
+                        </span>
+                        @endif
+                    </div>
+                    <br><input class="btn btn-primary" type="submit" value="Filtrar">
                 </form>
 
 

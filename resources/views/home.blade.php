@@ -115,10 +115,6 @@
                     $(".oculto").hide();
                     $(nodo).fadeToggle("fast");
 
-
-
-
-
                     return false;
                 }
             });

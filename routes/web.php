@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
 Auth::routes();
 
@@ -42,10 +40,11 @@ Route::get('nuevapublicacion', ['as' => 'nuevapublicacion', 'uses' => 'EditarPer
 Route::post('nuevapublicacion', ['as' => 'nuevapublicacion', 'uses' => 'EditarPerfil@insertarPublicacion']);
 
 Route::get('/filtrar', ['as' => 'filtrar', 'uses' => 'Vistas@selectRaza']);
-
 Route::post('/busqueda', ['as' => 'busqueda', 'uses' => 'Vistas@busqueda']);
 
 Route::get('/admin', ['as' => 'admin', 'uses' => 'AdminController@index']);
+
+Route::get('/mascota/{id}', ['as' => 'mascota', 'uses' => 'Vistas@mascota']);
 
 
 Route::resource('mascota', 'MascotaController');

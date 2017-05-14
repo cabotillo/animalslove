@@ -81,6 +81,28 @@ class Vistas extends Controller
 
         }
     }
+
+    public function mascota($id)
+    {
+
+        $mascota = DB::table('mascotas')->where('mascotas.id', $id)->join('animal', 'animal.id', '=', 'mascotas.animal_id')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->first();
+
+        $imagenes = DB::table('imagenes')->where('mascota_id', $id)->get();
+
+        $usuario = DB::table('users')->where('id', 1)->get();
+
+        $suspublicaciones = DB::table('publicaciones')->join('tipopublicacion', 'tipopublicacion.id', '=', 'publicaciones.tipo_id')->where('mascota_id', $id)->get();
+
+        $data = array(
+            'mascota' => $mascota,
+            'imagenes' => $imagenes,
+            'usuario' => $usuario,
+            'publicaciones' => $suspublicaciones
+
+        );
+
+        return view('mascota')->with($data);
+    }
 }
 
 
