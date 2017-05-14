@@ -9,6 +9,12 @@ class AdminController extends Controller
 {
     //
 
+
+    public function __construct()
+    {
+        $this->middleware('admin')->except('logout');
+    }
+
     public function index(){
 
         $usuarios = User::all();

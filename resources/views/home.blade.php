@@ -75,16 +75,12 @@
                 <div class="row oculto" id="publicaciones">
 
                     @foreach($publicaciones as $p)
-                        <div class="media col-sm-6 col-md-6">
-                            <div class="media-left"> <a >
-                                    <img alt="animal" class="media-object" src="storage/mascotas/avatar.jpg" data-holder-rendered="true" style="width: 64px; height: 64px;"> </a>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">{{$p->titulo}}</h4>
-                                {{$p->cuerpo}}
-                            </div>
-
+                        <a href="{{'publicaciones/',$p->id}}{{$p->id}}">
+                        <div class="col-md-6">
+                            <h4>{{$p->titulo}}</h4>
+                            <p>{{$p->cuerpo}}</p>
                         </div>
+                        </a>
                     @endforeach
                 </div>
             </div>
