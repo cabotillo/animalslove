@@ -11,6 +11,7 @@ class Mascotas extends Model
 
     protected $fillable = ['id', 'user_id','nombre', 'animal_id', 'raza_id','genero', 'tamanyo', 'avatar', 'edad'];
     protected $table = 'mascotas';
+    protected $primaryKey = 'id';
 
 
     public function animal(){

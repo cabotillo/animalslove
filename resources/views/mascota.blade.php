@@ -17,7 +17,7 @@
     }
 </style>
 @section('content')
-<div class="container" xmlns:border="http://www.w3.org/1999/xhtml">
+<div class="container">
     @if(isset($mensaje))
         <div class="alert alert-success">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -32,6 +32,7 @@
                 <p>{{$mascota->animal}}</p>
                 <p>{{$mascota->raza}}</p>
                 <p>{{$mascota->genero}}</p>
+                <p>Pertenece a <a href="{{'../perfil/',$usuario->id}}{{$usuario->login}}">{{$usuario->login}}</a></p>
             </div>
         </div>
     @if(!empty($publicaciones->first()))
@@ -49,9 +50,6 @@
     </div>
 
     <div class="col-md-8">
-
-
-
 
         @if(!empty($imagenes->first()))
             <h2>Galeria de imagenes</h2>

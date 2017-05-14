@@ -89,7 +89,8 @@ class Vistas extends Controller
 
         $imagenes = DB::table('imagenes')->where('mascota_id', $id)->get();
 
-        $usuario = DB::table('users')->where('id', 1)->get();
+        $id_usuario = $mascota->user_id;
+        $usuario = DB::table('users')->where('id', $id_usuario)->first();
 
         $suspublicaciones = DB::table('publicaciones')->join('tipopublicacion', 'tipopublicacion.id', '=', 'publicaciones.tipo_id')->where('mascota_id', $id)->get();
 
@@ -102,6 +103,29 @@ class Vistas extends Controller
         );
 
         return view('mascota')->with($data);
+    }
+
+    public function publicacion($id)
+    {
+
+        $publicacion = DB::table('publicaciones')->join('tipopublicacion', 'tipopublicacion.id', '=', 'publicaciones.tipo_id')->where('publicaciones.id', $id)->first();
+
+        $id_usuario = $publicacion->user_id;
+
+        $mascota = DB::table('mascotas')->where('mascotas.user_id', $id_usuario)->join('animal', 'animal.id', '=', 'mascotas.animal_id')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->first();
+
+        $usuario = DB::table('users')->where('id', $id_usuario)->first();
+
+
+
+        $data = array(
+            'mascota' => $mascota,
+            'usuario' => $usuario,
+            'publicacion' => $publicacion
+
+        );
+
+        return view('publicacion')->with($data);
     }
 }
 

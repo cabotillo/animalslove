@@ -61,9 +61,8 @@
 
 
                 <div class="row oculto" id="mascotas">
-
                     @foreach($mascotas as $m)
-                        <div class="mascotas col-sm-9 col-md-3" id="" style="border: 1px solid #98cbe8">
+                        <div class="mascotas col-sm-9 col-md-3" href="{{'mascota/',$m->id}}{{$m->id}}" style="border: 1px solid #98cbe8">
                             <a style="text-decoration: none" href="{{'mascota/',$m->id}}{{$m->id}}"><p>{{$m->nombre}}</p>
                                 <img alt="{{$m->nombre}}" src="storage/{{$m->avatar}}" class="img-responsive">
                                 <p>{{$m->animal}}</p>
@@ -77,7 +76,7 @@
 
                     @foreach($publicaciones as $p)
                         <div class="media col-sm-6 col-md-6">
-                            <div class="media-left"> <a href="#">
+                            <div class="media-left"> <a >
                                     <img alt="animal" class="media-object" src="storage/mascotas/avatar.jpg" data-holder-rendered="true" style="width: 64px; height: 64px;"> </a>
                             </div>
                             <div class="media-body">

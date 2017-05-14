@@ -121,7 +121,7 @@ class EditarPerfil extends Controller
                 'email' => $email,
                 'telefono' => $telefono,
                 'provincia_id' => $provincia,
-                'avatar' => $login."/".$nombreFichero
+                'avatar' => $carpeta."/".$login."/".$nombreFichero
             ));
 
 

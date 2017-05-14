@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Publicaciones;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PublicacionesController extends Controller
 {
@@ -47,6 +48,9 @@ class PublicacionesController extends Controller
     public function show(Publicaciones $publicaciones)
     {
         //
+
+        //dd($publicaciones);
+        DB::connection('mysql')->getDatabaseName();
     }
 
     /**
