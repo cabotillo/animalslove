@@ -176,10 +176,13 @@ class EditarPerfil extends Controller
                 $mensaje = 'Ya no eres premium';
             }
 
-
+            if(Auth::user()->tipo == 3){
+                $mensaje = "Un admin no puede ser premium";
+            }else{
             User::where('id', $user)->update(array(
                 'tipo' => $p,
             ));
+            }
 
 
             return view('welcome')->with('mensaje', $mensaje);

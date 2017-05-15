@@ -48,6 +48,9 @@ Route::get('/mascota/{id}', ['as' => 'mascota', 'uses' => 'Vistas@mascota']);
 
 Route::get('/publicacion/{id}', ['as' => 'publicacion', 'uses' => 'Vistas@publicacion']);
 
+Route::get('reporte/{id}', ['as' => 'reporte', 'uses' => 'AdminController@reporte']);
+Route::post('reporte/{id}', ['as' => 'reporte', 'uses' => 'AdminController@postReporte']);
+
 
 Route::resource('mascota1', 'MascotaController');
 Route::resource('raza', 'RazaController');

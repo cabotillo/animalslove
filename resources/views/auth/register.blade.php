@@ -95,7 +95,7 @@
                                 <select class="form-control" name="provincia">
 
                                     @foreach($provincias as $p)
-                                        <option @if( old('provincia') == $p->id) selected="selected" @endif value="{{$p->id}}">{{$p->nombre}}</option>
+                                        <option @if( old('provincia') == $p->id) selected="selected" @endif value="{{$p->id}}">{{$p->provincia}}</option>
                                     @endforeach
                                 </select>
                                 @if ($errors->has('provincia'))
