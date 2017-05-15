@@ -49,8 +49,8 @@ class RazaController extends Controller
     {
         //
 
-        //dd($raza);
-        echo DB::connection('mysql')->getDatabaseName();
+        dd($raza);
+        //echo DB::connection('mysql')->getDatabaseName();
     }
 
     /**

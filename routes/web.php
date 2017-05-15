@@ -56,3 +56,4 @@ Route::resource('mascota1', 'MascotaController');
 Route::resource('raza', 'RazaController');
 Route::resource('animal', 'AnimalController');
 Route::resource('publicacion1', 'PublicacionesController');
+Route::resource('reporte1', 'ReporteController');

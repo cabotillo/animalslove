@@ -11,7 +11,7 @@ class Provincias extends Model
 
     protected $fillable = ['id', 'provincia',];
 
-    public  function users(){
+    public function users(){
         return $this->hasMany('App\User');
     }
 }

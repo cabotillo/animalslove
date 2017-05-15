@@ -12,7 +12,8 @@
                 <form role="form" method="post">
                     {{ csrf_field() }}
                     <h1>El usuario {{$u}} tiene {{$r}} avisos.</h1>
-                    <h2>Puede Usuario &||& Mascota || Publicación</h2>
+                    <h2>Es suficiente con reportar al usuario</h2>
+                    <h3>Pero puede añadir la mascota o la publicación reportada</h3>
                     <div class="form-group">
                         <label class="control-label">Mascota</label>
                         <select class="form-control" name="mascota">

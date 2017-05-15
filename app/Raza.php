@@ -15,7 +15,4 @@ class Raza extends Model
     public function animal(){
         return $this->hasOne('App\Animal');
     }
-    public function mascota(){
-        return $this->hasOne('App\Mascotas');
-    }
 }

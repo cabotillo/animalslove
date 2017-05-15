@@ -8,12 +8,12 @@ class Publicaciones extends Model
 {
     //
 
-    protected $fillable = ['id','titulo', 'cuerpo', 'user_id', 'mascota_id','disponible'];
+    protected $fillable = ['id','titulo', 'cuerpo', 'user_id', 'mascota_id', 'tipo_id', 'created_at','disponible'];
 
     protected $table = 'publicaciones';
 
     public function user(){
-        return $this->hasMany('App\User');
+        return $this->hasOne('App\User');
     }
     public function mascota(){
         return $this->hasOne('App\Mascotas');
