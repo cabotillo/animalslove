@@ -31,8 +31,8 @@ Route::get('editarperfil/mascotas', ['as' => 'editarperfil.mascotas', 'uses' => 
 Route::get('editarperfil/editar/mascotas/{id}', ['as' => 'editarperfil.editarmascota', 'uses' => 'EditarPerfil@editarMascota']);
 Route::post('editarperfil/editar/mascotas/{id}', ['as' => 'editarperfil.editarmascota', 'uses' => 'EditarPerfil@updateMascota']);
 
-Route::get('editarperfil/mascotas/add/{id}', ['as' => 'editarperfil.addmascota', 'uses' => 'EditarPerfil@addMascota']);
-Route::post('editarperfil/mascotas/add/{id}', ['as' => 'editarperfil.addmascota', 'uses' => 'EditarPerfil@insertarMascota']);
+Route::get('editarperfil/mascotas/add', ['as' => 'editarperfil.addmascota', 'uses' => 'EditarPerfil@addMascota']);
+Route::post('editarperfil/mascotas/add', ['as' => 'editarperfil.addmascota', 'uses' => 'EditarPerfil@insertarMascota']);
 
 Route::get('perfil/{login}', ['as' => 'miperfil', 'uses' => 'Vistas@miperfil']);
 
@@ -51,7 +51,11 @@ Route::get('/publicacion/{id}', ['as' => 'publicacion', 'uses' => 'Vistas@public
 Route::get('reporte/{id}', ['as' => 'reporte', 'uses' => 'AdminController@reporte']);
 Route::post('reporte/{id}', ['as' => 'reporte', 'uses' => 'AdminController@postReporte']);
 
+Route::get('imagenes/{id}', ['as' => 'imagenes', 'uses' => 'EditarPerfil@addImagenes']);
+Route::post('imagenes/{id}', ['as' => 'imagenes', 'uses' => 'EditarPerfil@postImagenes']);
 
+
+Route::resource('Imagenes', 'ImagenesController');
 Route::resource('mascota1', 'MascotaController');
 Route::resource('raza', 'RazaController');
 Route::resource('animal', 'AnimalController');

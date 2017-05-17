@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="container">
-
     <div class="row">
 
 
@@ -75,7 +74,7 @@
                 <div class="row oculto" id="publicaciones">
 
                     @foreach($publicaciones as $p)
-                        <a href="{{'publicaciones/',$p->id}}{{$p->id}}">
+                        <a href="{{'publicacion/',$p->id}}{{$p->id}}">
                         <div class="col-md-6">
                             <h4>{{$p->titulo}}</h4>
                             <p>{{$p->cuerpo}}</p>
@@ -90,59 +89,55 @@
 @endsection
 
 @section('scripts')
+<script>
+    $(document).ready(function(){
 
-    <script>
+        //Cambiar entre mascotas y publicaciones
 
-        $(document).ready(function(){
+        $(".oculto").hide();
+        $("#mascotas").show();
+        $(".inf").click(function(){
+            var nodo = $(this).attr("href");
 
-            //Cambiar entre mascotas y publicaciones
+            if ($(nodo).is(":visible")){
+                $(nodo).hide();
+                return false;
+            }else{
 
-            $(".oculto").hide();
-            $("#mascotas").show();
-            $(".inf").click(function(){
-                var nodo = $(this).attr("href");
+                $(".oculto").hide();
+                $(nodo).fadeToggle("fast");
 
-                if ($(nodo).is(":visible")){
-                    $(nodo).hide();
-                    return false;
-                }else{
-
-                    $(".oculto").hide();
-                    $(nodo).fadeToggle("fast");
-
-                    return false;
-                }
-            });
-
-            //Flitrar mascotas
-
-            $('#animal').prepend('');
-
-            $('#animal').on('change',function (e) {
-
-                var animal_id = e.target.value;
-
-                if(animal_id){
-                    $.ajax({
-                        type: "GET",
-                        url: "{{url('filtrar')}}?animal_id=" + animal_id,
-                        success: function (res) {
-                            if(res){
-                                $("#raza").empty();
-                                $.each(res, function (key, value) {
-                                    $("#raza").append('<option value="' + key + '">' + value + '</option>');
-
-                                });
-                            }else{
-                                $("#raza").empty();
-                            }
-                        }
-                    });
-                }
-            });
+                return false;
+            }
         });
 
+        //Flitrar mascotas
 
-    </script>
-    @endsection
+        $('#animal').prepend('');
+
+        $('#animal').on('change',function (e) {
+
+            var animal_id = e.target.value;
+
+            if(animal_id){
+                $.ajax({
+                    type: "GET",
+                    url: "{{url('filtrar')}}?animal_id=" + animal_id,
+                    success: function (res) {
+                        if(res){
+                            $("#raza").empty();
+                            $.each(res, function (key, value) {
+                                $("#raza").append('<option value="' + key + '">' + value + '</option>');
+
+                            });
+                        }else{
+                            $("#raza").empty();
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>
+@endsection
 

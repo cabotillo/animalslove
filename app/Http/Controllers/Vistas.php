@@ -17,8 +17,8 @@ class Vistas extends Controller
         $user = DB::table('users')->where('login', $login)->get();
         $id = $user[0]->id;
 
-        $tusmascotas = DB::table('mascotas')->join('animal', 'animal.id', '=', 'mascotas.animal_id')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->where('user_id', $id)->get();
-        $tuspublicaciones = DB::table('publicaciones')->join('tipopublicacion', 'tipopublicacion.id', '=', 'publicaciones.tipo_id')->where('user_id', $id)->get();
+        $tusmascotas = DB::table('mascotas')->select('mascotas.*', 'animal.animal', 'razas.raza')->join('animal', 'animal.id', '=', 'mascotas.animal_id')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->where('user_id', $id)->get();
+        $tuspublicaciones = DB::table('publicaciones')->select('publicaciones.*', 'tipopublicacion.tipo')->join('tipopublicacion', 'tipopublicacion.id', '=', 'publicaciones.tipo_id')->where('user_id', $id)->get();
 
         $data = array(
             'tusmascotas' => $tusmascotas,
@@ -62,7 +62,7 @@ class Vistas extends Controller
                 ['animal_id', '=', $animal],
                 ['raza_id', '=', $raza],
                 ['genero', '=', $genero],
-            ])->join('animal', 'animal.id', '=', 'mascotas.animal_id')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->get();
+            ])->select('mascotas.id', 'razas.raza', 'animal.animal')->join('animal', 'animal.id', '=', 'mascotas.animal_id')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->get();
 
             if(empty($resultados[0])){
                 $mensaje = 'No hay resultados';
@@ -85,7 +85,7 @@ class Vistas extends Controller
     public function mascota($id)
     {
 
-        $mascota = DB::table('mascotas')->where('mascotas.id', $id)->join('animal', 'animal.id', '=', 'mascotas.animal_id')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->first();
+        $mascota = DB::table('mascotas')->where('mascotas.id', $id)->select('mascotas.*', 'animal.animal', 'razas.raza')->join('animal', 'animal.id', '=', 'mascotas.animal_id')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->first();
 
         $imagenes = DB::table('imagenes')->where('mascota_id', $id)->get();
 

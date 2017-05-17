@@ -8,11 +8,7 @@ class Mascotas extends Model
 {
     //
 
-
     protected $fillable = ['id', 'user_id', 'nombre', 'animal_id', 'raza_id', 'genero', 'tamanyo', 'avatar', 'edad', 'updated_at'];
-    protected $table = 'mascotas';
-    protected $primaryKey = 'id';
-    protected $connection = 'mysql';
 
 
     public function animal()

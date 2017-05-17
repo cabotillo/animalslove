@@ -9,10 +9,10 @@
 
                     <div class="panel-body">
                         <ul class="nav nav-tabs nav-top-border">
-                            <li><a href="{{'../../cuenta'}}">Datos Personales</a></li>
-                            <li><a href="{{'../../password'}}">Contraseña</a></li>
-                            <li class="active"><a href="{{'../../mascotas'}}">Mascotas</a></li>
-                            <li><a href="{{'../../premium'}}">Premium</a></li>
+                            <li><a href="{{'../cuenta'}}">Datos Personales</a></li>
+                            <li><a href="{{'../password'}}">Contraseña</a></li>
+                            <li class="active"><a href="{{'../mascotas'}}">Mascotas</a></li>
+                            <li><a href="{{'../premium'}}">Premium</a></li>
                         </ul>
                         <form action="" method="post">
                             {{ csrf_field() }}
@@ -29,17 +29,22 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Animal</label>
-                                    <input type="text" class="form-control" value="{{$animal[0]->animal}}"disabled>
-
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Raza</label>
-                                    <select class="form-control" name="raza">
-
-                                        @foreach($razas as $r)
-                                            <option @if( old('raza') == $r->id) selected="selected" @endif value="{{$r->id}}">{{$r->raza}}</option>
+                                    <select class="form-control" name="animal" id="animal">
+                                        <option selected="selected">Selecciona</option>
+                                        @foreach($animales as $a)
+                                            <option value="{{$a->id}}">{{$a->animal}}</option>
                                         @endforeach
                                     </select>
+
+                                </div>
+                                <div class="form-group {{ $errors->has('raza') ? ' has-error' : '' }}">
+                                    <label class="control-label">Raza</label>
+                                    <select class="form-control" name="raza" id="raza"></select>
+                                    @if ($errors->has('raza'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('raza') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
                                 <div class="form-group {{ $errors->has('genero') ? ' has-error' : '' }}">
                                     <label class="control-label">Genero</label>
@@ -71,6 +76,16 @@
                                         </span>
                                     @endif
                                 </div>
+                                <div class="form-group">
+                                    <label class="control-label">Imagen de perfil</label><br>
+
+                                    <div class="thumbnail col-md-6">
+                                        <!--<img src="" alt="avatar"></img>-->
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="file" name="img">
+                                    </div>
+                                </div>
                                 <div class="col-lg-12">
                                     <input type="submit" class="btn btn-primary" value="Guardar Cambios">
                                 </div>
@@ -83,5 +98,38 @@
         </div>
     </div>
 
+
+@endsection
+
+@section('scripts')
+<script>
+    //Flitrar mascotas
+
+    $(document).ready(function(){
+        $('#animal').prepend('');
+
+        $('#animal').on('change',function (e) {
+
+        var animal_id = e.target.value;
+
+        if(animal_id){
+            $.ajax({
+                type: "GET",
+                url: "{{url('filtrar')}}?animal_id=" + animal_id,
+                success: function (res) {
+                    if(res){
+                        $("#raza").empty();
+                        $.each(res, function (key, value) {
+                            $("#raza").append('<option value="' + key + '">' + value + '</option>');
+                        });
+                    }else{
+                        $("#raza").empty();
+                    }
+                }
+            });
+        }
+        });
+    });
+</script>
 
 @endsection

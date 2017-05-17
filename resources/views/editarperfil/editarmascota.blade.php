@@ -22,18 +22,13 @@
                             <li><a href="{{'../../premium'}}">Premium</a></li>
                         </ul>
 
-                        <form action="{{route('editarperfil.editarmascota',$mascota->id)}}" method="post">
+                        <form action="{{route('editarperfil.editarmascota',$mascota->id)}}" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class=" row panel-body">
 
                                 <div class="form-group">
                                     <label class="control-label">Nombre</label>
-                                    <input type="text" class="form-control" value="{{$mascota->nombre}}" name="nombre">
-                                    @if ($errors->has('nombre'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('nombre') }}</strong>
-                                        </span>
-                                    @endif
+                                    <input type="text" class="form-control" value="{{$mascota->nombre}}" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Animal</label>

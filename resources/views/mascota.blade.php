@@ -21,7 +21,6 @@
     @if(isset($mensaje))
         <div class="alert alert-success">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            {{ $mensaje }}
         </div>
     @endif
         <h1 class="text-center">{{$mascota->nombre}}</h1>
@@ -29,6 +28,13 @@
         <div class="thumbnail">
             <img alt="{{$mascota->nombre}}" src="../storage/{{$mascota->avatar}}" class="img-responsive" data-holder-rendered="true">
             <div class="caption">
+                @if(!Auth::guest())
+                    @if(Auth::user()->id == $usuario->id)
+
+                        <a href="../editarperfil/editar/mascotas/{{$mascota->id}}"><input type="button" class="btn btn-primary" value="Editar Mascota"></a>
+                        <a href="{{route('imagenes',$mascota->id)}}"><input type="button" class="btn btn-primary" value="Añadir Fotos"></a>
+                    @endif
+                @endif
                 <p>{{$mascota->animal}}</p>
                 <p>{{$mascota->raza}}</p>
                 <p>{{$mascota->genero}}</p>

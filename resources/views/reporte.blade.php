@@ -19,7 +19,7 @@
                         <select class="form-control" name="mascota">
                             <option></option>
                             @foreach($mascotas as $m)
-                                <option @if( old('mascota')) selected="selected" @endif value="{{$m->id}}">{{$m->nombre}}</option>
+                                <option value="{{$m->id}}">{{$m->nombre}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -29,7 +29,7 @@
                         <select class="form-control" name="publicacion">
                             <option></option>
                             @foreach($publicacion as $p)
-                                <option @if( old('publicacion')) selected="selected" @endif value="{{$p->id}}">{{$p->titulo}}</option>
+                                <option value="{{$p->id}}">{{$p->titulo}}</option>
                             @endforeach
                         </select>
                     </div>

@@ -43,8 +43,8 @@ class AdminController extends Controller
 
     public function reporte($id){
 
-        $mascotas = DB::table('mascotas')->join('animal', 'animal.id', '=', 'mascotas.animal_id')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->where('user_id', $id)->get();
-        $publicaciones = DB::table('publicaciones')->join('tipopublicacion', 'tipopublicacion.id', '=', 'publicaciones.tipo_id')->where('user_id', $id)->get();
+        $mascotas = DB::table('mascotas')->select('mascotas.id','mascotas.nombre')->join('animal', 'animal.id', '=', 'mascotas.animal_id')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->where('user_id', $id)->get();
+        $publicaciones = DB::table('publicaciones')->select('publicaciones.id','publicaciones.titulo')->join('tipopublicacion', 'tipopublicacion.id', '=', 'publicaciones.tipo_id')->where('user_id', $id)->get();
         $reportes = DB::table('reportes')->where('user_id', $id)->count();
         $usuario = DB::table('users')->where('id', $id)->value('login');
 
