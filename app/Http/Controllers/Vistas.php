@@ -62,7 +62,7 @@ class Vistas extends Controller
                 ['animal_id', '=', $animal],
                 ['raza_id', '=', $raza],
                 ['genero', '=', $genero],
-            ])->select('mascotas.id', 'razas.raza', 'animal.animal')->join('animal', 'animal.id', '=', 'mascotas.animal_id')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->get();
+            ])->select('mascotas.*', 'razas.raza', 'animal.animal')->join('animal', 'animal.id', '=', 'mascotas.animal_id')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->get();
 
             if(empty($resultados[0])){
                 $mensaje = 'No hay resultados';

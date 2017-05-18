@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <h1 class="text-center">Imagenes de {{$mascota->nombre}}</h1>
-        <form method="post" action="{{route('imagenes',$mascota->id)}}">
+        <form method="post" action="{{route('imagenesdelete',$mascota->id)}}">
             {{csrf_field()}}
         @foreach($imagenes as $i)
             <div class="col-md-2">
@@ -25,12 +25,13 @@
             </div>
             <div class="panel-body">
 
-                <form action="." id="my-dropzone" class="dropzone" method="post" enctype="multipart/form-data">
+                <form action="{{route('imagenesadd',$mascota->id)}}{{$mascota->id}}" id="my-dropzone" class="dropzone" method="post" enctype="multipart/form-data">
+                    {{csrf_field()}}
                     <div class="dz-message" style="height:200px;">
                         Drop your files here
                     </div>
                     <div class="dropzone-previews"></div>
-                    <button type="submit" class="btn btn-success" id="submit">Save</button>
+                    <input class="btn btn-info" type="submit" value="Subir imagenes">
                 </form>
             </div>
         </div>
@@ -45,32 +46,11 @@
     <script>
 
         Dropzone.options.myDropzone = {
-            autoProcessQueue: false,
+            autoProcessQueue: true,
             uploadMultiple: true,
             maxFilezise: 10,
             maxFiles: 2,
 
-            init: function() {
-                var submitBtn = document.querySelector("#submit");
-                myDropzone = this;
-
-                submitBtn.addEventListener("click", function(e){
-                    e.preventDefault();
-                    e.stopPropagation();
-                    myDropzone.processQueue();
-                });
-                this.on("addedfile", function(file) {
-                    alert("file uploaded");
-                });
-
-                this.on("complete", function(file) {
-                    myDropzone.removeFile(file);
-                });
-
-                this.on("success",
-                    myDropzone.processQueue.bind(myDropzone)
-                );
-            }
         };
     </script>
 @endsection

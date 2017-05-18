@@ -4,51 +4,6 @@
 <div class="container">
 
     <div class="row">
-
-
-        <!-- Menu izquierdo -->
-        <div class="col-sm-3">
-            <div id="buscar">
-                @if(Auth::user())<h1><a href="{{'perfil/',Auth::user()->login}}{{Auth::user()->login}}">Mi perfil</a></h1>@endif
-                <h1><small>Filtrar Mascotas</small></h1>
-                <form method="post" action="{{route('busqueda')}}">
-                    {{ csrf_field() }}
-                    <select class="form-control" name="animal" id="animal">
-                        <option selected="selected">Selecciona</option>
-                        @foreach($animales as $a)
-                            <option value="{{$a->id}}">{{$a->animal}}</option>
-                        @endforeach
-                    </select>
-
-                    <div class="form-group{{ $errors->has('raza') ? ' has-error' : '' }}">
-                        <label class="control-label">Raza</label>
-                        <select class="form-control" name="raza" id="raza"></select>
-                        @if ($errors->has('raza'))
-                            <span class="help-block">
-                            <strong>{{ $errors->first('raza') }}</strong>
-                        </span>
-                        @endif
-                    </div>
-
-                    <div class="form-group{{ $errors->has('genero') ? ' has-error' : '' }}">
-                        <label class="control-label">Genero</label>
-                        <div class="radio"><input type="radio" name="genero" value="Macho"> Macho</div>
-                        <div class="radio"><input type="radio" name="genero" value="Hembra"> Hembra</div>
-                        @if ($errors->has('genero'))
-                            <span class="help-block">
-                            <strong>{{ $errors->first('genero') }}</strong>
-                        </span>
-                        @endif
-                    </div>
-                    <br><input class="btn btn-primary" type="submit" value="Filtrar">
-                </form>
-
-
-            </div>
-
-
-        </div>
-
         <!--Menu Principal -->
         <div class="col-sm-9">
             <div class="row">

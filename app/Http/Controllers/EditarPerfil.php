@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use Auth;
 use App\User;
+use Illuminate\Validation\Rules\In;
 use View;
 
 class EditarPerfil extends Controller
@@ -386,21 +387,30 @@ class EditarPerfil extends Controller
         return view('imagenes')->with($data);
     }
 
-    public function postImagenes()
+    public function postInsertImagenes()
     {
-        $files = request()->file('file');
+        /*$files = request()->file('file');
         $mascota = Input::get('id');
         foreach ($files as $file) {
             $id = DB::table('imagenes')->select('id')->where('mascota_id', $mascota);
             $ext = $file->guessClientExtension();
-            $carpeta = 'usuarios/';
+            $carpeta = 'mascotas/';
 
             $nombreFichero = $mascota . $id . $ext;
 
             $file->storeAs($carpeta . $mascota, $nombreFichero);
-        }
+        }*/
+        echo "<script>alert('IE')</script>";
+        print_r(request()->file('file'));
 
         return view('welcome')->with('mensaje', 'Imágenes subidas correctamente');
+    }
+
+    public function postDeleteImagenes(){
+        $file = Input::get('file');
+
+
+
     }
 
 }

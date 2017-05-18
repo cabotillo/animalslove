@@ -52,7 +52,8 @@ Route::get('reporte/{id}', ['as' => 'reporte', 'uses' => 'AdminController@report
 Route::post('reporte/{id}', ['as' => 'reporte', 'uses' => 'AdminController@postReporte']);
 
 Route::get('imagenes/{id}', ['as' => 'imagenes', 'uses' => 'EditarPerfil@addImagenes']);
-Route::post('imagenes/{id}', ['as' => 'imagenes', 'uses' => 'EditarPerfil@postImagenes']);
+Route::post('imagenesdelete/{id}', ['as' => 'imagenesdelete', 'uses' => 'EditarPerfil@postDeleteImagenes']);
+Route::post('imagenesadd/{id}', ['as' => 'imagenesadd', 'uses' => 'EditarPerfil@postInsertImagenes']);
 
 
 Route::resource('Imagenes', 'ImagenesController');
