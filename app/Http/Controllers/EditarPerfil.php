@@ -239,7 +239,6 @@ class EditarPerfil extends Controller
 
             $file->storeAs($carpeta.$mascota,$nombreFichero);
 
-            $nombre = Input::get('nombre');
             $tamanyo = Input::get('tamanyo');
             $edad = Input::get('edad');
 
@@ -286,51 +285,74 @@ class EditarPerfil extends Controller
             return Redirect::back()->withInput()->withErrors($validation->messages());
         } else {
 
-            $nombre = Input::get('nombre');
-            $animal = Input::get('animal');
-            $raza = Input::get('raza');
-            $genero = Input::get('genero');
-            $tamanyo = Input::get('tamanyo');
-            $edad = Input::get('edad');
-            $user = Auth::user()->id;
-
             if (request()->file('img') != '') {
+
+                $nombre = Input::get('nombre');
+                $animal = Input::get('animal');
+                $raza = Input::get('raza');
+                $genero = Input::get('genero');
+                $tamanyo = Input::get('tamanyo');
+                $edad = Input::get('edad');
+                $user = Auth::user()->id;
+                $login = Auth::user()->login;
 
                 $file = request()->file('img');
                 $ext = $file->guessClientExtension();
 
                 $carpeta = 'mascotas/';
-                $id = DB::table('mascotas')->get('id')->last();
-                $nombreFichero = $id.".".$ext;
-                $file->storeAs($carpeta.$id, $nombreFichero);
-                $avatar = $carpeta.$id."/".$nombreFichero;
+                $nombreFichero = $nombre.$login.".".$ext;
+                $file->storeAs($carpeta.$login, $nombreFichero);
+                $avatar = $carpeta.$login."/".$nombreFichero;
+
+                $mascota = array(
+                    'user_id' => $user,
+                    'nombre' => $nombre,
+                    'animal_id' => $animal,
+                    'raza_id' => $raza,
+                    'genero' => $genero,
+                    'tamanyo' => $tamanyo,
+                    'avatar' => $avatar,
+                    'edad' => $edad,
+                    'updated_at' => time()
+                );
+                DB::table('mascotas')->insert($mascota);
+
+                return view('welcome')->with('mensaje', 'La mascota ha sido añadida correctamente');
+
             }else {
 
+                $nombre = Input::get('nombre');
+                $animal = Input::get('animal');
+                $raza = Input::get('raza');
+                $genero = Input::get('genero');
+                $tamanyo = Input::get('tamanyo');
+                $edad = Input::get('edad');
+                $user = Auth::user()->id;
                 $avatar = 'mascotas/avatar.jpg';
+
+
+                $mascota = array(
+                    'user_id' => $user,
+                    'nombre' => $nombre,
+                    'animal_id' => $animal,
+                    'raza_id' => $raza,
+                    'genero' => $genero,
+                    'tamanyo' => $tamanyo,
+                    'avatar' => $avatar,
+                    'edad' => $edad,
+                    'updated_at' => time()
+                );
+                DB::table('mascotas')->insert($mascota);
+
+                return view('welcome')->with('mensaje', 'La mascota ha sido añadida correctamente');
             }
-
-
-            $mascota = array(
-                'user_id' => $user,
-                'nombre' => $nombre,
-                'animal_id' => $animal,
-                'raza_id' => $raza,
-                'genero' => $genero,
-                'tamanyo' => $tamanyo,
-                'avatar' => $avatar,
-                'edad' => $edad,
-                'updated_at' => time()
-            );
-            DB::table('mascotas')->insert($mascota);
-
-            return view('welcome')->with('mensaje', 'La mascota ha sido añadida correctamente');
-        }
     }
+}
 
     public function addPublicacion(){
 
         $data = array(
-                'mascotas' => DB::table('mascotas')->get(),
+                'mascotas' => DB::table('mascotas')->where('user_id',Auth::user()->id )->get(),
                 'tipop' => DB::table('tipopublicacion')->get(),
             );
         return view('addpublicacion')->with($data);
@@ -387,30 +409,38 @@ class EditarPerfil extends Controller
         return view('imagenes')->with($data);
     }
 
-    public function postInsertImagenes()
+    public function postInsertImagenes($id)
     {
-        /*$files = request()->file('file');
-        $mascota = Input::get('id');
+        $files = request()->file('file');
+
         foreach ($files as $file) {
-            $id = DB::table('imagenes')->select('id')->where('mascota_id', $mascota);
+            $count = DB::table('imagenes')->where('mascota_id',$id)->count();
             $ext = $file->guessClientExtension();
             $carpeta = 'mascotas/';
 
-            $nombreFichero = $mascota . $id . $ext;
+            $nombreFichero = $id."_".$count.".".$ext;
 
-            $file->storeAs($carpeta . $mascota, $nombreFichero);
-        }*/
-        echo "<script>alert('IE')</script>";
-        print_r(request()->file('file'));
+            $file->storeAs($carpeta . $id, $nombreFichero);
 
-        return view('welcome')->with('mensaje', 'Imágenes subidas correctamente');
+            $imagen = array(
+                'mascota_id' => $id,
+                'imagen' => $id."/".$nombreFichero
+            );
+
+                DB::table('imagenes')->insert($imagen);
+        }
+
+
+        //return view('welcome')->with('mensaje', 'Imágenes subidas correctamente');
     }
 
     public function postDeleteImagenes(){
-        $file = Input::get('file');
+
+        $id = Input::get('id');
+        DB::table('imagenes')->where('imagen', $id)->delete();
 
 
-
+        return view('welcome')->with('mensaje', 'Imagen borrada');
     }
 
 }

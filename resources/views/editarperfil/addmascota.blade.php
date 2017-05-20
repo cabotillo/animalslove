@@ -14,7 +14,7 @@
                             <li class="active"><a href="{{'../mascotas'}}">Mascotas</a></li>
                             <li><a href="{{'../premium'}}">Premium</a></li>
                         </ul>
-                        <form action="" method="post">
+                        <form action="" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class=" row panel-body">
 

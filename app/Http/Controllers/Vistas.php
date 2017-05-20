@@ -94,11 +94,36 @@ class Vistas extends Controller
 
         $suspublicaciones = DB::table('publicaciones')->join('tipopublicacion', 'tipopublicacion.id', '=', 'publicaciones.tipo_id')->where('mascota_id', $id)->get();
 
+        switch ($mascota->animal){
+            case 'Perro':
+                $icono = '&#128021;';
+                break;
+            case 'Gato':
+                $icono = '&#128008;';
+                break;
+            case 'Conejo':
+                $icono = '&#128007;';
+            default:
+                $icono = '&#128062;';
+        }
+        switch ($mascota->genero){
+            case 'Macho':
+                $genero = "&#9794;";
+                break;
+                case 'Hembra':
+                $genero = '&#9792;';
+                break;
+
+
+        }
+
         $data = array(
             'mascota' => $mascota,
             'imagenes' => $imagenes,
             'usuario' => $usuario,
-            'publicaciones' => $suspublicaciones
+            'publicaciones' => $suspublicaciones,
+            'icono' => $icono,
+            'genero' => $genero
 
         );
 

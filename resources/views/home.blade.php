@@ -3,8 +3,6 @@
 @section('content')
 <div class="container">
     <div class="row">
-
-
         <!-- Menu izquierdo -->
         <div class="col-sm-3">
             <div id="buscar">
@@ -86,6 +84,28 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('styles')
+
+<style>
+
+    A:link, A:visited, A:active {
+         color:#636b6f;
+    }
+    #mascotas{
+        align-items:center;
+    }
+    .mascotas{
+        height: 25%;
+        width: 25%;
+        display:flex;
+        align-items:center;
+        margin: 10px;
+
+    }
+
+</style>
 @endsection
 
 @section('scripts')

@@ -66,7 +66,7 @@
                         @for($i = 0; $i < count($imagenes); $i++)
                             <li class="col-sm-3">
                                 <a class="thumbnail" id="carousel-selector-{{$i}}">
-                                    <img src="../storage/{{$imagenes[$i]->imagen}}">
+                                    <img src="../storage/mascotas/{{$imagenes[$i]->imagen}}">
                                 </a>
                             </li>
 
@@ -82,11 +82,11 @@
                 @for($i = 0; $i < count($imagenes); $i++)
                     @if($i == 0)
                                 <div class="item active" data-slide-number="{{$i}}">
-                                    <img src="../storage/{{$imagenes[$i]->imagen}}">
+                                    <img src="../storage/mascotas/{{$imagenes[$i]->imagen}}">
                                 </div>
                                         @else
                                             <div class="item " data-slide-number="{{$i}}">
-                                                <img src="../storage/{{$imagenes[$i]->imagen}}">
+                                                <img src="../storage/mascotas/{{$imagenes[$i]->imagen}}">
                                             </div>
                                         @endif
 

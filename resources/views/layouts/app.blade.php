@@ -12,6 +12,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{asset('css/bootstrap.icon-large.min.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
 
     <!-- Scripts -->
     <script>
@@ -19,6 +21,10 @@
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
+
+    @yield('styles')
+
+
 </head>
 <body>
     <div id="app">
