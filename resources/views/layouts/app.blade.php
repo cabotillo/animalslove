@@ -5,6 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <meta property="og:url"           content="https://www.animalslove.ml" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="AnimalsLove" />
+    <meta property="og:description"   content="Your description" />
+    <meta property="og:image"         content="http://www.your-domain.com/path/image.jpg" />
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -54,7 +60,7 @@
                         <li><a href="{{ route('home') }}">Inicio</a></li>
                         <li><a href="{{ route('editarperfil.cuenta')}}">Editar Perfil</a></li>
                         <!--<li><a href="">Mi Perfil</a></li>-->
-                        <li><a href="{{ route('home') }}">Mensajes</a></li>
+                        <li><a href="{{ route('mensajes') }}">Mensajes</a></li>
                         <li><a href="{{route('nuevapublicacion')}}">Nueva Publicación</a></li>
                         <li><a href="{{route('admin')}}">Admin</a></li>
                         @else

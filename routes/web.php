@@ -56,6 +56,22 @@ Route::post('imagenesdelete/{id}', ['as' => 'imagenesdelete', 'uses' => 'EditarP
 Route::post('imagenesadd/{id}', ['as' => 'imagenesadd', 'uses' => 'EditarPerfil@postInsertImagenes']);
 
 
+Route::get('mensajes/',['as' => 'mensajes', 'uses' => 'ChatController@index']);
+Route::get('chat/{login}',['as' => 'chat', 'uses' => 'ChatController@comprobar']);
+
+Route::get('mensajes/{login}', function ($login){
+    return View::make('mensajes')->with('login',$login);
+});
+
+Route::post('mensajes/sendMessage', array('uses' => 'ChatController@sendMessage'));
+Route::post('mensajes/isTyping', array('uses' => 'ChatController@isTyping'));
+Route::post('mensajes/notTyping', array('uses' => 'ChatController@notTyping'));
+Route::post('mensajes/retrieveChatMessages', array('uses' => 'ChatController@retrieveChatMessages'));
+Route::post('mensajes/retrieveTypingStatus', array('uses' => 'ChatController@retrieveTypingStatus'));
+
+
+
+
 Route::resource('Imagenes', 'ImagenesController');
 Route::resource('mascota1', 'MascotaController');
 Route::resource('raza', 'RazaController');
