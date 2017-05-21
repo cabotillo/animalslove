@@ -57,19 +57,18 @@ Route::post('imagenesadd/{id}', ['as' => 'imagenesadd', 'uses' => 'EditarPerfil@
 
 
 Route::get('mensajes/',['as' => 'mensajes', 'uses' => 'ChatController@index']);
+
+//Comprobar si esta el chat
 Route::get('chat/{login}',['as' => 'chat', 'uses' => 'ChatController@comprobar']);
 
-Route::get('mensajes/{login}', function ($login){
-    return View::make('mensajes')->with('login',$login);
-});
+//Cargar el chat
+Route::get('mensajes/{login}',['as' => 'chats', 'uses' => 'ChatController@cargarMensajes']);
 
-Route::post('mensajes/sendMessage', array('uses' => 'ChatController@sendMessage'));
-Route::post('mensajes/isTyping', array('uses' => 'ChatController@isTyping'));
-Route::post('mensajes/notTyping', array('uses' => 'ChatController@notTyping'));
-Route::post('mensajes/retrieveChatMessages', array('uses' => 'ChatController@retrieveChatMessages'));
-Route::post('mensajes/retrieveTypingStatus', array('uses' => 'ChatController@retrieveTypingStatus'));
+Route::post('mensajes/{login}',['as' => 'chats', 'uses' => 'ChatController@enviarMensaje']);
 
 
+//Contador de mensajes no leidos
+Route::get('cMensajes',['as' => 'chats', 'uses' => 'HomeController@countM']);
 
 
 Route::resource('Imagenes', 'ImagenesController');

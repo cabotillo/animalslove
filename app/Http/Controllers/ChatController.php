@@ -12,11 +12,10 @@ class ChatController extends Controller
 {
     public function index(){
 
-        $tuschats1 = DB::table('chats')->where('user_id_2', Auth::user()->id)->join('users','chats.user_id_1', '=', 'users.id')->pluck('login');
-        $tuschats2 = DB::table('chats')->where('user_id_1', Auth::user()->id)->join('users','chats.user_id_2', '=', 'users.id')->pluck('login');
+        $tuschats1 = DB::table('chats')->select('login','avatar','chats.updated_at')->where('user_id_2', Auth::user()->login)->join('users','chats.user_id_1', '=', 'users.login')->get();
+        $tuschats2 = DB::table('chats')->select('login','avatar','chats.updated_at')->where('user_id_1', Auth::user()->login)->join('users','chats.user_id_2', '=', 'users.login')->get();
 
         $tuschats = $tuschats1->merge($tuschats2);
-
 
         $data = array(
             'chats' => $tuschats
@@ -28,98 +27,71 @@ class ChatController extends Controller
 
     public function comprobar($login){
 
-        $idChatT = Auth::user()->id;
-
-        $loginChatU = $login;
-
-        $idChatU = DB::table('users')->where('login', $loginChatU)->first();
-
+        $loginChatT = Auth::user()->login; //Login del usuario
+                
        $existe1 = DB::table('chats')->where([
-            ['user_id_1', '=',$idChatU->id],
-            ['user_id_2', '=',$idChatT],
+            ['user_id_1', '=',$login],
+            ['user_id_2', '=',$loginChatT],
         ])->first();
 
         $existe2 = DB::table('chats')->where([
-            ['user_id_1', '=',$idChatT],
-            ['user_id_2', '=',$idChatU->id],
+            ['user_id_1', '=',$loginChatT],
+            ['user_id_2', '=',$login],
         ])->first();
 
         if($existe1 || $existe2){
-            return redirect('mensajes/'.$idChatU->login);
+            return redirect('mensajes/');
         }else{
             DB::table('chats')->insert([
 
-                'user_id_1' => $idChatU->id,
-                'user_id_2' => $idChatT,
+                'user_id_1' => $login,
+                'user_id_2' => $loginChatT,
                 ]);
-            return redirect('mensajes/'.$idChatU->login);
+            return redirect('mensajes/');
         }
     }
 
-    public function sendMessage()
-    {
-        $username = Input::get('username');
-        $text = Input::get('text');
+    public function cargarMensajes($login){
 
-        $chatMessage = new Mensajes();
-        $chatMessage->sender_username = $username;
-        $chatMessage->message = $text;
-        $chatMessage->save();
+       $mensajes = DB::table('mensajes')->where([
+           ['send_username', '=',$login],
+           ['sender_username', '=',  Auth::user()->login],
+       ])->orWhere([
+           ['send_username', '=', Auth::user()->login],
+           ['sender_username', '=',$login],
+           ])->select('message','send_username', 'created_at','leido')->orderBy('created_at', 'asc')->get();
+
+        Mensajes::where([
+            ['send_username', '=',$login],
+            ['sender_username', '=',  Auth::user()->login],
+        ])->update(array(
+            'leido' => 1
+        ));
+
+
+        $data = array(
+            'mensajes' => $mensajes,
+            'usuario' => $login,
+        );
+
+        return view('mensajes')->with($data);
     }
 
-    public function isTyping()
+    public function enviarMensaje()
     {
-        $username = Input::get('username');
 
-        $chat = Chats::find(1);
-        if ($chat->user1 == $username)
-            $chat->user1_is_typing = true;
-        else
-            $chat->user2_is_typing = true;
-        $chat->save();
-    }
+        $txt = Input::get('mensaje');
+        $sender = Input::get('sender');
 
-    public function notTyping()
-    {
-        $username = Input::get('username');
+        $mensaje = array(
+            'send_username' => Auth::user()->login,
+            'sender_username' => $sender,
+            'message' => $txt
+        );
+        DB::table('mensajes')->insert($mensaje);
+        DB::table('mensajes')->update()->where();
 
-        $chat = Chats::find(1);
-        if ($chat->user1 == $username)
-            $chat->user1_is_typing = false;
-        else
-            $chat->user2_is_typing = false;
-        $chat->save();
-    }
-
-    public function retrieveChatMessages()
-    {
-        $username = Input::get('username');
-
-        $message = Mensajes::where('sender_username', '!=', $username)->where('leido', '=', false)->first();
-
-        if (count($message) > 0)
-        {
-            $message->leido = true;
-            $message->save();
-            return $message->message;
-        }
-    }
-
-    public function retrieveTypingStatus()
-    {
-        $username = Input::get('username');
-
-        $chat = Chats::find(1);
-        if ($chat->user1 == $username)
-        {
-            if ($chat->user2_is_typing)
-                return $chat->user2;
-        }
-        else
-        {
-            if ($chat->user1_is_typing)
-                return $chat->user1;
-        }
-    }
+        return view('welcome')->with('mensaje', 'Mensaje enviado');
+     }
 }
 

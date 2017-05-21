@@ -36,6 +36,7 @@
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
+                <input type="hidden" id="url" value="{{\Illuminate\Support\Facades\URL::to('/')}}">
                 <div class="navbar-header">
 
                     <!-- Collapsed Hamburger -->
@@ -60,7 +61,7 @@
                         <li><a href="{{ route('home') }}">Inicio</a></li>
                         <li><a href="{{ route('editarperfil.cuenta')}}">Editar Perfil</a></li>
                         <!--<li><a href="">Mi Perfil</a></li>-->
-                        <li><a href="{{ route('mensajes') }}">Mensajes</a></li>
+                        <li><a href="{{ route('mensajes') }}">Mensajes <span class="badge" id="count"></span></a></li>
                         <li><a href="{{route('nuevapublicacion')}}">Nueva Publicación</a></li>
                         <li><a href="{{route('admin')}}">Admin</a></li>
                         @else
@@ -100,13 +101,31 @@
                 </div>
             </div>
         </nav>
-
-        @yield('content')
     </div>
+        @yield('content')
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/scripts.js') }}"></script>
+
+    @if(!Auth::guest())
+        <script>
+            $url = $('#url').val();
+            $.get({
+                url: $url + '/cMensajes',
+            }).done(function(data){
+                $('#count').append(data);
+
+            });
+        </script>
+        <style>
+            #count{
+                background: red;
+            }
+        </style>
+    @endif
+
     @yield('scripts')
+    @yield('styles')
 </body>
 </html>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -26,7 +27,14 @@ class HomeController extends Controller
     {
         $mascotas = DB::table('mascotas')->select('mascotas.*','razas.raza','animal.animal')->join('animal', 'animal.id', '=', 'mascotas.animal_id')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->get();
         $publicaciones = DB::table('publicaciones')->select('publicaciones.*', 'tipopublicacion.tipo')->join('tipopublicacion', 'tipopublicacion.id', '=', 'publicaciones.tipo_id')->get();
-
+        if(!Auth::guest()){
+            $mensajes = count(DB::table('mensajes')->where([
+                ['sender_username', '=', Auth::user()->login],
+                ['leido', '=', 0],
+            ])->get());
+        }else{
+            $mensajes = '';
+        }
 
         $data = array(
 
@@ -34,9 +42,18 @@ class HomeController extends Controller
             'animales' => DB::table('animal')->get(),
             'razas' => DB::table('razas')->get(),
             'mascotas' => $mascotas,
-            'publicaciones' => $publicaciones
+            'publicaciones' => $publicaciones,
+            'mensajes' => $mensajes
 
         );
         return view('home')->with($data);
+    }
+
+    public function countM()
+    {
+        return count(DB::table('mensajes')->where([
+            ['sender_username', '=', Auth::user()->login],
+            ['leido', '=', 0]
+        ])->get());
     }
 }
