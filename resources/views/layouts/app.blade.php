@@ -58,12 +58,12 @@
                     <ul class="nav navbar-nav">
                     @if (!Auth::guest())
 
-                        <li><a href="{{ route('home') }}">Inicio</a></li>
-                        <li><a href="{{ route('editarperfil.cuenta')}}">Editar Perfil</a></li>
+                        <li class="{{ Request::path() == 'home' || '' ? 'active' : '' }}"><a href="{{ route('home') }}">Inicio</a></li>
+                        <li class="{{ Request::path() == 'editarperfil/cuenta' ? 'active' : '' }}"><a href="{{ route('editarperfil.cuenta')}}">Editar Perfil</a></li>
                         <!--<li><a href="">Mi Perfil</a></li>-->
-                        <li><a href="{{ route('mensajes') }}">Mensajes <span class="badge" id="count"></span></a></li>
-                        <li><a href="{{route('nuevapublicacion')}}">Nueva Publicación</a></li>
-                        <li><a href="{{route('admin')}}">Admin</a></li>
+                        @if(Auth::user()->tipo == 2 || Auth::user()->tipo == 3)<li class="{{ Request::path() == 'mensajes' ? 'active' : '' }}"><a href="{{ route('mensajes') }}">Mensajes <span class="badge" id="count"></span></a></li>@endif
+                        <li class="{{ Request::path() == 'nuevapublicacion' ? 'active' : '' }}"><a href="{{route('nuevapublicacion')}}">Nueva Publicación</a></li>
+                        @if(Auth::user()->tipo == 3)<li class="{{ Request::path() == 'admin' ? 'active' : '' }}"><a href="{{route('admin')}}">Admin</a></li>@endif
                         @else
                             <li><a href="{{ route('home') }}">Inicio</a></li>
                     @endif

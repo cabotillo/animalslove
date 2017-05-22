@@ -35,10 +35,17 @@
                         <a href="{{route('imagenes',$mascota->id)}}"><input type="button" class="btn btn-primary" value="Añadir Fotos"></a>
                     @endif
                 @endif
-                <p>{{$mascota->animal}}</p>
-                <p>{{$mascota->raza}}</p>
-                <p>{{$mascota->genero}}</p>
-                <p>Pertenece a <a href="{{'../perfil/',$usuario->id}}{{$usuario->login}}">{{$usuario->login}}</a></p>
+                    <div class="input-group">
+                        <span class="input-group-addon">{{$icono}}</span>
+                        <input type="text" class="form-control" aria-label="Raza" value="{{$mascota->raza}}" disabled>
+                        <span class="input-group-addon">{{$genero}}</span>
+                    </div>
+                    <a href="{{'../perfil/',$usuario->id}}{{$usuario->login}}">
+                    <div class="input-group input-group-lg" style="min-height: 35px;margin-top: 10px">
+                        <span class="input-group-addon">&#128513;</span>
+                        <p style="min-height: 30px;color: #2a88bd" class="form-control">{{$usuario->login}}</p>
+                    </div>
+                    </a>
             </div>
         </div>
     @if(!empty($publicaciones->first()))
@@ -81,16 +88,14 @@
                                     <div class="carousel-inner">
                 @for($i = 0; $i < count($imagenes); $i++)
                     @if($i == 0)
-                                <div class="item active" data-slide-number="{{$i}}">
-                                    <img src="../storage/mascotas/{{$imagenes[$i]->imagen}}">
-                                </div>
-                                        @else
-                                            <div class="item " data-slide-number="{{$i}}">
-                                                <img src="../storage/mascotas/{{$imagenes[$i]->imagen}}">
-                                            </div>
-                                        @endif
-
-
+                        <div class="item active" data-slide-number="{{$i}}">
+                            <img src="../storage/mascotas/{{$imagenes[$i]->imagen}}">
+                        </div>
+                    @else
+                        <div class="item " data-slide-number="{{$i}}">
+                            <img src="../storage/mascotas/{{$imagenes[$i]->imagen}}">
+                        </div>
+                    @endif
                 @endfor
 
                 </div>
@@ -100,9 +105,8 @@
                 </a>
                 <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
                     <span class="glyphicon glyphicon-chevron-right"></span>
-                </a></div></div></div></div></div></div></div>
+                </a></div></div></div></div></div></div>
         @endif
-
     </div>
 </div>
 

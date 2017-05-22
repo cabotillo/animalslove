@@ -2,6 +2,12 @@
 
 @section('content')
 <div class="container">
+    @if(isset($mensaje))
+        <div class="alert alert-success">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            {{ $mensaje }}
+        </div>
+    @endif
     <div class="row">
         <!-- Menu izquierdo -->
         <div class="col-sm-3">

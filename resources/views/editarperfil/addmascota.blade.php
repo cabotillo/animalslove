@@ -48,7 +48,10 @@
                                 </div>
                                 <div class="form-group {{ $errors->has('genero') ? ' has-error' : '' }}">
                                     <label class="control-label">Genero</label>
-                                    <input type="text" class="form-control" value="{{old('genero')}}" name="genero" placeholder="Macho o hembra">
+                                    <select class="form-control" name="genero" id="genero">
+                                        <option value="Macho">Macho</option>
+                                        <option value="Hembra">Hembra</option>
+                                    </select>
                                     @if ($errors->has('genero'))
                                         <span class="help-block">
                                             <strong>{{ $errors->first('genero') }}</strong>

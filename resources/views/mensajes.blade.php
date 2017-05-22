@@ -13,8 +13,8 @@
                     @else<p class="left">{{$mensajes[$i]->message}}</p>@endif
                 @else
                     @if($mensajes[$i]->leido == 0)
-                        <p class="right">{{$mensajes[$i]->message}}  <span>&#10004;</span></p>
-                    @else<p class="right">{{$mensajes[$i]->message}} <span>&#10004;&#10004;</span></p>@endif
+                        <p class="right">{{$mensajes[$i]->message}}  <span class="checkB">&#10004;</span></p>
+                    @else<p class="right">{{$mensajes[$i]->message}} <span class="checkV">&#10004;&#10004;</span></p>@endif
                 @endif
             @endfor
         </div>
@@ -41,6 +41,9 @@
         .right{
             text-align: right;
         }
+
+        .checkV{color: #2ab27b}
+        .checkB{color: #2a88bd}
 
     </style>
 @endsection

@@ -11,7 +11,7 @@
         <h1 class="text-center">{{$publicacion->titulo}}</h1>
         <h2 class="text-center">{{$publicacion->cuerpo}}</h2>
 
-        <input type="submit" value="Contactar">
+        <a href="{{'../chat/',$usuario->login}}{{$usuario->login}}"><button class="form-control">Chat</button></a>
 </div>
 
 @endsection

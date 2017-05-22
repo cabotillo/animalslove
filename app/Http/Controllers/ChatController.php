@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Chats;
+use App\User;
 use App\Mensajes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Input;
 
 class ChatController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('premium')->except('logout');
+    }
     public function index(){
 
         $tuschats1 = DB::table('chats')->select('login','avatar','chats.updated_at')->where('user_id_2', Auth::user()->login)->join('users','chats.user_id_1', '=', 'users.login')->get();
@@ -89,7 +93,6 @@ class ChatController extends Controller
             'message' => $txt
         );
         DB::table('mensajes')->insert($mensaje);
-        DB::table('mensajes')->update()->where();
 
         return view('welcome')->with('mensaje', 'Mensaje enviado');
      }
