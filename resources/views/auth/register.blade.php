@@ -107,7 +107,6 @@
                         </div>
                         <div class="form-group{{ $errors->has('telefono') ? ' has-error' : '' }}">
                             <label for="telefono" class="col-md-4 control-label">Telefono</label>
-
                             <div class="col-md-6">
                                 <input id="telefono" type="number" class="form-control" name="telefono" value="{{ old('telefono') }}" required autofocus>
 
@@ -119,7 +118,12 @@
                             </div>
                         </div>
 
-
+                        <div class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
+                            <label for="g-recaptcha-response" class="col-md-4 control-label">Captcha</label>
+                            <div class="col-md-6">
+                                {!! \Recaptcha::render() !!}
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">

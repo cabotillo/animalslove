@@ -8,13 +8,12 @@
             {{ $mensaje }}
         </div>
     @endif
-    <h1>Tus Chats</h1>
+    <h1>Tus Chats</h1><br>
 
     <div class="col-md-12">
-        {{print_r($chats)}}
         <ul class="DMInbox-conversations">
         @foreach($chats as $c)
-            <li>
+            <li class="li">
                 <a href="{{'mensajes/',$c->login}}{{$c->login}}"><div class="row chat">
                     <div class="col-lg-2">
                       <img class="img-responsive" src="storage/{{$c->avatar}}" alt="">
@@ -73,7 +72,6 @@
 
             }
         }
-
     </style>
 
 @endsection

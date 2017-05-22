@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta property="og:url"           content="https://www.animalslove.ml" />
-    <meta property="og:type"          content="website" />
+    <meta property="og:type"          content="Animals Love" />
     <meta property="og:title"         content="AnimalsLove" />
-    <meta property="og:description"   content="Your description" />
-    <meta property="og:image"         content="http://www.your-domain.com/path/image.jpg" />
+    <meta property="og:description"   content="Red social de mascotas para personas" />
+    <meta property="og:image"         content="https://www.animalslove.ml/storage/mascotas/1/20.jpeg" />
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">

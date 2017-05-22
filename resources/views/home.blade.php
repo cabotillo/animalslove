@@ -34,16 +34,16 @@
                 </div>
 
                 <div class="form-group{{ $errors->has('genero') ? ' has-error' : '' }}">
-                    <label class="control-label">Genero</label>
-                    <div class="radio"><input type="radio" name="genero" value="Macho"> Macho</div>
-                    <div class="radio"><input type="radio" name="genero" value="Hembra"> Hembra</div>
+                    <label class="control-label">Genero</label><br>
+                    <label class="radio-inline"><input type="radio" name="genero" value="Macho"> Macho</label>
+                    <label class="radio-inline"><input type="radio" name="genero" value="Hembra"> Hembra</label>
                     @if ($errors->has('genero'))
                         <span class="help-block">
                             <strong>{{ $errors->first('genero') }}</strong>
                         </span>
                     @endif
             </div>
-                    <br><input class="btn btn-primary" type="submit" value="Filtrar">
+                    <input class="btn btn-primary" type="submit" value="Filtrar">
                 </form>
 
 
@@ -109,6 +109,9 @@
         align-items:center;
         margin: 10px;
 
+    }
+    .form-group {
+        margin-bottom: 15px !important;
     }
 
 </style>

@@ -3,7 +3,10 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <h1 class="text-center">Imagenes de {{$mascota->nombre}}</h1>
+        <h1 class="text-center">Imágenes de {{$mascota->nombre}}</h1>
+        <div class="alert alert-success" id="verde" hidden="hidden">
+            Imágenes subidas correctamente
+        </div>
         @foreach($imagenes as $i)
             <div class="col-md-2">
             <img src="../storage/mascotas/{{$i->imagen}}" class="img-responsive">
@@ -15,10 +18,10 @@
             </div>
         @endforeach
     </div>
-
-    <div class="panel panel-success">
+    <hr>
+    <div class="panel panel-info">
         <div class="panel-heading">
-            Sube nuevas fotos para la galeria de imagenes
+            Sube nuevas fotos para la galería de imágenes
         </div>
         <div class="panel-body">
             <form action="../imagenesadd/{{$mascota->id}}" enctype="multipart/form-data" method="post" id="my-dropzone" class="dropzone">
@@ -62,6 +65,8 @@
 
             this.on("complete", function(file) {
                 myDropzone.removeFile(file);
+                $("#verde").show().delay(5000).fadeOut();
+                location.reload().delay(8000).fadeOut();
             });
 
             this.on("success",
