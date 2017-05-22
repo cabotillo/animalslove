@@ -35,7 +35,7 @@
                         <a href="{{route('imagenes',$mascota->id)}}"><input type="button" class="btn btn-primary" value="Añadir Fotos"></a>
                     @endif
                 @endif
-                    <div class="input-group">
+                <div class="input-group">
                         <span class="input-group-addon">{{$icono}}</span>
                         <input type="text" class="form-control" aria-label="Raza" value="{{$mascota->raza}}" disabled>
                         <span class="input-group-addon">{{$genero}}</span>
