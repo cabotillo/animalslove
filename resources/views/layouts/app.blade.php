@@ -30,9 +30,9 @@
 
     @yield('styles')
 
-
 </head>
 <body>
+
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -57,7 +57,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                     @if (!Auth::guest())
-
+                        <!-- Compruebo si el usuario esta bloqueado -->
                         <li class="{{ Request::path() == 'home' || '' ? 'active' : '' }}"><a href="{{ route('home') }}">Inicio</a></li>
                         <li class="{{ Request::path() == 'editarperfil/cuenta' ? 'active' : '' }}"><a href="{{ route('editarperfil.cuenta')}}">Editar Perfil</a></li>
                         <!--<li><a href="">Mi Perfil</a></li>-->

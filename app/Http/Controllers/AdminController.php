@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Reporte;
 use Illuminate\Support\Facades\Validator;
 use App\User;
 use Illuminate\Support\Facades\DB;
@@ -92,10 +93,23 @@ class AdminController extends Controller
 
 
         DB::table('reportes')->insert($reporte);
-        $data = array(
-            'mensaje' => 'El reporte se ha introducido'
 
-        );
+
+        $reportes = DB::table('reportes')->where('user_id',$user_id)->count();
+
+        if($reportes >= 3){
+            DB::table('users')->where('id',$user_id)->update(['disponible' => 0]);
+            $data = array(
+                'mensaje' => 'El reporte se ha introducido y se ha bloqueado al usuario',
+
+            );
+        }else{
+            $data = array(
+                'mensaje' => 'El reporte se ha introducido'
+
+            );
+        }
+
 
         return view('welcome')->with($data);
 

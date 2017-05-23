@@ -4,6 +4,12 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
+            @if(isset($error))
+                <div class="alert alert-danger">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{ $error }}
+                </div>
+            @endif
             <div class="panel panel-default">
                 <div class="panel-heading">Login</div>
                 <div class="panel-body">
