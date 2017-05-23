@@ -66,6 +66,7 @@
                         @if(Auth::user()->tipo == 3)<li class="{{ Request::path() == 'admin' ? 'active' : '' }}"><a href="{{route('admin')}}">Admin</a></li>@endif
                         @else
                             <li><a href="{{ route('home') }}">Inicio</a></li>
+                            <li><a href="{{ route('contacto') }}">Contacto</a></li>
                     @endif
 
                     </ul>

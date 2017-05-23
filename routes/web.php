@@ -77,6 +77,9 @@ Route::post('mensajes/{login}',['as' => 'chats', 'uses' => 'ChatController@envia
 //Contador de mensajes no leidos
 Route::get('cMensajes',['as' => 'chats', 'uses' => 'HomeController@countM']);
 
+Route::get('contacto',['as' => 'contacto', 'uses' => 'ContactoController@index']);
+Route::post('contacto',['as' => 'contacto', 'uses' => 'ContactoController@enviar']);
+
 
 Route::resource('Imagenes', 'ImagenesController');
 Route::resource('mascota1', 'MascotaController');
