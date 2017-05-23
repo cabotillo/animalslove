@@ -51,6 +51,13 @@ Route::get('/publicacion/{id}', ['as' => 'publicacion', 'uses' => 'Vistas@public
 Route::get('reporte/{id}', ['as' => 'reporte', 'uses' => 'AdminController@reporte']);
 Route::post('reporte/{id}', ['as' => 'reporte', 'uses' => 'AdminController@postReporte']);
 
+Route::get('daradmin/{id}', ['as' => 'postadmin', 'uses' => 'AdminController@admin']);
+
+Route::get('bloquear/{id}', ['as' => 'bloquear', 'uses' => 'AdminController@bloquear']);
+
+Route::get('admin/editarcuenta/{id}', ['as' => 'getperfil', 'uses' => 'AdminController@getPerfil']);
+Route::post('admin/editarcuenta/{id}', ['as' => 'postperfil', 'uses' => 'AdminController@postPerfil']);
+
 Route::get('imagenes/{id}', ['as' => 'imagenes', 'uses' => 'EditarPerfil@addImagenes']);
 Route::post('imagenesdelete/{id}', ['as' => 'imagenesdelete', 'uses' => 'EditarPerfil@postDeleteImagenes']);
 Route::post('imagenesadd/{id}', ['as' => 'imagenesadd', 'uses' => 'EditarPerfil@postInsertImagenes']);

@@ -7,32 +7,52 @@
             <table class="table table-bordered">
                 <thead>
                 <tr>
-                    <td>ID</td>
                     <td>Nombre</td>
                     <td>Login</td>
                     <td>Email</td>
                     <td>Telefono</td>
                     <td>Premium</td>
+                    <td>Perfil</td>
+                    <td>Editar</td>
+                    <td>Reportes</td>
+                    <td>Privilegios</td>
+                    <td>Eliminar</td>
                 </tr>
                 </thead>
                 <tbody>
                     @foreach($usuarios as $u)
                         <!--Usuarios disponibles en verde-->
-                        @if($u->tipo == 3)<tr class="success">@else<tr class="info">@endif
-
-                            <td>{{$u->id}}</td>
+                        @if($u->tipo == 'Administrador')<tr class="success">
                             <td>{{$u->nombre}}</td>
                             <td>{{$u->login}}</td>
                             <td>{{$u->email}}</td>
                             <td>{{$u->telefono}}</td>
                             <td>{{$u->tipo}}</td>
                             <td><a href="{{'perfil/',$u->login}}{{$u->login}}" class="btn btn-success"><span>Ver Perfil</span></a></td>
-                            <td><input type="submit" name="editar" class="btn btn-warning" value="Editar"></td>
-                            <td><a href="{{'reporte/',$u->id}}{{$u->id}}"><input type="submit" name="reporte" class="btn btn-info" value="Dar Toque"></a></td>
-                            <td><input type="submit" name="admin" class="btn btn-primary" value="Dar Admin"></td>
-                            <td><input type="submit" name="eliminar" class="btn btn-danger" value="X"></td>
-                            </tr>
+                            <td></td><td></td><td></td><td></td>
 
+                        @elseif($u->disponible== 1)<tr class="info">
+                            <td>{{$u->nombre}}</td>
+                            <td>{{$u->login}}</td>
+                            <td>{{$u->email}}</td>
+                            <td>{{$u->telefono}}</td>
+                            <td>{{$u->tipo}}</td>
+                            <td><a href="{{'perfil/',$u->login}}{{$u->login}}" class="btn btn-success"><span>Ver Perfil</span></a></td>
+                            <td><a href="{{'admin/editarcuenta/',$u->id}}{{$u->id}}"><input type="submit" name="editar" class="btn btn-warning" value="Editar"></td>
+                            <td><a href="{{'reporte/',$u->id}}{{$u->id}}"><input type="submit" name="reporte" class="btn btn-info" value="Dar Toque"></a></td>
+                            <td><a href="{{'daradmin/',$u->id}}{{$u->id}}"><input type="submit" class="btn btn-primary" value="Dar Admin"@if($u->tipo == 3) style="display: none"@endif></td>
+                            <td><a href="{{'bloquear/',$u->id}}{{$u->id}}"><input type="submit" name="eliminar" class="btn btn-danger" value="X"></td>
+                        @elseif($u->disponible== 0)<tr class="danger">
+                            <td>{{$u->nombre}}</td>
+                            <td>{{$u->login}}</td>
+                            <td>{{$u->email}}</td>
+                            <td>{{$u->telefono}}</td>
+                            <td>{{$u->tipo}}</td><td></td><td></td><td></td><td></td><td></td>
+
+
+                        @endif
+
+                        </tr>
                     @endforeach
 
                 </tbody>

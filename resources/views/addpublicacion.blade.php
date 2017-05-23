@@ -51,7 +51,7 @@
                         @endif
                     </div>
                     <div class="col-lg-12">
-                        <input type="submit" class="btn btn-primary" value="Insertar la nueva noticia">
+                        <input type="submit" class="btn btn-primary" value="Insertar nueva publicación">
                     </div>
                 </form>
             </div>
