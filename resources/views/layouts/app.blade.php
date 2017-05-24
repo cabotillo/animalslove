@@ -65,8 +65,8 @@
                         <li class="{{ Request::path() == 'nuevapublicacion' ? 'active' : '' }}"><a href="{{route('nuevapublicacion')}}">Nueva Publicación</a></li>
                         @if(Auth::user()->tipo == 3)<li class="{{ Request::path() == 'admin' ? 'active' : '' }}"><a href="{{route('admin')}}">Admin</a></li>@endif
                         @else
-                            <li><a href="{{ route('home') }}">Inicio</a></li>
-                            <li><a href="{{ route('contacto') }}">Contacto</a></li>
+                            <li class="{{ Request::path() == 'home' || '' ? 'active' : '' }}"><a href="{{ route('home') }}">Inicio</a></li>
+                            <li class="{{ Request::path() == 'contacto' || '' ? 'active' : '' }}"><a href="{{ route('contacto') }}">Contacto</a></li>
                     @endif
 
                     </ul>
@@ -129,4 +129,65 @@
     @yield('scripts')
     @yield('styles')
 </body>
+<footer id="footer" style="margin-top: 15px;background-color:#d4d4d4">
+    <div class="container">
+
+        <div class="row margin-top-60 margin-bottom-40 size-13">
+
+            <!-- col #1 -->
+            <div class="col-md-4 col-sm-4">
+
+
+            </div>
+            <!-- /col #1 -->
+
+            <!-- col #2 -->
+            <div class="col-md-8 col-sm-8">
+
+                <div class="row">
+
+                    <div class="col-md-3 hidden-sm hidden-xs">
+                        <h4 class="letter-spacing-1">EXPLORA</h4>
+                        <ul class="list-unstyled footer-list half-paddings noborder">
+                            <li><a class="block" href="#"><i class="fa fa-angle-right"></i> Home</a></li>
+                            <li><a class="block" href="#"><i class="fa fa-angle-right"></i> Login</a></li>
+                            <li><a class="block" href="#"><i class="fa fa-angle-right"></i> Registro</a></li>
+                            <li><a class="block" href="#"><i class="fa fa-angle-right"></i> Publicaciones</a></li>
+                            <li><a class="block" href="#"><i class="fa fa-angle-right"></i> Mascotas</a></li>
+                            <li><a class="block" href="#"><i class="fa fa-angle-right"></i> Contacto</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h4 class="letter-spacing-1">GRACIAS A</h4>
+                        <p>	<!-- see assets/images/cc/ for more icons -->
+                            <img src="assets/images/cc/Visa.png" alt="" />
+                            <img src="assets/images/cc/Mastercard.png" alt="" />
+                            <img src="assets/images/cc/Maestro.png" alt="" />
+                            <img src="assets/images/cc/PayPal.png" alt="" />
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- /col #2 -->
+
+        </div>
+
+    </div>
+
+    <div class="copyright">
+        <div class="container">
+            <ul class="pull-right nomargin list-inline mobile-block">
+                <li><a href="#">Terminos &amp; Condiciones</a></li>
+                <li>&bull;</li>
+                <li><a href="#">Privacidad</a></li>
+            </ul>
+
+            ® 2017 Todos los derechos resevados
+        </div>
+    </div>
+
+</footer>
 </html>

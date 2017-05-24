@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $mascotas = DB::table('mascotas')->select('mascotas.*','razas.raza','animal.animal')->join('animal', 'animal.id', '=', 'mascotas.animal_id')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->get();
+        $mascotas = DB::table('mascotas')->select('mascotas.*','razas.raza','animal.animal')->join('animal', 'animal.id', '=', 'mascotas.animal_id')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->paginate(15);
         $publicaciones = DB::table('publicaciones')->select('publicaciones.*', 'tipopublicacion.tipo')->join('tipopublicacion', 'tipopublicacion.id', '=', 'publicaciones.tipo_id')->get();
         if(!Auth::guest()){
             $mensajes = count(DB::table('mensajes')->where([

@@ -16,6 +16,7 @@
                 <h1><small>Filtrar Mascotas</small></h1>
                 <form method="post" action="{{route('busqueda')}}">
                     {{ csrf_field() }}
+                <label class="control-label">Animal</label>
                 <select class="form-control" name="animal" id="animal">
                     <option selected="selected">Selecciona</option>
                     @foreach($animales as $a)
@@ -57,23 +58,23 @@
             <div class="row">
                 <h1 class="text-center">SLOGAN SUPER MEGA CHULO</h1>
                 <ul class="nav nav-tabs">
-                    <a href="#mascotas" class="inf"><li id="mascotas_ref" role="presentation" class="active"><h2>Mascotas</h2></a></li>
-                    <a href="#publicaciones" class="inf"><li id="publicaciones_ref" role="presentation"><h2>Publicaciones</h2></a></li>
+                    <li class="active" id="mascotas_ref" role="presentation" class="active" ><a href="#mascotas" class="inf"><h2>Mascotas</h2></a></li>
+                    <li id="publicaciones_ref" role="presentation"><a href="#publicaciones" class="inf"><h2>Publicaciones</h2></a></li>
                 </ul>
             </div>
 
 
                 <div class="row oculto" id="mascotas">
                     @foreach($mascotas as $m)
-                        <div class="mascotas col-sm-9 col-md-3" href="{{'mascota/',$m->id}}{{$m->id}}" style="border: 1px solid #98cbe8">
+
+                        <div class="@if($m->genero == 'Macho') macho @else hembra @endif col-sm-4 col-md-3" href="{{'mascota/',$m->id}}{{$m->id}}">
                             <a style="text-decoration: none" href="{{'mascota/',$m->id}}{{$m->id}}"><p>{{$m->nombre}}</p>
-                                <img alt="{{$m->nombre}}" src="storage/{{$m->avatar}}" class="img-responsive">
-                                <p>{{$m->animal}}</p>
-                                <p>{{$m->raza}}</p>
-                                <p>{{$m->genero}}</p></a>
+                                <img alt="{{$m->nombre}}" src="storage/{{$m->avatar}}" class="img-responsive" style="max-height: 250px">
+                            </a>
                         </div>
                     @endforeach
                 </div>
+                {{ $mascotas->links() }}
 
                 <div class="row oculto" id="publicaciones">
 
@@ -99,19 +100,20 @@
     A:link, A:visited, A:active {
          color:#636b6f;
     }
-    #mascotas{
-        align-items:center;
-    }
-    .mascotas{
-        height: 25%;
-        width: 25%;
-        display:flex;
-        align-items:center;
-        margin: 10px;
-
-    }
     .form-group {
         margin-bottom: 15px !important;
+    }
+
+    #mascotas{
+        text-align: center;
+        align-items:center;
+    }
+
+    .macho{
+        border: 1px solid lightskyblue;margin: 15px;
+    }
+    .hembra{
+        border: 1px solid lightpink;margin: 15px;
     }
 
 </style>
@@ -127,7 +129,8 @@
         $("#mascotas").show();
         $(".inf").click(function(){
             var nodo = $(this).attr("href");
-
+            $("#mascotas_ref").toggleClass('active');
+            $("#publicaciones_ref").toggleClass('active');
             if ($(nodo).is(":visible")){
                 $(nodo).hide();
                 return false;
