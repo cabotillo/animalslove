@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Mascotas;
+use Image;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use Auth;
 use App\User;
-use Illuminate\Validation\Rules\In;
 use View;
 
 class EditarPerfil extends Controller
@@ -63,7 +63,11 @@ class EditarPerfil extends Controller
     {
         $mascota = DB::table('mascotas')->select('mascotas.*','animal.animal', 'razas.raza')->join('animal', 'animal.id', '=', 'mascotas.animal_id')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->where('mascotas.id',$id)->get()->first();
 
-        return view('editarperfil.editarmascota')->with('mascota',$mascota);
+        if($mascota->user_id == Auth::user()->id)
+            return view('editarperfil.editarmascota')->with('mascota',$mascota);
+        else {
+            return redirect()->route('home');
+        }
     }
     public function addMascota()
     {
@@ -106,6 +110,12 @@ class EditarPerfil extends Controller
 
             $file->storeAs($carpeta.$login,$nombreFichero);
 
+            //$path = public_path('usuarios\\'.$login);
+
+            //Image::make($file->getRealPath())->resize(100, 100)->save($path.".".$ext);
+
+
+
             $user = Auth::user()->id;
 
             $nombre = Input::get('nombre');
@@ -120,7 +130,7 @@ class EditarPerfil extends Controller
                 'email' => $email,
                 'telefono' => $telefono,
                 'provincia_id' => $provincia,
-                'avatar' => $carpeta.$login."/".$nombreFichero
+                'avatar' => $carpeta.$login."/".$nombreFichero,
             ));
 
 
@@ -183,7 +193,7 @@ class EditarPerfil extends Controller
             }
 
 
-            return view('welcome')->with('mensaje', $mensaje);
+            return redirect()->action('HomeController@index',['mensaje' => $mensaje]);
 
         }
     }

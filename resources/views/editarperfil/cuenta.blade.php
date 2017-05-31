@@ -25,7 +25,7 @@
                             <li><a href="{{'premium'}}">Premium</a></li>
                         </ul>
 
-                    <form role="form" action="{{route('editarperfil.cuenta')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('editarperfil.cuenta')}}" method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="form-group {{ $errors->has('nombre') ? ' has-error' : '' }}">
                             <label class="control-label">Nombre</label>
@@ -82,11 +82,11 @@
                         <div class="form-group">
                             <label class="control-label">Imagen de perfil</label><br>
 
-                            <div class="thumbnail col-md-6">
-                                <img src="../storage/{{ Auth::user()->avatar }}" width="50%" height="50%" alt="avatar"></img>
+                            <div class="thumbnail col-md-6" style="width:50%;height:50%">
+                                <img src="../storage/{{ Auth::user()->avatar }}" alt="avatar" id="avatar">
                             </div>
                             <div class="col-md-6">
-                                <input type="file" name="avatar">
+                                <input type="file" name="avatar" id="file">
                             </div>
                         </div>
                         <div class="col-lg-12">
@@ -100,4 +100,25 @@
     </div>
 
 
+@endsection
+
+@section('scripts')
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#avatar').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#file").change(function(){
+            readURL(this);
+        });
+
+    </script>
 @endsection

@@ -8,73 +8,82 @@
             {{ $mensaje }}
         </div>
     @endif
-    <div class="row">
-        <!-- Menu izquierdo -->
-        <div class="col-sm-3">
-            <div id="buscar">
-                @if(Auth::user())<h1><a href="{{'perfil/',Auth::user()->login}}{{Auth::user()->login}}">Mi perfil</a></h1>@endif
-                <h1><small>Filtrar Mascotas</small></h1>
-                <form method="post" action="{{route('busqueda')}}">
-                    {{ csrf_field() }}
-                <label class="control-label">Animal</label>
-                <select class="form-control" name="animal" id="animal">
-                    <option selected="selected">Selecciona</option>
-                    @foreach($animales as $a)
-                        <option value="{{$a->id}}">{{$a->animal}}</option>
-                    @endforeach
-                </select>
+    <!-- 1 menu -->
 
-                <div class="form-group{{ $errors->has('raza') ? ' has-error' : '' }}">
-                    <label class="control-label">Raza</label>
-                    <select class="form-control" name="raza" id="raza"></select>
-                    @if ($errors->has('raza'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('raza') }}</strong>
-                        </span>
-                    @endif
-                </div>
+    <div class="col-sm-12">
 
-                <div class="form-group{{ $errors->has('genero') ? ' has-error' : '' }}">
-                    <label class="control-label">Genero</label><br>
-                    <label class="radio-inline"><input type="radio" name="genero" value="Macho"> Macho</label>
-                    <label class="radio-inline"><input type="radio" name="genero" value="Hembra"> Hembra</label>
-                    @if ($errors->has('genero'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('genero') }}</strong>
-                        </span>
-                    @endif
-            </div>
-                    <input class="btn btn-primary" type="submit" value="Filtrar">
-                </form>
+        <div class="row" style="display:flex;justify-content:center;align-items:center;">
+            <!--<div class="col-md-4"><img src="storage/perro.jpg" alt="logo" style="width:250px;"></div>-->
+            <div class="col-md-2" style="align-items: center"><button type="button" id="menu"><span class="glyphicon glyphicon-align-justify"></span></button></div>
+            <h1 class="text-center">SLOGAN SUPER MEGA CHULO</h1>
+        </div>
+    </div>
 
 
-            </div>
+    <!--Menu Principal -->
+    <div class="col-sm-12">
 
+        <div class="row">
 
+            <ul class="nav nav-tabs">
+                <li class="active" id="mascotas_ref" role="presentation"><a href="#mascotas" class="inf"><h2>Mascotas</h2></a></li>
+                <li id="publicaciones_ref" role="presentation"><a href="#publicaciones" class="inf"><h2>Publicaciones</h2></a></li>
+            </ul>
         </div>
 
-        <!--Menu Principal -->
-        <div class="col-sm-9">
-            <div class="row">
-                <h1 class="text-center">SLOGAN SUPER MEGA CHULO</h1>
-                <ul class="nav nav-tabs">
-                    <li class="active" id="mascotas_ref" role="presentation" class="active" ><a href="#mascotas" class="inf"><h2>Mascotas</h2></a></li>
-                    <li id="publicaciones_ref" role="presentation"><a href="#publicaciones" class="inf"><h2>Publicaciones</h2></a></li>
-                </ul>
+        <div class="row">
+            <div id="buscar" class="col-sm-3 oculto">
+
+                    @if(Auth::user())<h1><a href="{{'perfil/',Auth::user()->login}}{{Auth::user()->login}}">Mi perfil</a></h1>@endif
+                    <h1><small>Filtrar Mascotas</small></h1>
+                    <form method="post" action="{{route('busqueda')}}">
+                        {{ csrf_field() }}
+                        <label class="control-label">Animal</label>
+                        <select class="form-control" name="animal" id="animal">
+                            <option selected="selected">Selecciona</option>
+                            @foreach($animales as $a)
+                                <option value="{{$a->id}}">{{$a->animal}}</option>
+                            @endforeach
+                        </select>
+
+                        <div class="form-group{{ $errors->has('raza') ? ' has-error' : '' }}">
+                            <label class="control-label">Raza</label>
+                            <select class="form-control" name="raza" id="raza"></select>
+                            @if ($errors->has('raza'))
+                                <span class="help-block">
+                                <strong>{{ $errors->first('raza') }}</strong>
+                            </span>
+                            @endif
+                        </div>
+
+                        <div class="form-group{{ $errors->has('genero') ? ' has-error' : '' }}">
+                            <label class="control-label">Genero</label><br>
+                            <label class="radio-inline"><input type="radio" name="genero" value="Macho"> Macho</label>
+                            <label class="radio-inline"><input type="radio" name="genero" value="Hembra"> Hembra</label>
+                            @if ($errors->has('genero'))
+                                <span class="help-block">
+                                <strong>{{ $errors->first('genero') }}</strong>
+                            </span>
+                            @endif
+                        </div>
+                        <input class="btn btn-primary" type="submit" value="Filtrar">
+                    </form>
+
             </div>
-
-
+            <div id="menumascotas" class="col-sm-12">
                 <div class="row oculto" id="mascotas">
                     @foreach($mascotas as $m)
 
-                        <div class="@if($m->genero == 'Macho') macho @else hembra @endif col-sm-4 col-md-3" href="{{'mascota/',$m->id}}{{$m->id}}">
-                            <a style="text-decoration: none" href="{{'mascota/',$m->id}}{{$m->id}}"><p>{{$m->nombre}}</p>
-                                <img alt="{{$m->nombre}}" src="storage/{{$m->avatar}}" class="img-responsive" style="max-height: 250px">
-                            </a>
-                        </div>
+                        <a href="{{'mascota/',$m->id}}{{$m->id}}"><div class="mascota @if($m->genero == 'Macho') macho @else hembra @endif col-sm-4 col-md-3">
+                            <p>{{$m->nombre}}</p>
+                                <img alt="{{$m->nombre}}" src="storage/{{$m->avatar}}" class="img-responsive" style="max-height: 200px;max-width: 200px">
+
+                        </div></a>
                     @endforeach
+
+                    <div class="col-md-12">{{ $mascotas->links() }}</div>
                 </div>
-                {{ $mascotas->links() }}
+
 
                 <div class="row oculto" id="publicaciones">
 
@@ -115,6 +124,15 @@
     .hembra{
         border: 1px solid lightpink;margin: 15px;
     }
+    .mascota{
+        width: 17%;
+        min-height: 200px;
+        min-width: 250px;
+    }
+
+    .img-responsive{
+        margin:auto;
+    }
 
 </style>
 @endsection
@@ -137,6 +155,20 @@
             }else{
 
                 $(".oculto").hide();
+                $(nodo).fadeToggle("fast");
+
+                return false;
+            }
+        });
+        $('#busqueda').click(function () {
+            var nodo = $(this).attr("href");
+            $("#buscar").toggleClass('active');
+            if ($(nodo).is(":visible")){
+                $(nodo).hide();
+                return false;
+            }else{
+
+                $("#buscar").hide();
                 $(nodo).fadeToggle("fast");
 
                 return false;
@@ -168,6 +200,15 @@
                     }
                 });
             }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function(){
+        $('#menu').click('click', function() {
+            $('#buscar').toggle('show');
+            $("#menumascotas").toggleClass('col-sm-12');
+            $("#menumascotas").toggleClass('col-sm-9');
         });
     });
 </script>

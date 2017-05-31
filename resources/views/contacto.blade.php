@@ -5,39 +5,25 @@
 <div class="container">
 
     <div class="row col-md-8 col-md-offset-2">
-
+        @if(isset($mensaje))
+            <div class="alert alert-success">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{ $mensaje }}
+            </div>
+        @endif
         <h1>Formulario de contacto</h1>
                 <form role="form" action="{{route('contacto')}}" method="post">
                     {{ csrf_field() }}
 
-                    <div class="form-group{{ $errors->has('invi') ? ' has-error' : '' }}">
-                        <label class="control-label">¿Tiene una cuenta en la web?</label>
-                        <input type="radio" name="invi" value="si">Si
-                        <input type="radio" name="invi" value="no" checked="checked">No
-                        </select>
-                        @if ($errors->has('invi'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('invi') }}</strong>
-                            </span>
-                        @endif
-                    </div>
+                    @if (Auth::guest())
 
+                    <input type="hidden" value="invitado" name="usu">
                     <div class="nombre form-group{{ $errors->has('nombre') ? ' has-error' : '' }}">
                         <label class="control-label">Nombre *</label>
                         <input class="form-control" type="text" name="nombre">
                         @if ($errors->has('nombre'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('nombre') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-
-                    <div class="login form-group{{ $errors->has('login') ? ' has-error' : '' }}">
-                        <label class="control-label">Nombre de usuario *</label>
-                        <input class="form-control" type="text" name="login">
-                        @if ($errors->has('login'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('login') }}</strong>
                             </span>
                         @endif
                     </div>
@@ -51,7 +37,7 @@
                             </span>
                         @endif
                     </div>
-
+                    @else <input type="hidden" value="usuario" name="usu"> @endif
                     <div class=" form-group{{ $errors->has('asunto') ? ' has-error' : '' }}">
                         <label class="control-label">Asunto</label>
                         <input class="form-control" type="text" name="asunto">
@@ -71,16 +57,18 @@
                             </span>
                         @endif
                     </div>
+                    <div class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
+                        <label for="g-recaptcha-response" class="col-md-4 control-label">Captcha</label>
+                        <div class="col-md-6">
+                            {!! \Recaptcha::render() !!}
+                        </div>
+                    </div>
                     <div class="col-lg-12">
                         <input type="submit" class="btn btn-primary" value="Enviar Mensaje">
                     </div>
                 </form>
             </div>
         </div>
-    </div>
-</div>
-
-
 @endsection
 
 @section('scripts')

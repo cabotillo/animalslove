@@ -42,7 +42,7 @@ class HomeController extends Controller
             'razas' => DB::table('razas')->get(),
             'mascotas' => $mascotas,
             'publicaciones' => $publicaciones,
-            'mensajes' => $mensajes
+            'mensajes' => $mensajes,
 
         );
         return view('home')->with($data);
@@ -54,5 +54,9 @@ class HomeController extends Controller
             ['sender_username', '=', Auth::user()->login],
             ['leido', '=', 0]
         ])->get());
+    }
+
+    public  function welcome(){
+        return view('welcome');
     }
 }

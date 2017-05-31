@@ -26,13 +26,11 @@ Route::post('editarperfil/premium', ['as' => 'editarperfil.premium', 'uses' => '
 Route::get('editarperfil/password', ['as' => 'editarperfil.password', 'uses' => 'EditarPerfil@password']);
 Route::post('editarperfil/password', ['as' => 'editarperfil.password', 'uses' => 'EditarPerfil@updatePassword']);
 
-Route::get('editarperfil/mascotas', ['as' => 'editarperfil.mascotas', 'uses' => 'EditarPerfil@mascotas']);
-
 Route::get('editarperfil/editar/mascotas/{id}', ['as' => 'editarperfil.editarmascota', 'uses' => 'EditarPerfil@editarMascota']);
 Route::post('editarperfil/editar/mascotas/{id}', ['as' => 'editarperfil.editarmascota', 'uses' => 'EditarPerfil@updateMascota']);
 
-Route::get('editarperfil/mascotas/add', ['as' => 'editarperfil.addmascota', 'uses' => 'EditarPerfil@addMascota']);
-Route::post('editarperfil/mascotas/add', ['as' => 'editarperfil.addmascota', 'uses' => 'EditarPerfil@insertarMascota']);
+Route::get('editarperfil/mascotas', ['as' => 'editarperfil.mascotas', 'uses' => 'EditarPerfil@addMascota']);
+Route::post('editarperfil/mascotas', ['as' => 'editarperfil.addmascota', 'uses' => 'EditarPerfil@insertarMascota']);
 
 Route::get('perfil/{login}', ['as' => 'miperfil', 'uses' => 'Vistas@miperfil']);
 
@@ -76,6 +74,8 @@ Route::post('mensajes/{login}',['as' => 'chats', 'uses' => 'ChatController@envia
 
 //Contador de mensajes no leidos
 Route::get('cMensajes',['as' => 'chats', 'uses' => 'HomeController@countM']);
+
+Route::get('welcome',['as' => 'welcome', 'uses' => 'HomeController@welcome']);
 
 Route::get('contacto',['as' => 'contacto', 'uses' => 'ContactoController@index']);
 Route::post('contacto',['as' => 'contacto', 'uses' => 'ContactoController@enviar']);

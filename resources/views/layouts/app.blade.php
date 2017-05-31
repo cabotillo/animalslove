@@ -17,9 +17,11 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{asset('css/micss.css')}}" rel="stylesheet">
+    <link href="{{asset('css/app.css')}}" rel="stylesheet">
     <link href="{{asset('css/bootstrap.icon-large.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
+
 
     <!-- Scripts -->
     <script>
@@ -28,7 +30,14 @@
         ]) !!};
     </script>
 
+    <style>
+        #count{
+            background: red;
+        }
+    </style>
+
     @yield('styles')
+
 
 </head>
 <body>
@@ -66,9 +75,9 @@
                         @if(Auth::user()->tipo == 3)<li class="{{ Request::path() == 'admin' ? 'active' : '' }}"><a href="{{route('admin')}}">Admin</a></li>@endif
                         @else
                             <li class="{{ Request::path() == 'home' || '' ? 'active' : '' }}"><a href="{{ route('home') }}">Inicio</a></li>
-                            <li class="{{ Request::path() == 'contacto' || '' ? 'active' : '' }}"><a href="{{ route('contacto') }}">Contacto</a></li>
-                    @endif
 
+                    @endif
+                        <li class="{{ Request::path() == 'contacto' || '' ? 'active' : '' }}"><a href="{{ route('contacto') }}">Contacto</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -119,29 +128,20 @@
 
             });
         </script>
-        <style>
-            #count{
-                background: red;
-            }
-        </style>
     @endif
 
     @yield('scripts')
-    @yield('styles')
-</body>
-<footer id="footer" style="margin-top: 15px;background-color:#d4d4d4">
+
+<!-- <footer id="footer" style="margin-top: 15px;background-color:#d4d4d4">
     <div class="container">
 
         <div class="row margin-top-60 margin-bottom-40 size-13">
 
-            <!-- col #1 -->
+
             <div class="col-md-4 col-sm-4">
 
 
             </div>
-            <!-- /col #1 -->
-
-            <!-- col #2 -->
             <div class="col-md-8 col-sm-8">
 
                 <div class="row">
@@ -160,7 +160,7 @@
 
                     <div class="col-md-4">
                         <h4 class="letter-spacing-1">GRACIAS A</h4>
-                        <p>	<!-- see assets/images/cc/ for more icons -->
+
                             <img src="assets/images/cc/Visa.png" alt="" />
                             <img src="assets/images/cc/Mastercard.png" alt="" />
                             <img src="assets/images/cc/Maestro.png" alt="" />
@@ -171,7 +171,6 @@
                 </div>
 
             </div>
-            <!-- /col #2 -->
 
         </div>
 
@@ -189,5 +188,6 @@
         </div>
     </div>
 
-</footer>
+</footer> -->
+</body>
 </html>

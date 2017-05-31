@@ -9,10 +9,10 @@
 
                     <div class="panel-body">
                         <ul class="nav nav-tabs nav-top-border">
-                            <li><a href="{{'../cuenta'}}">Datos Personales</a></li>
-                            <li><a href="{{'../password'}}">Contraseña</a></li>
+                            <li><a href="{{'cuenta'}}">Datos Personales</a></li>
+                            <li><a href="{{'password'}}">Contraseña</a></li>
                             <li class="active"><a href="{{'../mascotas'}}">Mascotas</a></li>
-                            <li><a href="{{'../premium'}}">Premium</a></li>
+                            <li><a href="{{'premium'}}">Premium</a></li>
                         </ul>
                         <form action="" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
@@ -83,10 +83,10 @@
                                     <label class="control-label">Imagen de perfil</label><br>
 
                                     <div class="thumbnail col-md-6">
-                                        <!--<img src="" alt="avatar"></img>-->
+                                        <img src="" alt="avatar" id="foto">
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="file" name="img">
+                                        <input type="file" name="img" id="file">
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
@@ -134,5 +134,21 @@
         });
     });
 </script>
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
+            reader.onload = function (e) {
+                $('#foto').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#file").change(function(){
+        readURL(this);
+    });
+
+</script>
 @endsection

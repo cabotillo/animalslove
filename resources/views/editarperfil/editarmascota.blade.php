@@ -1,13 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <script type="text/javascript">
-
-        function toggler(divId) {
-            $("#" + divId).toggle();
-        }
-
-    </script>
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -66,10 +59,10 @@
                                 <div class="form-group">
                                     <label class="control-label">Imagen de perfil</label>
                                     <div class="thumbnail ">
-                                        <img class="img-responsive" src="../../../storage/{{$mascota->avatar}}" alt="{{$mascota->nombre}}">
+                                        <img class="img-responsive" src="../../../storage/{{$mascota->avatar}}" alt="{{$mascota->nombre}}" id="avatar">
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="file" name="img">
+                                        <input type="file" name="img" id="file">
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
@@ -84,4 +77,25 @@
         </div>
     </div>
 
+@endsection
+
+@section('scripts')
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#avatar').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#file").change(function(){
+            readURL(this);
+        });
+
+    </script>
 @endsection

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Mail\WelcomeMail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -78,7 +80,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+
+        $user = User::create([
             'nombre' => $data['nombre'],
             'apellidos' => $data['apellidos'],
             'login' => $data['login'],
@@ -87,5 +90,10 @@ class RegisterController extends Controller
             'provincia' => $data['provincia'],
             'telefono' => $data['telefono'],
         ]);
+
+        Mail::to($user->email)->send(new WelcomeMail($user->nombre));
+        return $user;
+
+
     }
 }

@@ -1,0 +1,28 @@
+/*http://colorhunt.co/c/35469*/
+
+*{
+    color: #44A !important;
+}
+body {
+    background-color: #E4FCF9 !important;
+}
+
+#app > nav{
+
+    background-color: #ACE6F6 !important;
+    text-transform: uppercase;
+
+}
+
+#app > nav > div{
+    width: 100%;
+}
+
+body > div.container{
+    width: 80%;
+}
+
+.active>a{
+    background-color: #4B89AC !important;
+}
+
