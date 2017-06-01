@@ -51,7 +51,7 @@
                         <div class="form-group">
                             <label class="control-label">Imagen de perfil</label><br>
 
-                            <div class="thumbnail col-md-6" style="width:50%;height:50%">
+                            <div class="thumbnail col-md-6 imgcuenta">
                                 <img src="../../storage/{{ $avatar[0] }}" alt="avatar" id="avatar"></img>
                             </div>
                             <div class="col-md-6">

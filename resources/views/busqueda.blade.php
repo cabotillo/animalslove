@@ -19,8 +19,8 @@
                 <div class="row" id="">
                     <h2>{{$mensaje}}</h2>
                     @foreach($resultados as $r)
-                        <div class="mascotas col-sm-9 col-md-3" id="" style="border: 1px solid #98cbe8">
-                            <a style="text-decoration: none" href="{{'mascota/',$r->id}}{{$r->id}}"><p>{{$r->nombre}}</p>
+                        <div class="mascotas col-sm-9 col-md-3">
+                            <a class="textDeco" href="{{'mascota/',$r->id}}{{$r->id}}"><p>{{$r->nombre}}</p>
                                 <img alt="{{$r->nombre}}" src="storage/{{$r->avatar}}" class="img-responsive">
                                 <p>{{$r->animal}}</p>
                                 <p>{{$r->raza}}</p>

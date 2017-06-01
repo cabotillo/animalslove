@@ -25,3 +25,35 @@ body > div.container{
 .active>a{
     background-color: #4B89AC !important;
 }
+
+.imgmascotas{
+    max-height: 200px !important;
+    max-width: 200px !important;
+}
+
+.imgcuenta{
+    max-width: 50% !important;
+    max-height: 50% !important;
+}
+#count{
+    background: #4b89ac;
+}
+#invisible{
+    display: none;
+}
+.facebook{
+    border:none !important;
+    overflow:hidden !important;
+}
+
+.textDeco{
+    text-decoration: none !important;
+}
+.desc{
+    min-height: 35px !important;
+    margin-top: 10px !important;
+}
+.infoUsu{
+    min-height: 30px !important;
+    color: #2a88bd !important;
+}

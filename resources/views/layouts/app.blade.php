@@ -30,12 +30,6 @@
         ]) !!};
     </script>
 
-    <style>
-        #count{
-            background: red;
-        }
-    </style>
-
     @yield('styles')
 
 
@@ -65,17 +59,13 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                    @if (!Auth::guest())
-                        <!-- Compruebo si el usuario esta bloqueado -->
-                        <li class="{{ Request::path() == 'home' || '' ? 'active' : '' }}"><a href="{{ route('home') }}">Inicio</a></li>
+                    <li class="{{ Request::path() == 'home' || '' ? 'active' : '' }}"><a href="{{ route('home') }}">Inicio</a></li>
+                    @if (!Auth::guest() && Auth::user()->tipo == 2)
                         <li class="{{ Request::is('editarperfil/*') ? 'active' : '' }}"><a href="{{ route('editarperfil.cuenta')}}">Editar Perfil</a></li>
-                        <!--<li><a href="">Mi Perfil</a></li>-->
-                        @if(Auth::user()->tipo == 2 || Auth::user()->tipo == 3)<li class="{{ Request::path() == 'mensajes' ? 'active' : '' }}"><a href="{{ route('mensajes') }}">Mensajes <span class="badge" id="count"></span></a></li>@endif
+                        <li class="{{ Request::path() == 'mensajes' ? 'active' : '' }}"><a href="{{ route('mensajes') }}">Mensajes <span class="badge" id="count"></span></a></li>
                         <li class="{{ Request::path() == 'nuevapublicacion' ? 'active' : '' }}"><a href="{{route('nuevapublicacion')}}">Nueva Publicación</a></li>
-                        @if(Auth::user()->tipo == 3)<li class="{{ Request::path() == 'admin' ? 'active' : '' }}"><a href="{{route('admin')}}">Admin</a></li>@endif
-                        @else
-                            <li class="{{ Request::path() == 'home' || '' ? 'active' : '' }}"><a href="{{ route('home') }}">Inicio</a></li>
-
+                    @elseif(!Auth::guest() && Auth::user()->tipo == 3)
+                        <li class="{{ Request::path() == 'admin' ? 'active' : '' }}"><a href="{{route('admin')}}">Admin</a></li>
                     @endif
                         <li class="{{ Request::path() == 'contacto' || '' ? 'active' : '' }}"><a href="{{ route('contacto') }}">Contacto</a></li>
                     </ul>
@@ -100,7 +90,7 @@
                                             Cerrar Sesión
                                         </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" id="invisible">
                                             {{ csrf_field() }}
                                         </form>
                                     </li>

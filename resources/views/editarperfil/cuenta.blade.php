@@ -86,8 +86,8 @@
                         <div class="form-group">
                             <label class="control-label">Imagen de perfil</label><br>
 
-                            <div class="thumbnail col-md-6" style="width:50%;height:50%">
-                                <img src="../storage/{{ Auth::user()->avatar }}" alt="avatar" id="avatar">
+                            <div class="thumbnail col-md-6">
+                                <img src="../storage/{{ Auth::user()->avatar }}" alt="avatar" id="avatar" class="img-responsive imgcuenta">
                             </div>
                             <div class="col-md-6">
                                 <input type="file" name="avatar" id="file">

@@ -12,9 +12,8 @@
 
     <div class="col-sm-12">
 
-        <div class="row" style="display:flex;justify-content:center;align-items:center;">
-            <!--<div class="col-md-4"><img src="storage/perro.jpg" alt="logo" style="width:250px;"></div>-->
-            <div class="col-md-2" style="align-items: center"><button type="button" id="menu"><span class="glyphicon glyphicon-align-justify"></span></button></div>
+        <div class="row">
+            <div class="col-md-2 text-center"><button type="button" id="menu"><span class="glyphicon glyphicon-align-justify"></span></button></div>
             <h1 class="text-center">SLOGAN SUPER MEGA CHULO</h1>
         </div>
     </div>
@@ -72,7 +71,7 @@
 
                         <a href="{{'mascota/',$m->id}}{{$m->id}}"><div class="mascota @if($m->genero == 'Macho') macho @else hembra @endif col-sm-4 col-md-3">
                             <p>{{$m->nombre}}</p>
-                                <img alt="{{$m->nombre}}" src="storage/{{$m->avatar}}" class="img-responsive" style="max-height: 200px;max-width: 200px">
+                                <img alt="{{$m->nombre}}" src="storage/{{$m->avatar}}" class="img-responsive imgmascotas">
 
                         </div></a>
                     @endforeach
@@ -207,6 +206,16 @@
             $("#menumascotas").toggleClass('col-sm-9');
         });
     });
+</script>
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-98902271-1', 'auto');
+    ga('send', 'pageview');
+
 </script>
 @endsection
 

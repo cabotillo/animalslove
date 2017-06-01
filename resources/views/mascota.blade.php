@@ -43,15 +43,15 @@
                         <a href="{{route('imagenes',$mascota->id)}}"><input type="button" class="btn btn-primary" value="Añadir Fotos"></a>
                     @endif
                 @endif
-                <div class="input-group" style="min-height: 35px;margin-top: 10px">
+                <div class="input-group desc">
                     <br><span class="input-group-addon">{{$icono}}</span>
                     <input type="text" class="form-control" aria-label="Raza" value="{{$mascota->raza}}" disabled>
                     <span class="input-group-addon">{{$genero}}</span>
                 </div>
-                <a href="{{'../perfil/',$usuario->id}}{{$usuario->login}}" style="text-decoration: none">
-                    <div class="input-group" style="min-height: 35px;margin-top: 10px;">
+                <a href="{{'../perfil/',$usuario->id}}{{$usuario->login}}" class="textDeco">
+                    <div class="input-group desc">
                         <span class="input-group-addon">&#128513;</span>
-                        <p style="min-height: 30px;color: #2a88bd" class="form-control">{{$usuario->login}}</p>
+                        <p class="form-control infoUsu">{{$usuario->login}}</p>
                     </div>
                 </a>
             </div>
