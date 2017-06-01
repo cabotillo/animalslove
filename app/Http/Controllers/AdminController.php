@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Reporte;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
-use function MongoDB\BSON\toJSON;
 
 
 class AdminController extends Controller
@@ -88,19 +87,13 @@ class AdminController extends Controller
 
         if($reportes >= 3){
             DB::table('users')->where('id',$user_id)->update(['disponible' => 0]);
-            $data = array(
-                'mensaje' => 'El reporte se ha introducido y se ha bloqueado al usuario',
-
-            );
+                $mensaje = 'El reporte se ha introducido y se ha bloqueado al usuario';
         }else{
-            $data = array(
-                'mensaje' => 'El reporte se ha introducido'
-
-            );
+              $mensaje = 'El reporte se ha introducido';
         }
 
-
-        return view('welcome')->with($data);
+        Session::flash('message', $mensaje);
+        return redirect()->action('AdminController@index');
 
     }
     public function admin($id)
@@ -128,7 +121,8 @@ class AdminController extends Controller
 
         DB::table('users')->where('id',$id)->update(['disponible' =>0]);
 
-        return view('welcome')->with('mensaje', 'Has bloqueado al usuario correctamente');
+        Session::flash('message', 'Has bloqueado al usuario correctamente');
+        return redirect()->action('AdminController@index');
 
     }
 
@@ -174,8 +168,8 @@ class AdminController extends Controller
                     'avatar' => $carpeta.$login."/".$nombreFichero
                 ));
 
-
-                return view('welcome')->with('mensaje', 'Perfil actualizado correctamente con avatar');
+                Session::flash('message', 'Perfil actualizado correctamente con avatar');
+                return redirect()->action('AdminController@index');
 
             }else{
 
@@ -190,7 +184,9 @@ class AdminController extends Controller
                     'email' => $email,
                     'telefono' => $telefono,
                 ));
-                return view('welcome')->with('mensaje', 'Perfil actualizado correctamente');
+
+                Session::flash('message', 'Perfil actualizado correctamente');
+                return redirect()->action('AdminController@index');
 
             }
         }

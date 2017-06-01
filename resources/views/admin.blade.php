@@ -2,6 +2,9 @@
 
 @section('content')
     <div class="container">
+        @if(Session::has('message'))
+            <p class="alert {{ \Illuminate\Support\Facades\Session::get('alert-class', 'alert-success') }}">{{ \Illuminate\Support\Facades\Session::get('message') }}</p>
+        @endif
         <div class="row">
             <h1>Usuarios de la web</h1>
             <table class="table table-bordered">
