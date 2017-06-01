@@ -267,7 +267,7 @@ class EditarPerfil extends Controller
             'genero' => 'required|string|max:25@|in:Hembra,Macho',
             'tamanyo' => 'required|string|max:25|in:Pequeño,Mediano,Grande,Gigante',
             'img' => 'mimes:jpeg,bmp,png',
-            'edad' => 'required|integer|max:3'
+            'edad' => 'required|integer'
         ]);
 
         if ($validation->fails()) {
@@ -307,7 +307,7 @@ class EditarPerfil extends Controller
                 );
                 DB::table('mascotas')->insert($mascota);
 
-                return redirect()->action('EditarPerfil@addMascotas', ['u' => 1]);
+                return redirect()->action('EditarPerfil@addMascota', ['u' => 1]);
 
             }else {
 
@@ -334,7 +334,7 @@ class EditarPerfil extends Controller
                 );
                 DB::table('mascotas')->insert($mascota);
 
-                return redirect()->action('EditarPerfil@addMascotas', ['u' => 1]);
+                return redirect()->action('EditarPerfil@addMascota', ['u' => 1]);
             }
     }
 }
