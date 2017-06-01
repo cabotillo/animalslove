@@ -3,8 +3,20 @@
 @section('content')
 
 <div class="container">
-
-    <div class="row col-md-8 col-md-offset-2">
+    @if(isset($_GET['u']))
+        @if($_GET['u'] == 1)
+            <div class="alert alert-success">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                Se ha añadido la publicación correctamente
+            </div>
+        @elseif($_GET['u'] == 0)
+            <div class="alert alert-danger">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                Se ha producido un error. Vuelve a intentarlo más tarde
+            </div>
+        @endif
+    @endif
+    <div class="row col-md-10">
 
         <div class="panel panel-default">
             <div class="panel-heading">Añadir Publicación</div>

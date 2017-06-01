@@ -1,20 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-    <script type="text/javascript">
-
-        function toggler(divId) {
-            $("#" + divId).toggle();
-        }
-
-    </script>
     <div class="container">
-
-
-
+        @if(isset($_GET['u']))
+            @if($_GET['u'] == 1)
+                <div class="alert alert-success">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    Perfil actualizado correctamente con avatar
+                </div>
+            @elseif($_GET['u'] == 0)
+                <div class="alert alert-danger">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    Se ha producido un error. Vuelve a intentarlo más tarde
+                </div>
+            @endif
+        @endif
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
                 <div class="panel panel-default">
+
                     <div class="panel-heading">Editar Perfil</div>
 
                     <div class="panel-body">

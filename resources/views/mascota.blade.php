@@ -18,10 +18,18 @@
 </style>
 @section('content')
 <div class="container">
-    @if(isset($mensaje))
-        <div class="alert alert-success">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        </div>
+    @if(isset($_GET['u']))
+        @if($_GET['u'] == 1)
+            <div class="alert alert-success">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                La mascota ha sido editada correctamente con su avatar
+            </div>
+        @elseif($_GET['u'] == 0)
+            <div class="alert alert-danger">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                Se ha producido un error. Vuelve a intentarlo más tarde
+            </div>
+        @endif
     @endif
         <h1 class="text-center">{{$mascota->nombre}}</h1>
     <div class="row col-sm-4">
@@ -64,7 +72,7 @@
 
     <div class="col-md-8">
 
-        @if(!empty($imagenes->first()))
+        @if(!empty($imagenes->first() && Auth::check()))
             <h2>Galeria de imagenes</h2>
 
             <div class="row">
@@ -76,8 +84,7 @@
                                     <img src="../storage/mascotas/{{$imagenes[$i]->imagen}}">
                                 </a>
                             </li>
-
-                @endfor
+                        @endfor
                     </ul>
                 </div>
                 <div class="col-sm-6">
@@ -107,6 +114,10 @@
                     <span class="glyphicon glyphicon-chevron-right"></span>
                 </a></div></div></div></div></div></div>
         @endif
+
+        @if(!Auth::check())
+            <h2>Solo los usuarios registrados pueden ver la galería de fotos.</h2>
+       @endif
     </div>
 </div>
 

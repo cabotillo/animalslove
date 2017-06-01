@@ -32,6 +32,10 @@ class ChatController extends Controller
     public function comprobar($login){
 
         $loginChatT = Auth::user()->login; //Login del usuario
+
+        if($login == $loginChatT){
+            return redirect()->action('HomeController@index');
+        }
                 
        $existe1 = DB::table('chats')->where([
             ['user_id_1', '=',$login],
@@ -51,7 +55,7 @@ class ChatController extends Controller
                 'user_id_1' => $login,
                 'user_id_2' => $loginChatT,
                 ]);
-            return redirect('mensajes/');
+            return redirect()->action('ChatController@cargarMensajes',[$login]);
         }
     }
 
@@ -94,7 +98,7 @@ class ChatController extends Controller
         );
         DB::table('mensajes')->insert($mensaje);
 
-        return view('welcome')->with('mensaje', 'Mensaje enviado');
+        return redirect()->action('ChatController@cargarMensajes',[$sender]);
      }
 }
 

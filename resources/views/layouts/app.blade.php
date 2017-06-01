@@ -68,7 +68,7 @@
                     @if (!Auth::guest())
                         <!-- Compruebo si el usuario esta bloqueado -->
                         <li class="{{ Request::path() == 'home' || '' ? 'active' : '' }}"><a href="{{ route('home') }}">Inicio</a></li>
-                        <li class="{{ Request::path() == 'editarperfil/cuenta' ? 'active' : '' }}"><a href="{{ route('editarperfil.cuenta')}}">Editar Perfil</a></li>
+                        <li class="{{ Request::is('editarperfil/*') ? 'active' : '' }}"><a href="{{ route('editarperfil.cuenta')}}">Editar Perfil</a></li>
                         <!--<li><a href="">Mi Perfil</a></li>-->
                         @if(Auth::user()->tipo == 2 || Auth::user()->tipo == 3)<li class="{{ Request::path() == 'mensajes' ? 'active' : '' }}"><a href="{{ route('mensajes') }}">Mensajes <span class="badge" id="count"></span></a></li>@endif
                         <li class="{{ Request::path() == 'nuevapublicacion' ? 'active' : '' }}"><a href="{{route('nuevapublicacion')}}">Nueva Publicación</a></li>

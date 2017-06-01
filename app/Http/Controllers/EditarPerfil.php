@@ -47,18 +47,6 @@ class EditarPerfil extends Controller
     {
         return view('editarperfil.password');
     }
-
-    public function mascotas()
-    {
-        $data = array(
-
-            'num' => Auth::user()->mascotas,
-            'animales' => DB::table('animal')->get()
-
-        );
-        return view('editarperfil.mascotas')->with($data);
-    }
-
     public function editarMascota($id)
     {
         $mascota = DB::table('mascotas')->select('mascotas.*','animal.animal', 'razas.raza')->join('animal', 'animal.id', '=', 'mascotas.animal_id')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->where('mascotas.id',$id)->get()->first();
@@ -134,7 +122,7 @@ class EditarPerfil extends Controller
             ));
 
 
-            return view('welcome')->with('mensaje', 'Perfil actualizado correctamente con avatar');
+                return redirect()->action('EditarPerfil@cuenta', ['u' => 1]);
 
             }else{
 
@@ -153,7 +141,7 @@ class EditarPerfil extends Controller
                     'telefono' => $telefono,
                     'provincia_id' => $provincia
                 ));
-                return view('welcome')->with('mensaje', 'Perfil actualizado correctamente');
+                return redirect()->action('EditarPerfil@cuenta', ['u' => 1]);
 
             }
         }
@@ -176,24 +164,17 @@ class EditarPerfil extends Controller
             $p = Input::get('premium');
             if ($p == 'on'){
                 $p = 2;
-                $mensaje = 'Te has convertido en premium';
             }
-
             if ($p == ''){
                 $p = 1;
-                $mensaje = 'Ya no eres premium';
             }
 
-            if(Auth::user()->tipo == 3){
-                $mensaje = "Un admin no puede ser premium";
-            }else{
-            User::where('id', $user)->update(array(
-                'tipo' => $p,
-            ));
+            if(Auth::user()->tipo != 3){
+                User::where('id', $user)->update(array(
+                    'tipo' => $p,
+                ));
             }
-
-
-            return redirect()->action('HomeController@index',['mensaje' => $mensaje]);
+            return redirect()->action('EditarPerfil@premium', ['u' => $p]);
 
         }
     }
@@ -218,7 +199,7 @@ class EditarPerfil extends Controller
             ));
 
 
-            return view('welcome')->with('mensaje', 'Contraseña modificada correctamente');
+            return redirect()->action('EditarPerfil@password', ['u' => 1]);
         }
     }
 
@@ -258,8 +239,7 @@ class EditarPerfil extends Controller
                 'avatar' => $carpeta.$mascota."/".$nombreFichero
             ));
 
-
-            return view('welcome')->with('mensaje', 'La mascota ha sido editada correctamente con su avatar');
+                return redirect()->action('EditarPerfil@editarMascota', ['u' => 1]);
 
             }else{
 
@@ -273,7 +253,7 @@ class EditarPerfil extends Controller
                 ));
 
 
-                return view('welcome')->with('mensaje', 'La mascota ha sido editada correctamente');
+                return redirect()->action('Vistas@mascota',['id' => $id,'u' => 1]);
            }
         }
     }
@@ -327,7 +307,7 @@ class EditarPerfil extends Controller
                 );
                 DB::table('mascotas')->insert($mascota);
 
-                return view('welcome')->with('mensaje', 'La mascota ha sido añadida correctamente');
+                return redirect()->action('EditarPerfil@addMascotas', ['u' => 1]);
 
             }else {
 
@@ -354,7 +334,7 @@ class EditarPerfil extends Controller
                 );
                 DB::table('mascotas')->insert($mascota);
 
-                return view('welcome')->with('mensaje', 'La mascota ha sido añadida correctamente');
+                return redirect()->action('EditarPerfil@addMascotas', ['u' => 1]);
             }
     }
 }
@@ -402,8 +382,8 @@ class EditarPerfil extends Controller
 
             DB::table('publicaciones')->insert($publicacion);
 
+            return redirect()->action('EditarPerfil@insertarPublicacion', ['u' => 1]);
 
-            return view('welcome')->with('mensaje', 'La publicación ha sido añadida correctamente');
 
         }
     }
@@ -441,16 +421,18 @@ class EditarPerfil extends Controller
         }
 
 
-        //return view('welcome')->with('mensaje', 'Imágenes subidas correctamente');
+        return redirect()->action('EditarPerfil@addImagenes',['id' => $id,'u' => 2]);
+
     }
 
     public function postDeleteImagenes(){
 
         $id = Input::get('id');
+        $p = DB::table('imagenes')->select('mascota_id')->where('imagen', $id)->delete();
         DB::table('imagenes')->where('imagen', $id)->delete();
 
 
-        return view('welcome')->with('mensaje', 'Imagen borrada');
+        return redirect()->action('EditarPerfil@addImagenes',['id' => $p,'u' => 1]);
     }
 
 }

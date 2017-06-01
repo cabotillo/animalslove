@@ -2,11 +2,26 @@
 
 @section('content')
 <div class="container">
+    @if(isset($_GET['u']))
+        @if($_GET['u'] == 1)
+            <div class="alert alert-success">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                Imagen borrada
+            </div>
+        @elseif($_GET['u'] == 2)
+            <div class="alert alert-success">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                Imagen/es subidas con éxito
+            </div>
+        @elseif($_GET['u'] == 0)
+            <div class="alert alert-danger">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                Se ha producido un error. Vuelve a intentarlo más tarde
+            </div>
+        @endif
+    @endif
     <div class="row">
         <h1 class="text-center">Imágenes de {{$mascota->nombre}}</h1>
-        <div class="alert alert-success" id="verde" hidden="hidden">
-            Imágenes subidas correctamente
-        </div>
         @foreach($imagenes as $i)
             <div class="col-md-2">
             <img src="../storage/mascotas/{{$i->imagen}}" class="img-responsive">

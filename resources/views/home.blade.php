@@ -32,7 +32,7 @@
         </div>
 
         <div class="row">
-            <div id="buscar" class="col-sm-3 oculto">
+            <div id="buscar" class="col-sm-3">
 
                     @if(Auth::user())<h1><a href="{{'perfil/',Auth::user()->login}}{{Auth::user()->login}}">Mi perfil</a></h1>@endif
                     <h1><small>Filtrar Mascotas</small></h1>
@@ -70,7 +70,7 @@
                     </form>
 
             </div>
-            <div id="menumascotas" class="col-sm-12">
+            <div id="menumascotas" class="col-sm-9">
                 <div class="row oculto" id="mascotas">
                     @foreach($mascotas as $m)
 
