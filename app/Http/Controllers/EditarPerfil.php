@@ -70,11 +70,11 @@ class EditarPerfil extends Controller
     {
 
         $validation = Validator::make(Input::all(), [
-            'nombre' => 'required|string|max:25',
-            'apellidos' => 'required|string|max:25',
-            'email' => 'required|string|max:50',
-            'telefono' => 'required|integer|min:9',
-            'provincia' => 'required|integer',
+            'nombre' => 'required|string|min:3|max:25',
+            'apellidos' => 'required|string|min:3|max:50',
+            'email' => 'required|string|email|max:50|min:6|unique:users',
+            'telefono' => 'required|integer|regex:/[0-9]{9}/',
+            'provincia' => 'required|integer|exists:provincias,id',
             'avatar' => 'mimes:jpeg,bmp,png'
         ]);
 
@@ -209,7 +209,7 @@ class EditarPerfil extends Controller
         $validation = Validator::make(Input::all(), [
             'tamanyo' => 'required|string|max:25',
             'edad' => 'required|integer',
-            'img' => ''
+            'img' => 'mimes:jpeg,bmp,png'
 
         ]);
 
@@ -261,13 +261,13 @@ class EditarPerfil extends Controller
     public function insertarMascota()
     {
         $validation = Validator::make(Input::all(), [
-            'nombre' => 'required|string|max:25',
-            'animal' => 'required|integer',
-            'raza' => 'required|integer',
-            'genero' => 'required|string|max:25',
-            'tamanyo' => 'required|string|max:25',
-            'img' => '',
-            'edad' => 'required|integer:max:3'
+            'nombre' => 'required|string|min:3|max:25',
+            'animal' => 'required|integer|exists:animal,id',
+            'raza' => 'required|integer|exists:razas,id',
+            'genero' => 'required|string|max:25@|in:Hembra,Macho',
+            'tamanyo' => 'required|string|max:25|in:Pequeño,Mediano,Grande,Gigante',
+            'img' => 'mimes:jpeg,bmp,png',
+            'edad' => 'required|integer|max:3'
         ]);
 
         if ($validation->fails()) {
@@ -352,8 +352,8 @@ class EditarPerfil extends Controller
     {
 
         $validation = Validator::make(Input::all(), [
-            'mascota' => 'required|integer',
-            'publicacion' => 'required|integer',
+            'mascota' => 'required|integer|exists:mascotas,id',
+            'publicacion' => 'required|integer|exists:tipopublicacion,id',
             'cuerpo' => 'required|string|max:250',
         ]);
 

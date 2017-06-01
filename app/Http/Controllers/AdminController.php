@@ -47,17 +47,6 @@ class AdminController extends Controller
         return view('admin')->with($data);
     }
 
-    /*public function  postAdmin($id){
-        if(Input::get('reporte')){
-            $this->reporte($id);
-            echo "<script>alert('REPORTE')</script>";
-        }elseif (Input::get('admin')){
-            echo "<script>alert('NOO')</script>";
-        }else{
-
-        }
-    }*/
-
     public function reporte($id){
 
         $mascotas = DB::table('mascotas')->select('mascotas.id','mascotas.nombre')->join('animal', 'animal.id', '=', 'mascotas.animal_id')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->where('user_id', $id)->get();
@@ -147,9 +136,9 @@ class AdminController extends Controller
     {
         $validation = Validator::make(Input::all(), [
             'nombre' => 'required|string|max:25',
-            'apellidos' => 'required|string|max:25',
-            'email' => 'required|string|max:50',
-            'telefono' => 'required|integer|min:9',
+            'apellidos' => 'required|string|max:50',
+            'email' => 'required|email|max:50',
+            'telefono' => 'required|integer|regex:/[0-9]{9}/',
             'avatar' => 'mimes:jpeg,bmp,png'
         ]);
 

@@ -26,9 +26,9 @@ class ContactoController extends Controller
         if(Input::get('usu') == 'invitado'){
 
             $validation = Validator::make(Input::all(), [
-                'nombre' => 'required_without:login|string|max:25',
+                'nombre' => 'required|string|max:25',
                 'correo' => 'required|email|max:50',
-                'asunto' => 'required|string|max:25',
+                'asunto' => 'required|string|max:50',
                 'cuerpo' => 'required|string|max:250',
                 'g-recaptcha-response' => 'required|recaptcha',
             ]);
@@ -49,7 +49,7 @@ class ContactoController extends Controller
         }elseif(Input::get('usu') == 'usuario') {
 
             $validation = Validator::make(Input::all(), [
-                'asunto' => 'required|string|max:25',
+                'asunto' => 'required|string|max:50',
                 'cuerpo' => 'required|string|max:250',
                 'g-recaptcha-response' => 'required|recaptcha',
             ]);

@@ -24,51 +24,47 @@
     <div class="col-sm-12">
 
         <div class="row">
-
-            <ul class="nav nav-tabs">
-                <li class="active" id="mascotas_ref" role="presentation"><a href="#mascotas" class="inf"><h2>Mascotas</h2></a></li>
-                <li id="publicaciones_ref" role="presentation"><a href="#publicaciones" class="inf"><h2>Publicaciones</h2></a></li>
-            </ul>
-        </div>
-
-        <div class="row">
             <div id="buscar" class="col-sm-3">
 
-                    @if(Auth::user())<h1><a href="{{'perfil/',Auth::user()->login}}{{Auth::user()->login}}">Mi perfil</a></h1>@endif
-                    <h1><small>Filtrar Mascotas</small></h1>
-                    <form method="post" action="{{route('busqueda')}}">
-                        {{ csrf_field() }}
-                        <label class="control-label">Animal</label>
-                        <select class="form-control" name="animal" id="animal">
-                            <option selected="selected">Selecciona</option>
-                            @foreach($animales as $a)
-                                <option value="{{$a->id}}">{{$a->animal}}</option>
-                            @endforeach
-                        </select>
+                <ul class="nav nav-tabs">
+                    <li class="active" id="mascotas_ref" role="presentation"><a href="#mascotas" class="inf">Mascotas</a></li>
+                    <li id="publicaciones_ref" role="presentation"><a href="#publicaciones" class="inf">Publicaciones</a></li>
+                </ul>
 
-                        <div class="form-group{{ $errors->has('raza') ? ' has-error' : '' }}">
-                            <label class="control-label">Raza</label>
-                            <select class="form-control" name="raza" id="raza"></select>
-                            @if ($errors->has('raza'))
-                                <span class="help-block">
-                                <strong>{{ $errors->first('raza') }}</strong>
-                            </span>
-                            @endif
-                        </div>
+                @if(Auth::user())<h3><a href="{{'perfil/',Auth::user()->login}}{{Auth::user()->login}}">Ver mi perfil</a></h3>@endif
+                <h1><small>Filtrar Mascotas</small></h1>
+                <form method="post" action="{{route('busqueda')}}">
+                    {{ csrf_field() }}
+                    <label class="control-label">Animal</label>
+                    <select class="form-control" name="animal" id="animal">
+                        <option selected="selected">Selecciona</option>
+                        @foreach($animales as $a)
+                            <option value="{{$a->id}}">{{$a->animal}}</option>
+                        @endforeach
+                    </select>
 
-                        <div class="form-group{{ $errors->has('genero') ? ' has-error' : '' }}">
-                            <label class="control-label">Genero</label><br>
-                            <label class="radio-inline"><input type="radio" name="genero" value="Macho"> Macho</label>
-                            <label class="radio-inline"><input type="radio" name="genero" value="Hembra"> Hembra</label>
-                            @if ($errors->has('genero'))
-                                <span class="help-block">
-                                <strong>{{ $errors->first('genero') }}</strong>
-                            </span>
-                            @endif
-                        </div>
-                        <input class="btn btn-primary" type="submit" value="Filtrar">
-                    </form>
+                    <div class="form-group{{ $errors->has('raza') ? ' has-error' : '' }}">
+                        <label class="control-label">Raza</label>
+                        <select class="form-control" name="raza" id="raza"></select>
+                        @if ($errors->has('raza'))
+                            <span class="help-block">
+                            <strong>{{ $errors->first('raza') }}</strong>
+                        </span>
+                        @endif
+                    </div>
 
+                    <div class="form-group{{ $errors->has('genero') ? ' has-error' : '' }}">
+                        <label class="control-label">Genero</label><br>
+                        <label class="radio-inline"><input type="radio" name="genero" value="Macho"> Macho</label>
+                        <label class="radio-inline"><input type="radio" name="genero" value="Hembra"> Hembra</label>
+                        @if ($errors->has('genero'))
+                            <span class="help-block">
+                            <strong>{{ $errors->first('genero') }}</strong>
+                        </span>
+                        @endif
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Filtrar">
+                </form>
             </div>
             <div id="menumascotas" class="col-sm-9">
                 <div class="row oculto" id="mascotas">

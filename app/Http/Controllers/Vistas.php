@@ -43,9 +43,9 @@ class Vistas extends Controller
     {
 
         $validation = Validator::make(Input::all(), [
-            'animal' => 'required|integer',
-            'raza' => 'required|integer',
-            'genero' => 'required|string|max:10',
+            'animal' => 'required|integer|exists:animal,id',
+            'raza' => 'required|integer|exists:razas,id',
+            'genero' => 'required|string|max:25@|in:Hembra,Macho',
         ]);
 
         if ($validation->fails()) {
