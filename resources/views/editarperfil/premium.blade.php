@@ -29,7 +29,7 @@
                         <ul class="nav nav-tabs nav-top-border">
                             <li><a href="{{'cuenta'}}">Datos Personales</a></li>
                             <li><a href="{{'password'}}">Contraseña</a></li>
-                            <li><a href="{{'mascotas'}}">Mascotas</a></li>
+                            <li><a href="{{'mascotas'}}">Añadir Mascota</a></li>
                             <li class="active"><a href="{{'premium'}}">Premium</a></li>
                         </ul>
                         <form action="{{route('editarperfil.premium')}}" method="post">

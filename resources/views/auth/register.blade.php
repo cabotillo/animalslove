@@ -14,7 +14,7 @@
                             <label for="nombre" class="col-md-4 control-label">Nombre</label>
 
                             <div class="col-md-6">
-                                <input id="nombre" type="text" class="form-control" name="nombre" value="{{ old('nombre') }}" required autofocus>
+                                <input id="nombre" type="text" class="form-control" name="nombre" value="{{ old('nombre') }}" required autofocus data-toggle="tooltip" data-placement="right" title="De 3 a 25 caracteres">
 
                                 @if ($errors->has('nombre'))
                                     <span class="help-block">
@@ -28,7 +28,7 @@
                             <label for="apellidos" class="col-md-4 control-label">Apellidos</label>
 
                             <div class="col-md-6">
-                                <input id="apellidos" type="text" class="form-control" name="apellidos" value="{{ old('apellidos') }}" required autofocus>
+                                <input id="apellidos" type="text" class="form-control" name="apellidos" value="{{ old('apellidos') }}" required autofocus data-toggle="tooltip" data-placement="right" title="De 3 a 50 caracteres">
 
                                 @if ($errors->has('apellidos'))
                                     <span class="help-block">
@@ -42,7 +42,7 @@
                             <label for="login" class="col-md-4 control-label">Nombre de usuario</label>
 
                             <div class="col-md-6">
-                                <input id="login" type="text" class="form-control" name="login" value="{{ old('login') }}" required autofocus>
+                                <input id="login" type="text" class="form-control" name="login" value="{{ old('login') }}" required autofocus data-toggle="tooltip" data-placement="right" title="De 3 a 20 caracteres">
 
                                 @if ($errors->has('login'))
                                     <span class="help-block">
@@ -56,7 +56,7 @@
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required data-toggle="tooltip" data-placement="right" title="De 6 a 50 caracteres">
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -70,7 +70,7 @@
                             <label for="password" class="col-md-4 control-label">Contraseña</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
+                                <input id="password" type="password" class="form-control" name="password" required data-toggle="tooltip" data-placement="right" title="8 caracteres o más, letra minuscula y un numero ">
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -138,4 +138,9 @@
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+    <script>
+        $('input[title]').tooltip({'trigger':'focus'});
+    </script>
 @endsection

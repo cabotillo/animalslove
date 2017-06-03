@@ -25,13 +25,13 @@
                         <ul class="nav nav-tabs nav-top-border">
                             <li class="active"><a href="{{'cuenta'}}">Datos Personales</a></li>
                             <li><a href="{{'password'}}">Contraseña</a></li>
-                            <li><a href="{{'mascotas'}}">Mascotas</a></li>
+                            <li><a href="{{'mascotas'}}">Añadir Mascota</a></li>
                             <li><a href="{{'premium'}}">Premium</a></li>
                         </ul>
 
                     <form action="{{route('editarperfil.cuenta')}}" method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}
-                        <div class="form-group {{ $errors->has('nombre') ? ' has-error' : '' }}">
+                        <div class="col-sm-12 col-md-6 form-group {{ $errors->has('nombre') ? ' has-error' : '' }}">
                             <label class="control-label">Nombre</label>
                             <input name="nombre" type="text" placeholder="Nombre" class="form-control" value="{{Auth::user()->nombre}}">
                             @if ($errors->has('nombre'))
@@ -40,7 +40,7 @@
                                         </span>
                             @endif
                         </div>
-                        <div class="form-group {{ $errors->has('apellidos') ? ' has-error' : '' }}">
+                        <div class="col-sm-12 col-md-6 form-group {{ $errors->has('apellidos') ? ' has-error' : '' }}">
                             <label class="control-label">Apellidos</label>
                             <input name="apellidos" type="text" placeholder="Apellidos" class="form-control" value="{{Auth::user()->apellidos}}">
                             @if ($errors->has('apellidos'))
@@ -49,16 +49,12 @@
                                         </span>
                             @endif
                         </div>
-                        <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
+                        <div class="col-sm-12 form-group {{ $errors->has('email') ? ' has-error' : '' }}">
                             <label class="control-label">Correo Electrónico</label>
-                            <input name="email" type="text" placeholder="Correo electrónico" class="form-control" value="{{Auth::user()->email}}">
-                            @if ($errors->has('email'))
-                                <span class="help-block">
-                                            <strong>{{ $errors->first('email') }}</strong>
-                                        </span>
-                            @endif
+                            <input disabled name="email" type="text" placeholder="Correo electrónico" class="form-control" value="{{Auth::user()->email}}">
+
                         </div>
-                        <div class="form-group {{ $errors->has('telefono') ? ' has-error' : '' }}">
+                        <div class="col-sm-12 col-md-6 form-group {{ $errors->has('telefono') ? ' has-error' : '' }}">
                             <label class="control-label">Telefono</label>
                             <input name="telefono" type="number" placeholder="666666666" class="form-control" value="{{Auth::user()->telefono}}">
                             @if ($errors->has('telefono'))
@@ -68,7 +64,7 @@
                             @endif
                         </div>
 
-                        <div class="form-group{{ $errors->has('provincia') ? ' has-error' : '' }}">
+                        <div class="col-sm-12 col-md-6 form-group{{ $errors->has('provincia') ? ' has-error' : '' }}">
                             <label class="control-label">Provincia</label>
                                 <select class="form-control" name="provincia">
 
@@ -83,7 +79,7 @@
                                 @endif
                         </div>
 
-                        <div class="form-group">
+                        <div class="col-sm-12 form-group">
                             <label class="control-label">Imagen de perfil</label><br>
 
                             <div class="thumbnail col-md-6">

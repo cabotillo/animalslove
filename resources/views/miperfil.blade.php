@@ -12,7 +12,7 @@
 
         <div class="col-sm-3">
             <h1><span class="text-capitalize">{{$usuario[0]->login}}</span></h1>
-            <img src="../storage/{{ $usuario[0]->avatar }}" class="img-responsive"><br>
+            <img src="../storage/{{ $usuario[0]->avatar }}" class="img-responsive" alt="avatar"><br>
             <span>Nombre:{{$usuario[0]->nombre}}&nbsp;</span>
             <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fwww.animalslove.ml/perfil/{{$usuario[0]->login}}&layout=button&size=small&mobile_iframe=true&width=81&height=20&appId" width="81" height="20" class="facebook"></iframe>
             <a href="{{'../chat/',$usuario[0]->login}}{{$usuario[0]->login}}"><button class="form-control">Chat</button></a>

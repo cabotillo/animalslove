@@ -17,8 +17,8 @@ class Vistas extends Controller
         $user = DB::table('users')->where('login', $login)->get();
         $id = $user[0]->id;
 
-        $tusmascotas = DB::table('mascotas')->select('mascotas.*', 'animal.animal', 'razas.raza')->join('animal', 'animal.id', '=', 'mascotas.animal_id')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->where('user_id', $id)->get();
-        $tuspublicaciones = DB::table('publicaciones')->select('publicaciones.*', 'tipopublicacion.tipo')->join('tipopublicacion', 'tipopublicacion.id', '=', 'publicaciones.tipo_id')->where('user_id', $id)->get();
+        $tusmascotas = DB::table('mascotas')->select('mascotas.*', 'razas.*')->select('mascotas.*', 'razas.*','animal.animal')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->join('animal','animal.id', '=', 'razas.id_animal')->where('mascotas.disponible',1)->get();
+        $tuspublicaciones = DB::table('publicaciones')->select('publicaciones.*', 'tipopublicacion.tipo')->join('tipopublicacion', 'tipopublicacion.id', '=', 'publicaciones.tipo_id')->where('user_id', $id)->where('publicaciones.disponible',1)->get();
 
         $data = array(
             'tusmascotas' => $tusmascotas,
@@ -59,10 +59,9 @@ class Vistas extends Controller
             $mensaje = '';
 
             $resultados = DB::table('mascotas')->where([
-                ['animal_id', '=', $animal],
                 ['raza_id', '=', $raza],
                 ['genero', '=', $genero],
-            ])->select('mascotas.*', 'razas.raza', 'animal.animal')->join('animal', 'animal.id', '=', 'mascotas.animal_id')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->get();
+            ])->select('mascotas.*', 'razas.raza', 'animal.animal')->select('mascotas.*', 'razas.*','animal.animal')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->join('animal','animal.id', '=', 'razas.id_animal')->get();
 
             if(empty($resultados[0])){
                 $mensaje = 'No hay resultados';
@@ -85,8 +84,11 @@ class Vistas extends Controller
     public function mascota($id)
     {
 
-        $mascota = DB::table('mascotas')->where('mascotas.id', $id)->select('mascotas.*', 'animal.animal', 'razas.raza')->join('animal', 'animal.id', '=', 'mascotas.animal_id')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->first();
+        $mascota = DB::table('mascotas')->where('mascotas.id', $id)->select('mascotas.*', 'razas.id_animal','razas.raza','animal.animal')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->join('animal','animal.id', '=', 'razas.id_animal')->first();
 
+        if($mascota->disponible == 0){
+            return redirect()->action('HomeController@index');
+        }else{
         $imagenes = DB::table('imagenes')->where('mascota_id', $id)->get();
 
         $id_usuario = $mascota->user_id;
@@ -128,6 +130,7 @@ class Vistas extends Controller
         );
 
         return view('mascota')->with($data);
+        }
     }
 
     public function publicacion($id)
@@ -135,22 +138,27 @@ class Vistas extends Controller
 
         $publicacion = DB::table('publicaciones')->join('tipopublicacion', 'tipopublicacion.id', '=', 'publicaciones.tipo_id')->where('publicaciones.id', $id)->first();
 
-        $id_usuario = $publicacion->user_id;
+        if($publicacion->disponible == 0){
 
-        $mascota = DB::table('mascotas')->where('mascotas.user_id', $id_usuario)->join('animal', 'animal.id', '=', 'mascotas.animal_id')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->first();
+            return redirect()->action('HomeController@index');
 
-        $usuario = DB::table('users')->where('id', $id_usuario)->first();
+        }else {
 
+            $id_usuario = $publicacion->user_id;
 
+            $mascota = DB::table('mascotas')->where('mascotas.user_id', $id_usuario)->select('mascotas.*', 'razas.*', 'animal.animal')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->join('animal', 'animal.id', '=', 'razas.id_animal')->first();
 
-        $data = array(
-            'mascota' => $mascota,
-            'usuario' => $usuario,
-            'publicacion' => $publicacion
+            $usuario = DB::table('users')->where('id', $id_usuario)->first();
 
-        );
+            $data = array(
+                'mascota' => $mascota,
+                'usuario' => $usuario,
+                'publicacion' => $publicacion
 
-        return view('publicacion')->with($data);
+            );
+
+            return view('publicacion')->with($data);
+        }
     }
 }
 

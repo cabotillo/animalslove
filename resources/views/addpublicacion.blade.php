@@ -23,7 +23,7 @@
             <div class="panel-body">
                 <form role="form" action="{{route('nuevapublicacion')}}" method="post">
                     {{ csrf_field() }}
-                    <div class="form-group{{ $errors->has('mascota') ? ' has-error' : '' }}">
+                    <div class="col-md-6 form-group{{ $errors->has('mascota') ? ' has-error' : '' }}">
                         <label class="control-label">Mascota</label>
                         <select class="form-control" name="mascota">
 
@@ -38,7 +38,7 @@
                         @endif
                     </div>
 
-                    <div class=" form-group{{ $errors->has('publicacion') ? ' has-error' : '' }}">
+                    <div class="col-md-6 form-group{{ $errors->has('publicacion') ? ' has-error' : '' }}">
                         <label class="control-label">Tipo de publicacion</label>
                         <select class="form-control" name="publicacion">
                             @foreach($tipop as $t)
@@ -53,7 +53,7 @@
                     </div>
 
 
-                    <div class="form-group {{ $errors->has('cuerpo') ? ' has-error' : '' }}">
+                    <div class="col-md-12 form-group {{ $errors->has('cuerpo') ? ' has-error' : '' }}">
                         <label class="control-label">Mas información</label>
                         <textarea class="form-control" name="cuerpo" value="{{old('cuerpo')}}"></textarea>
                         @if ($errors->has('cuerpo'))

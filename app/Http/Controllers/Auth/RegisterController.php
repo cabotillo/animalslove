@@ -65,10 +65,10 @@ class RegisterController extends Controller
             'apellidos' => 'required|string|min:3|max:50',
             'login' => 'required|unique:users|string|min:3|max:20',
             'email' => 'required|string|email|max:50|min:6|unique:users',
-            'password' => 'required|string|min:6|max:15|regex:/(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}/|confirmed',
+            'password' => 'required|string|min:8|max:15|regex:/(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}/|confirmed',
             'provincia' => 'required|integer|exists:provincias,id',
             'telefono' => 'required|integer|regex:/[0-9]{9}/',
-            //'g-recaptcha-response' => 'required|recaptcha',
+            'g-recaptcha-response' => 'required|recaptcha',
         ]);
     }
 
@@ -81,14 +81,21 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
+        $nombre = htmlentities($data['nombre'], ENT_QUOTES, 'UTF-8', false);
+        $apellidos = htmlentities($data['apellidos'], ENT_QUOTES, 'UTF-8', false);
+        $login = htmlentities($data['apellidos'], ENT_QUOTES, 'UTF-8', false);
+        $login = str_replace(" ",$login);
+        $email = htmlentities($data['apellidos'], ENT_QUOTES, 'UTF-8', false);
+        $telefono = htmlentities($data['apellidos'], ENT_QUOTES, 'UTF-8', false);
+
         $user = User::create([
-            'nombre' => $data['nombre'],
-            'apellidos' => $data['apellidos'],
-            'login' => $data['login'],
-            'email' => $data['email'],
+            'nombre' => $nombre,
+            'apellidos' => $apellidos,
+            'login' => $login,
+            'email' => $email,
             'password' => bcrypt($data['password']),
             'provincia' => $data['provincia'],
-            'telefono' => $data['telefono'],
+            'telefono' => $telefono,
         ]);
 
         Mail::to($user->email)->send(new WelcomeMail($user->nombre));

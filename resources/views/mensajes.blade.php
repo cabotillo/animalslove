@@ -2,6 +2,24 @@
 
 @section('content')
 <div class="container">
+    @if(isset($_GET['u']))
+        @if($_GET['u'] == 1)
+            <div class="alert alert-success">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                Mensaje enviado!
+            </div>
+        @elseif($_GET['u'] == 2)
+            <div class="alert alert-danger">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                El mensaje no puede estar vacio!
+            </div>
+        @elseif($_GET['u'] == 0)
+            <div class="alert alert-danger">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                Se ha producido un error. Vuelve a intentarlo más tarde
+            </div>
+        @endif
+    @endif
     <h1>Chat con {{$usuario}}</h1>
     <form method="post" action="{{'mensajes'}}">
         {{ csrf_field() }}
@@ -18,9 +36,12 @@
                 @endif
             @endfor
         </div>
-        <input type="text" name="mensaje">
-        <input type="hidden" value="{{$usuario}}" name="sender">
-        <input type="submit" value="Enviar Mensaje">
+
+        <div class=" col-md-12 input-group">
+            <input name="mensaje" class="form-control" placeholder="Escribe el mensaje que le quieras enviar a {{$usuario}}. Intro para enviar." aria-describedby="basic-addon2">
+            <span class="input-group-addon" id="basic-addon2"><input class="btn" type="submit" value="Enviar Mensaje"></span>
+            <input type="hidden" value="{{$usuario}}" name="sender">
+        </div>
 
 
     </form>

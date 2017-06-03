@@ -26,8 +26,8 @@ Route::post('editarperfil/premium', ['as' => 'editarperfil.premium', 'uses' => '
 Route::get('editarperfil/password', ['as' => 'editarperfil.password', 'uses' => 'EditarPerfil@password']);
 Route::post('editarperfil/password', ['as' => 'editarperfil.password', 'uses' => 'EditarPerfil@updatePassword']);
 
-Route::get('editarperfil/editar/mascotas/{id}', ['as' => 'editarperfil.editarmascota', 'uses' => 'EditarPerfil@editarMascota']);
-Route::post('editarperfil/editar/mascotas/{id}', ['as' => 'editarperfil.editarmascota', 'uses' => 'EditarPerfil@updateMascota']);
+Route::get('editar/mascota/{id}', ['as' => 'editarperfil.editarmascota', 'uses' => 'EditarPerfil@editarMascota']);
+Route::post('editar/mascota/{id}', ['as' => 'editarperfil.editarmascota', 'uses' => 'EditarPerfil@updateMascota']);
 
 Route::get('editarperfil/mascotas', ['as' => 'editarperfil.mascotas', 'uses' => 'EditarPerfil@addMascota']);
 Route::post('editarperfil/mascotas', ['as' => 'editarperfil.addmascota', 'uses' => 'EditarPerfil@insertarMascota']);
@@ -52,6 +52,9 @@ Route::post('reporte/{id}', ['as' => 'reporte', 'uses' => 'AdminController@postR
 Route::get('daradmin/{id}', ['as' => 'postadmin', 'uses' => 'AdminController@admin']);
 
 Route::get('bloquear/{id}', ['as' => 'bloquear', 'uses' => 'AdminController@bloquear']);
+Route::get('eliminarMascota/{id}', ['as' => 'bloquear', 'uses' => 'EditarPerfil@eliminarMascota']);
+Route::get('eliminarPublicacion/{id}', ['as' => 'eliminar', 'uses' => 'EditarPerfil@eliminarPublicacion']);
+
 
 Route::get('admin/editarcuenta/{id}', ['as' => 'getperfil', 'uses' => 'AdminController@getPerfil']);
 Route::post('admin/editarcuenta/{id}', ['as' => 'postperfil', 'uses' => 'AdminController@postPerfil']);
@@ -80,6 +83,8 @@ Route::get('welcome',['as' => 'welcome', 'uses' => 'HomeController@welcome']);
 Route::get('contacto',['as' => 'contacto', 'uses' => 'ContactoController@index']);
 Route::post('contacto',['as' => 'contacto', 'uses' => 'ContactoController@enviar']);
 
+Route::get('administrar',['as' => 'administrar', 'uses' => 'EditarPerfil@administrar']);
+Route::post('administrar',['as' => 'administrar', 'uses' => 'ContactoController@postAdministrar']);
 
 Route::resource('Imagenes', 'ImagenesController');
 Route::resource('mascota1', 'MascotaController');

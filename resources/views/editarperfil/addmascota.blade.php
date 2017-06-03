@@ -24,14 +24,14 @@
                         <ul class="nav nav-tabs nav-top-border">
                             <li><a href="{{'cuenta'}}">Datos Personales</a></li>
                             <li><a href="{{'password'}}">Contraseña</a></li>
-                            <li class="active"><a href="{{'../mascotas'}}">Mascotas</a></li>
+                            <li class="active"><a href="{{'../mascotas'}}">Añadir Mascota</a></li>
                             <li><a href="{{'premium'}}">Premium</a></li>
                         </ul>
                         <form action="" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
-                            <div class=" row panel-body">
+                            <div class="panel-body">
 
-                                <div class="form-group {{ $errors->has('nombre') ? ' has-error' : '' }}">
+                                <div class="col-sm-6 form-group {{ $errors->has('nombre') ? ' has-error' : '' }}">
                                     <label class="control-label">Nombre</label>
                                     <input type="text" class="form-control" value="{{old('nombre')}}" name="nombre">
                                     @if ($errors->has('nombre'))
@@ -40,17 +40,26 @@
                                         </span>
                                     @endif
                                 </div>
-                                <div class="form-group">
+                                <div class="col-sm-6 form-group {{ $errors->has('edad') ? ' has-error' : '' }}">
+                                    <label class="control-label">Edad</label>
+                                    <input type="number" class="form-control" value="{{old('edad')}}" name="edad">
+                                    @if ($errors->has('edad'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('edad') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                                <div class="col-sm-6 form-group">
                                     <label class="control-label">Animal</label>
                                     <select class="form-control" name="animal" id="animal">
-                                        <option selected="selected">Selecciona</option>
+                                        <option selected="selected"></option>
                                         @foreach($animales as $a)
                                             <option value="{{$a->id}}">{{$a->animal}}</option>
                                         @endforeach
                                     </select>
 
                                 </div>
-                                <div class="form-group {{ $errors->has('raza') ? ' has-error' : '' }}">
+                                <div class="col-sm-6 form-group {{ $errors->has('raza') ? ' has-error' : '' }}">
                                     <label class="control-label">Raza</label>
                                     <select class="form-control" name="raza" id="raza"></select>
                                     @if ($errors->has('raza'))
@@ -59,7 +68,7 @@
                                         </span>
                                     @endif
                                 </div>
-                                <div class="form-group {{ $errors->has('genero') ? ' has-error' : '' }}">
+                                <div class="col-sm-6 form-group {{ $errors->has('genero') ? ' has-error' : '' }}">
                                     <label class="control-label">Genero</label>
                                     <select class="form-control" name="genero" id="genero">
                                         <option value="Macho">Macho</option>
@@ -71,7 +80,7 @@
                                         </span>
                                     @endif
                                 </div>
-                                <div class="form-group">
+                                <div class="col-sm-6 form-group">
                                     <label class="control-label">Tamaño</label>
                                     <select class="form-control" name="tamanyo">
                                         <option selected = "selected" value="Pequeño">Pequeño</option>
@@ -83,16 +92,7 @@
 
 
                                 </div>
-                                <div class="form-group {{ $errors->has('edad') ? ' has-error' : '' }}">
-                                    <label class="control-label">Edad</label>
-                                    <input type="number" class="form-control" value="{{old('edad')}}" name="edad">
-                                    @if ($errors->has('edad'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('edad') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                                <div class="form-group">
+                                <div class="col-sm-12 form-group">
                                     <label class="control-label">Imagen de perfil</label><br>
 
                                     <div class="thumbnail col-md-6">

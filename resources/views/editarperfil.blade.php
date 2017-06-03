@@ -11,7 +11,7 @@
                 <h1>Perfil de {{$nombre[0]}}</h1>
                     <form method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}
-                        <div class="form-group {{ $errors->has('nombre') ? ' has-error' : '' }}">
+                        <div class="col-sm-12 col-md-6 form-group {{ $errors->has('nombre') ? ' has-error' : '' }}">
                             <label class="control-label">Nombre</label>
                             <input name="nombre" type="text" placeholder="Nombre" class="form-control" value="{{$nombre[0]}}">
                             @if ($errors->has('nombre'))
@@ -20,7 +20,7 @@
                                         </span>
                             @endif
                         </div>
-                        <div class="form-group {{ $errors->has('apellidos') ? ' has-error' : '' }}">
+                        <div class="col-sm-12 col-md-6 form-group {{ $errors->has('apellidos') ? ' has-error' : '' }}">
                             <label class="control-label">Apellidos</label>
                             <input name="apellidos" type="text" placeholder="Apellidos" class="form-control" value="{{$apellidos[0]}}">
                             @if ($errors->has('apellidos'))
@@ -29,7 +29,7 @@
                                         </span>
                             @endif
                         </div>
-                        <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
+                        <div class="col-sm-12 col-md-6 form-group {{ $errors->has('email') ? ' has-error' : '' }}">
                             <label class="control-label">Correo Electrónico</label>
                             <input name="email" type="text" placeholder="Correo electrónico" class="form-control" value="{{$email[0]}}">
                             @if ($errors->has('email'))
@@ -38,7 +38,7 @@
                                         </span>
                             @endif
                         </div>
-                        <div class="form-group {{ $errors->has('telefono') ? ' has-error' : '' }}">
+                        <div class="col-sm-12 col-md-6 form-group {{ $errors->has('telefono') ? ' has-error' : '' }}">
                             <label class="control-label">Telefono</label>
                             <input name="telefono" type="number" placeholder="666666666" class="form-control" value="{{$telefono[0]}}">
                             @if ($errors->has('telefono'))

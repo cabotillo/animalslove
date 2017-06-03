@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('styles')
 <style>
 
     .hide-bullets {
@@ -16,6 +16,7 @@
         width: 100%;
     }
 </style>
+@endsection
 @section('content')
 <div class="container">
     @if(isset($_GET['u']))
@@ -39,7 +40,7 @@
                 @if(!Auth::guest())
                     @if(Auth::user()->id == $usuario->id)
 
-                        <a href="../editarperfil/editar/mascotas/{{$mascota->id}}"><input type="button" class="btn btn-primary" value="Editar Mascota"></a>
+                        <a href="../editar/mascota/{{$mascota->id}}"><input type="button" class="btn btn-primary" value="Editar Mascota"></a>
                         <a href="{{route('imagenes',$mascota->id)}}"><input type="button" class="btn btn-primary" value="Añadir Fotos"></a>
                     @endif
                 @endif

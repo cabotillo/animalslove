@@ -1,8 +1,8 @@
 /*http://colorhunt.co/c/35469*/
 
-*{
+/**{
     color: #44A !important;
-}
+}*/
 body {
     background-color: #E4FCF9 !important;
 }
@@ -38,7 +38,7 @@ body > div.container{
 #count{
     background: #4b89ac;
 }
-#invisible{
+.invisible{
     display: none;
 }
 .facebook{
@@ -56,4 +56,17 @@ body > div.container{
 .infoUsu{
     min-height: 30px !important;
     color: #2a88bd !important;
+}
+
+body > div.container > div > div > div > div.panel-body > ul{
+    margin-bottom: 15px;
+}
+#basic-addon2{
+    padding: 0 !important;
+    margin: 0 !important;
+    border:none !important;
+}
+
+table{
+    text-align: center;
 }

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Mascotas;
+use File;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Image;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
@@ -10,6 +13,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use Auth;
 use App\User;
+use Mockery\Exception;
 use View;
 
 class EditarPerfil extends Controller
@@ -49,10 +53,9 @@ class EditarPerfil extends Controller
     }
     public function editarMascota($id)
     {
-        $mascota = DB::table('mascotas')->select('mascotas.*','animal.animal', 'razas.raza')->join('animal', 'animal.id', '=', 'mascotas.animal_id')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->where('mascotas.id',$id)->get()->first();
-
+        $mascota = DB::table('mascotas')->select('mascotas.*','animal.animal', 'razas.id_animal','razas.raza')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->join('animal','animal.id', '=', 'razas.id_animal')->where('mascotas.id',$id)->first();
         if($mascota->user_id == Auth::user()->id)
-            return view('editarperfil.editarmascota')->with('mascota',$mascota);
+            return view('editarmascota')->with('mascota',$mascota);
         else {
             return redirect()->route('home');
         }
@@ -72,76 +75,76 @@ class EditarPerfil extends Controller
         $validation = Validator::make(Input::all(), [
             'nombre' => 'required|string|min:3|max:25',
             'apellidos' => 'required|string|min:3|max:50',
-            'email' => 'required|string|email|max:50|min:6|unique:users',
             'telefono' => 'required|integer|regex:/[0-9]{9}/',
             'provincia' => 'required|integer|exists:provincias,id',
             'avatar' => 'mimes:jpeg,bmp,png'
         ]);
 
         if($validation->fails()) {
-            //withInput keep the users info
             return Redirect::back()->withInput()->withErrors($validation->messages());
         } else {
 
             //Recogo la imagen si la hay
 
-            if(request()->file('avatar') != ''){
+            if(request()->file('avatar') != '') {
 
 
-            $login = Auth::user()->login;
+                $login = Auth::user()->login;
 
-            $file = request()->file('avatar');
-            $ext = $file->guessClientExtension();
+                $file = request()->file('avatar');
+                $ext = $file->guessClientExtension();
 
-            $carpeta = 'usuarios/';
-            $nombreFichero = $login.".".$ext;
+                $carpeta = 'usuarios/';
+                $nombreFichero = $login . "." . $ext;
 
-            $file->storeAs($carpeta.$login,$nombreFichero);
+                $file->storeAs($carpeta . $login, $nombreFichero);
 
-            //$path = public_path('usuarios\\'.$login);
+                //$path = public_path('usuarios\\'.$login);
 
-            //Image::make($file->getRealPath())->resize(100, 100)->save($path.".".$ext);
-
-
-
-            $user = Auth::user()->id;
-
-            $nombre = Input::get('nombre');
-            $email = Input::get('email');
-            $apellidos = Input::get('apellidos');
-            $telefono = Input::get('telefono');
-            $provincia = Input::get('provincia');
-
-            User::where('id', $user)->update(array(
-                'nombre' => $nombre,
-                'apellidos' => $apellidos,
-                'email' => $email,
-                'telefono' => $telefono,
-                'provincia_id' => $provincia,
-                'avatar' => $carpeta.$login."/".$nombreFichero,
-            ));
+                //Image::make($file->getRealPath())->resize(100, 100)->save($path.".".$ext);
 
 
-                return redirect()->action('EditarPerfil@cuenta', ['u' => 1]);
+                $user = Auth::user()->id;
 
+                $nombre = Input::get('nombre');
+                $apellidos = Input::get('apellidos');
+                $telefono = Input::get('telefono');
+                $provincia = Input::get('provincia');
+
+                try {
+                    User::where('id', $user)->update(array(
+                        'nombre' => $nombre,
+                        'apellidos' => $apellidos,
+                        'telefono' => $telefono,
+                        'provincia_id' => $provincia,
+                        'avatar' => $carpeta . $login . "/" . $nombreFichero,
+                    ));
+
+
+                    return redirect()->action('EditarPerfil@cuenta', ['u' => 1]);
+                } catch (Exception $e){
+                    return redirect()->action('EditarPerfil@cuenta', ['u' => 0]);
+                }
             }else{
 
                 $user = Auth::user()->id;
 
                 $nombre = Input::get('nombre');
-                $email = Input::get('email');
                 $apellidos = Input::get('apellidos');
                 $telefono = Input::get('telefono');
                 $provincia = Input::get('provincia');
 
-                User::where('id', $user)->update(array(
-                    'nombre' => $nombre,
-                    'apellidos' => $apellidos,
-                    'email' => $email,
-                    'telefono' => $telefono,
-                    'provincia_id' => $provincia
-                ));
-                return redirect()->action('EditarPerfil@cuenta', ['u' => 1]);
+                try {
+                    User::where('id', $user)->update(array(
+                        'nombre' => $nombre,
+                        'apellidos' => $apellidos,
+                        'telefono' => $telefono,
+                        'provincia_id' => $provincia
+                    ));
+                    return redirect()->action('EditarPerfil@cuenta', ['u' => 1]);
+                }catch (Exception $e){
+                    return redirect()->action('EditarPerfil@cuenta', ['u' => 0]);
+                }
 
             }
         }
@@ -169,12 +172,16 @@ class EditarPerfil extends Controller
                 $p = 1;
             }
 
-            if(Auth::user()->tipo != 3){
-                User::where('id', $user)->update(array(
-                    'tipo' => $p,
-                ));
+            try{
+                if(Auth::user()->tipo != 3){
+                    User::where('id', $user)->update(array(
+                        'tipo' => $p,
+                    ));
+                }
+                return redirect()->action('EditarPerfil@premium', ['u' => $p]);
+            }catch (Exception $e){
+                return redirect()->action('EditarPerfil@premium', ['u' => 0]);
             }
-            return redirect()->action('EditarPerfil@premium', ['u' => $p]);
 
         }
     }
@@ -183,7 +190,7 @@ class EditarPerfil extends Controller
     {
 
         $validation = Validator::make(Input::all(), [
-            'password' => 'required|min:6|confirmed',
+            'password' => 'required|string|min:6|max:15|regex:/(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}/|confirmed',
         ]);
 
         if($validation->fails()) {
@@ -194,12 +201,14 @@ class EditarPerfil extends Controller
             $user = Auth::user()->id;
             $pass = Input::get('password');
 
-            User::where('id', $user)->update(array(
-                'password' => bcrypt($pass),
-            ));
-
-
-            return redirect()->action('EditarPerfil@password', ['u' => 1]);
+            try{
+                User::where('id', $user)->update(array(
+                    'password' => bcrypt($pass),
+                ));
+                return redirect()->action('EditarPerfil@password', ['u' => 1]);
+            }catch (Exception $e){
+                return redirect()->action('EditarPerfil@password', ['u' => 0]);
+            }
         }
     }
 
@@ -207,7 +216,7 @@ class EditarPerfil extends Controller
     {
 
         $validation = Validator::make(Input::all(), [
-            'tamanyo' => 'required|string|max:25',
+            'tamanyo' => 'required|string|max:25|in:Pequeño,Mediano,Grande,Gigante',
             'edad' => 'required|integer',
             'img' => 'mimes:jpeg,bmp,png'
 
@@ -233,27 +242,34 @@ class EditarPerfil extends Controller
             $tamanyo = Input::get('tamanyo');
             $edad = Input::get('edad');
 
-            Mascotas::where('id', $mascota)->update(array(
-                'tamanyo' => $tamanyo,
-                'edad' => $edad,
-                'avatar' => $carpeta.$mascota."/".$nombreFichero
-            ));
+            try {
+                Mascotas::where('id', $mascota)->update(array(
+                    'tamanyo' => $tamanyo,
+                    'edad' => $edad,
+                    'avatar' => $carpeta . $mascota . "/" . $nombreFichero
+                ));
 
-                return redirect()->action('EditarPerfil@editarMascota', ['u' => 1]);
+                return redirect()->action('Vistas@mascota', ['id' => $id, 'u' => 1]);
+            }catch (Exception $e){
+                return redirect()->action('Vistas@mascota', ['id' => $id, 'u' => 0]);
+
+            }
 
             }else{
 
                 $tamanyo = Input::get('tamanyo');
                 $edad = Input::get('edad');
                 $mascota = $id;
+                try {
+                    Mascotas::where('id', $mascota)->update(array(
+                        'tamanyo' => $tamanyo,
+                        'edad' => $edad,
+                    ));
 
-                Mascotas::where('id', $mascota)->update(array(
-                    'tamanyo' => $tamanyo,
-                    'edad' => $edad,
-                ));
-
-
-                return redirect()->action('Vistas@mascota',['id' => $id,'u' => 1]);
+                    return redirect()->action('Vistas@mascota', ['id' => $id, 'u' => 1]);
+                }catch (Exception $e){
+                    return redirect()->action('Vistas@mascota', ['id' => $id, 'u' => 0]);
+                }
            }
         }
     }
@@ -262,7 +278,6 @@ class EditarPerfil extends Controller
     {
         $validation = Validator::make(Input::all(), [
             'nombre' => 'required|string|min:3|max:25',
-            'animal' => 'required|integer|exists:animal,id',
             'raza' => 'required|integer|exists:razas,id',
             'genero' => 'required|string|max:25@|in:Hembra,Macho',
             'tamanyo' => 'required|string|max:25|in:Pequeño,Mediano,Grande,Gigante',
@@ -278,7 +293,6 @@ class EditarPerfil extends Controller
             if (request()->file('img') != '') {
 
                 $nombre = Input::get('nombre');
-                $animal = Input::get('animal');
                 $raza = Input::get('raza');
                 $genero = Input::get('genero');
                 $tamanyo = Input::get('tamanyo');
@@ -297,7 +311,6 @@ class EditarPerfil extends Controller
                 $mascota = array(
                     'user_id' => $user,
                     'nombre' => $nombre,
-                    'animal_id' => $animal,
                     'raza_id' => $raza,
                     'genero' => $genero,
                     'tamanyo' => $tamanyo,
@@ -305,14 +318,16 @@ class EditarPerfil extends Controller
                     'edad' => $edad,
                     'updated_at' => time()
                 );
-                DB::table('mascotas')->insert($mascota);
-
-                return redirect()->action('EditarPerfil@addMascota', ['u' => 1]);
+                try{
+                    $id = DB::table('mascotas')->insertGetId($mascota);
+                    return redirect()->action('Vistas@mascota', ['id' => $id, 'u' => 1]);
+                }catch (Exception $e){
+                    return redirect()->action('Vistas@mascota', ['id' => $id, 'u' => 0]);
+                }
 
             }else {
 
                 $nombre = Input::get('nombre');
-                $animal = Input::get('animal');
                 $raza = Input::get('raza');
                 $genero = Input::get('genero');
                 $tamanyo = Input::get('tamanyo');
@@ -324,7 +339,6 @@ class EditarPerfil extends Controller
                 $mascota = array(
                     'user_id' => $user,
                     'nombre' => $nombre,
-                    'animal_id' => $animal,
                     'raza_id' => $raza,
                     'genero' => $genero,
                     'tamanyo' => $tamanyo,
@@ -332,9 +346,12 @@ class EditarPerfil extends Controller
                     'edad' => $edad,
                     'updated_at' => time()
                 );
-                DB::table('mascotas')->insert($mascota);
-
-                return redirect()->action('EditarPerfil@addMascota', ['u' => 1]);
+                try{
+                    $id = DB::table('mascotas')->insertGetId($mascota);
+                    return redirect()->action('Vistas@mascota', ['id' => $id, 'u' => 1]);
+                }catch (Exception $e){
+                    return redirect()->action('Vistas@mascota', ['id' => $id, 'u' => 0]);
+                }
             }
     }
 }
@@ -380,15 +397,27 @@ class EditarPerfil extends Controller
                 'disponible' => 1
             );
 
-            DB::table('publicaciones')->insert($publicacion);
+            try{
 
-            return redirect()->action('EditarPerfil@insertarPublicacion', ['u' => 1]);
+                DB::table('publicaciones')->insert($publicacion);
+                return redirect()->action('EditarPerfil@insertarPublicacion', ['u' => 1]);
+            }catch (Exception $e){
+                return redirect()->action('EditarPerfil@insertarPublicacion', ['u' => 0]);
+            }
 
 
         }
     }
     public function addImagenes($id){
+
+
         $mascota = DB::table('mascotas')->where('id', $id)->get()->first();
+
+        if($mascota->user_id != Auth::user()->id){
+            return redirect()->action('HomeController@index');
+        }else{
+
+
         $imagenes = DB::table('imagenes')->where('mascota_id',$id)->get();
 
         $data = array(
@@ -397,6 +426,7 @@ class EditarPerfil extends Controller
         );
 
         return view('imagenes')->with($data);
+        }
     }
 
     public function postInsertImagenes($id)
@@ -412,27 +442,88 @@ class EditarPerfil extends Controller
 
             $file->storeAs($carpeta . $id, $nombreFichero);
 
+             //$img = Image::make($file)->resize(100,100)->steam();
+
+             //$img->storeAS($carpeta."a.jpg");
+
             $imagen = array(
                 'mascota_id' => $id,
                 'imagen' => $id."/".$nombreFichero
             );
+            DB::table('imagenes')->insert($imagen);
 
-                DB::table('imagenes')->insert($imagen);
+
         }
-
-
-        return redirect()->action('EditarPerfil@addImagenes',['id' => $id,'u' => 2]);
 
     }
 
     public function postDeleteImagenes(){
 
-        $id = Input::get('id');
-        $p = DB::table('imagenes')->select('mascota_id')->where('imagen', $id)->delete();
-        DB::table('imagenes')->where('imagen', $id)->delete();
+        $img = Input::get('id');
+        $idImg = DB::table('imagenes')->select('mascota_id')->where('imagen', $img)->delete();
+        $mascota = explode("/", $img);
+        $nombreImagen = $mascota[1];
+        $mascota = $mascota[0];
 
 
-        return redirect()->action('EditarPerfil@addImagenes',['id' => $p,'u' => 1]);
+        try{
+            File::Delete(public_path().'\storage\mascotas\\'.$mascota.'\\'.$nombreImagen);
+            DB::table('imagenes')->where('imagen', $idImg)->delete();
+
+           return redirect()->action('EditarPerfil@addImagenes',['id' => $mascota,'u' => 1]);
+        }catch (Exception $e){
+            return redirect()->action('EditarPerfil@addImagenes',['id' => $mascota,'u' => 0]);
+        }
+
+    }
+
+    public  function administrar(){
+        $mismascotas = DB::table('mascotas')->where('user_id', Auth::user()->id)->orderBy('disponible','DESC')->get();
+
+        $mispublicaciones = DB::table('publicaciones')->where('user_id', Auth::user()->id)->orderBy('disponible','DESC')->get();
+
+        $data = array(
+            'mascotas' => $mismascotas,
+            'publicaciones' => $mispublicaciones,
+        );
+
+        return view('editarperfil.panel')->with($data);
+    }
+    public function eliminarMascota($id){
+
+        $num = DB::table('mascotas')->where('id',$id)->value('disponible');
+
+        $d = $num==1?'0':'1';
+        $mensaje = $num==1?'Tu mascota ha sido eliminada con éxito':'Tu mascota ahora esta disponible';
+
+        try{
+            DB::table('mascotas')->where('id',$id)->update(['disponible' => $d]);
+            Session::flash('message', $mensaje);
+            return redirect()->action('EditarPerfil@administrar');
+
+        }catch (Exception $e){
+            Session::flash('error', 'Se ha producido un error. Vuelve a intentarlo más tarde');
+            return redirect()->action('EditarPerfil@administrar');
+        }
+
+    }
+    public function eliminarPublicacion($id){
+
+        $num = DB::table('publicaciones')->where('id',$id)->value('disponible');
+
+        $d = $num==1?'0':'1';
+        $mensaje = $num==1?'Tu publicación ha sido eliminada con éxito':'Tu publicación ahora esta disponible';
+
+        try{
+            DB::table('publicaciones')->where('id',$id)->update(['disponible' => $d]);
+            Session::flash('message', $mensaje);
+            return redirect()->action('EditarPerfil@administrar');
+
+        }catch (Exception $e){
+            Session::flash('error', 'Se ha producido un error. Vuelve a intentarlo más tarde');
+            return redirect()->action('EditarPerfil@administrar');
+        }
+
     }
 
 }

@@ -7,6 +7,7 @@ use App\Mensajes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Mockery\Exception;
 
 class ChatController extends Controller
 {
@@ -16,8 +17,8 @@ class ChatController extends Controller
     }
     public function index(){
 
-        $tuschats1 = DB::table('chats')->select('login','avatar','chats.updated_at')->where('user_id_2', Auth::user()->login)->join('users','chats.user_id_1', '=', 'users.login')->get();
-        $tuschats2 = DB::table('chats')->select('login','avatar','chats.updated_at')->where('user_id_1', Auth::user()->login)->join('users','chats.user_id_2', '=', 'users.login')->get();
+        $tuschats1 = DB::table('chats')->select('login','avatar','chats.updated_at')->where('user_login_2', Auth::user()->login)->join('users','chats.user_login_1', '=', 'users.login')->get();
+        $tuschats2 = DB::table('chats')->select('login','avatar','chats.updated_at')->where('user_login_1', Auth::user()->login)->join('users','chats.user_login_2', '=', 'users.login')->get();
 
         $tuschats = $tuschats1->merge($tuschats2);
 
@@ -38,13 +39,13 @@ class ChatController extends Controller
         }
                 
        $existe1 = DB::table('chats')->where([
-            ['user_id_1', '=',$login],
-            ['user_id_2', '=',$loginChatT],
+            ['user_login_1', '=',$login],
+            ['user_login_2', '=',$loginChatT],
         ])->first();
 
         $existe2 = DB::table('chats')->where([
-            ['user_id_1', '=',$loginChatT],
-            ['user_id_2', '=',$login],
+            ['user_login_1', '=',$loginChatT],
+            ['user_login_2', '=',$login],
         ])->first();
 
         if($existe1 || $existe2){
@@ -52,8 +53,8 @@ class ChatController extends Controller
         }else{
             DB::table('chats')->insert([
 
-                'user_id_1' => $login,
-                'user_id_2' => $loginChatT,
+                'user_login_1' => $login,
+                'user_login_2' => $loginChatT,
                 ]);
             return redirect()->action('ChatController@cargarMensajes',[$login]);
         }
@@ -90,7 +91,9 @@ class ChatController extends Controller
 
         $txt = Input::get('mensaje');
         $sender = Input::get('sender');
-
+         if($txt == ''){
+             return redirect()->action('ChatController@cargarMensajes',[$sender,'u' => 2]);
+         }
         $mensaje = array(
             'send_username' => Auth::user()->login,
             'sender_username' => $sender,
@@ -98,7 +101,11 @@ class ChatController extends Controller
         );
         DB::table('mensajes')->insert($mensaje);
 
-        return redirect()->action('ChatController@cargarMensajes',[$sender]);
+        try{
+            return redirect()->action('ChatController@cargarMensajes',[$sender,'u' => 1]);
+        }catch (Exception $e){
+            return redirect()->action('ChatController@cargarMensajes',[$sender,'u' => 0]);
+        }
      }
 }
 

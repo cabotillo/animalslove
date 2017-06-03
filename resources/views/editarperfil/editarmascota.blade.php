@@ -11,7 +11,7 @@
                         <ul class="nav nav-tabs nav-top-border">
                             <li><a href="{{'../../cuenta'}}">Datos Personales</a></li>
                             <li><a href="{{'../../password'}}">Contraseña</a></li>
-                            <li class="active"><a href="{{'../../mascotas'}}">Mascotas</a></li>
+                            <li class="active"><a href="{{'../../mascotas'}}">Añadir Mascota</a></li>
                             <li><a href="{{'../../premium'}}">Premium</a></li>
                         </ul>
 

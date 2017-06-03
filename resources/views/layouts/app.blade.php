@@ -22,13 +22,33 @@
     <link href="{{asset('css/bootstrap.icon-large.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
 
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+        window.addEventListener("load", function(){
+            window.cookieconsent.initialise({
+                "palette": {
+                    "popup": {
+                        "background": "#e4fcf9",
+                        "text": "#446491"
+                    },
+                    "button": {
+                        "background": "#ace6f6",
+                        "text": "#446491"
+                    }
+                },
+                "theme": "edgeless",
+                "content": {
+                    "message": "Este sitio emplea cookies de Google  para analizar el tráfico. Google recibe información sobre tu uso de este sitio web. Si utilizas este sitio web, se sobreentiende que aceptas el uso de cookies.",
+                    "dismiss": "Entiendo!",
+                    "link": "Más información",
+                    "href": "https://www.google.com/policies/technologies/cookies/"
+                }
+            })});
+    </script>
+
 
     <!-- Scripts -->
-    <script>
-        window.Laravel = {!! json_encode([
-            'csrfToken' => csrf_token(),
-        ]) !!};
-    </script>
 
     @yield('styles')
 
@@ -64,6 +84,7 @@
                         <li class="{{ Request::is('editarperfil/*') ? 'active' : '' }}"><a href="{{ route('editarperfil.cuenta')}}">Editar Perfil</a></li>
                         <li class="{{ Request::path() == 'mensajes' ? 'active' : '' }}"><a href="{{ route('mensajes') }}">Mensajes <span class="badge" id="count"></span></a></li>
                         <li class="{{ Request::path() == 'nuevapublicacion' ? 'active' : '' }}"><a href="{{route('nuevapublicacion')}}">Nueva Publicación</a></li>
+                        <li class="{{ Request::path() == 'administrar' ? 'active' : '' }}"><a href="{{route('administrar')}}">Administrar</a></li>
                     @elseif(!Auth::guest() && Auth::user()->tipo == 3)
                         <li class="{{ Request::path() == 'admin' ? 'active' : '' }}"><a href="{{route('admin')}}">Admin</a></li>
                     @endif
@@ -90,7 +111,7 @@
                                             Cerrar Sesión
                                         </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" id="invisible">
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="invisible">
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
@@ -119,7 +140,11 @@
             });
         </script>
     @endif
-
+    <script>
+        window.Laravel = {!! json_encode([
+            'csrfToken' => csrf_token(),
+        ]) !!};
+    </script>
     @yield('scripts')
 
 <!-- <footer id="footer" style="margin-top: 15px;background-color:#d4d4d4">
