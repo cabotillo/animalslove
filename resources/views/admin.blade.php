@@ -41,10 +41,10 @@
                             <td>{{$u->telefono}}</td>
                             <td>{{$u->tipo}}</td>
                             <td><a href="{{'perfil/',$u->login}}{{$u->login}}" class="btn btn-success"><span>Ver Perfil</span></a></td>
-                            <td><a href="{{'admin/editarcuenta/',$u->id}}{{$u->id}}"><input type="submit" name="editar" class="btn btn-warning" value="Editar"></a></td>
-                            <td><a href="{{'reporte/',$u->id}}{{$u->id}}"><input type="submit" name="reporte" class="btn btn-info" value="Dar Toque"></a></td>
-                            <td><a href="{{'daradmin/',$u->id}}{{$u->id}}"><input type="submit" class="btn btn-primary @if($u->tipo == 3) invisible @endif" value="Dar Admin"></a></td>
-                            <td><a href="{{'bloquear/',$u->id}}{{$u->id}}"><input type="submit" name="eliminar" class="btn btn-danger" value="X"></a></td>
+                            <td><a href="{{'admin/editarcuenta/',$u->id}}{{$u->id}}" class="btn btn-warning">Editar</a></td>
+                            <td><a href="{{'reporte/',$u->id}}{{$u->id}}" class="btn btn-info"></a>Dar Toque</td>
+                            <td><a href="{{'daradmin/',$u->id}}{{$u->id}}" class="btn btn-primary @if($u->tipo == 3) invisible @endif">Dar Admin</a></td>
+                            <td><a href="{{'bloquear/',$u->id}}{{$u->id}}" class="btn btn-danger">X</a></td>
                         @elseif($u->disponible== 0)<tr class="danger">
                             <td>{{$u->nombre}}</td>
                             <td>{{$u->login}}</td>

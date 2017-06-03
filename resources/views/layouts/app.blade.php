@@ -79,16 +79,20 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                    <li class="{{ Request::path() == 'home' || '' ? 'active' : '' }}"><a href="{{ route('home') }}">Inicio</a></li>
+                        <li class="{{ Request::path() == 'home' || '' ? 'active' : '' }}"><a href="{{ route('home') }}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> <span class="hidden-sm hidden-md">Inicio</span></a></li>
                     @if (!Auth::guest() && Auth::user()->tipo == 2)
-                        <li class="{{ Request::is('editarperfil/*') ? 'active' : '' }}"><a href="{{ route('editarperfil.cuenta')}}">Editar Perfil</a></li>
-                        <li class="{{ Request::path() == 'mensajes' ? 'active' : '' }}"><a href="{{ route('mensajes') }}">Mensajes <span class="badge" id="count"></span></a></li>
-                        <li class="{{ Request::path() == 'nuevapublicacion' ? 'active' : '' }}"><a href="{{route('nuevapublicacion')}}">Nueva Publicación</a></li>
-                        <li class="{{ Request::path() == 'administrar' ? 'active' : '' }}"><a href="{{route('administrar')}}">Administrar</a></li>
+                        <li class="{{ Request::is('editarperfil/*') ? 'active' : '' }}"><a href="{{ route('editarperfil.cuenta')}}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> <span class="hidden-sm hidden-md">Editar Perfil</span></a></li>
+                        <li class="{{ Request::path() == 'mensajes' ? 'active' : '' }}"><a href="{{ route('mensajes') }}"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <span class="hidden-sm hidden-md">Mensajes <span class="badge" id="count"></span></span></a></li>
+                        <li class="{{ Request::path() == 'nuevapublicacion' ? 'active' : '' }}"><a href="{{route('nuevapublicacion')}}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> <span class="hidden-sm hidden-md">Nueva Publicación</span></a></li>
+                        <li class="{{ Request::path() == 'administrar' ? 'active' : '' }}"><a href="{{route('administrar')}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> <span class="hidden-sm hidden-md">Administrar</span></a></li>
+                        <li class="{{ Request::path() == 'contacto' || '' ? 'active' : '' }}"><a href="{{ route('contacto') }}"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> <span class="hidden-sm hidden-md">Contacto</span></a></li>
+
                     @elseif(!Auth::guest() && Auth::user()->tipo == 3)
                         <li class="{{ Request::path() == 'admin' ? 'active' : '' }}"><a href="{{route('admin')}}">Admin</a></li>
+                        @elseif(Auth::guest())
+                        <li class="{{ Request::path() == 'contacto' || '' ? 'active' : '' }}"><a href="{{ route('contacto') }}"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> <span class="hidden-sm hidden-md">Contacto</span></a></li>
                     @endif
-                        <li class="{{ Request::path() == 'contacto' || '' ? 'active' : '' }}"><a href="{{ route('contacto') }}">Contacto</a></li>
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->

@@ -15,7 +15,7 @@
             <img src="../storage/{{ $usuario[0]->avatar }}" class="img-responsive" alt="avatar"><br>
             <span>Nombre:{{$usuario[0]->nombre}}&nbsp;</span>
             <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fwww.animalslove.ml/perfil/{{$usuario[0]->login}}&layout=button&size=small&mobile_iframe=true&width=81&height=20&appId" width="81" height="20" class="facebook"></iframe>
-            <a href="{{'../chat/',$usuario[0]->login}}{{$usuario[0]->login}}"><button class="form-control">Chat</button></a>
+            <a href="{{'../chat/',$usuario[0]->login}}{{$usuario[0]->login}}" class="btn btn-info form-control">Chat</a>
 
 
         </div>

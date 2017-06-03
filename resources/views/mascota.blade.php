@@ -39,9 +39,8 @@
             <div class="caption">
                 @if(!Auth::guest())
                     @if(Auth::user()->id == $usuario->id)
-
-                        <a href="../editar/mascota/{{$mascota->id}}"><input type="button" class="btn btn-primary" value="Editar Mascota"></a>
-                        <a href="{{route('imagenes',$mascota->id)}}"><input type="button" class="btn btn-primary" value="Añadir Fotos"></a>
+                        <a href="../editar/mascota/{{$mascota->id}}" class="btn btn-primary">Editar Mascota</a>
+                        <a href="{{route('imagenes',$mascota->id)}}" class="btn btn-primary">Añadir Fotos</a>
                     @endif
                 @endif
                 <div class="input-group desc">
@@ -82,7 +81,7 @@
                         @for($i = 0; $i < count($imagenes); $i++)
                             <li class="col-sm-3">
                                 <a class="thumbnail" id="carousel-selector-{{$i}}">
-                                    <img src="../storage/mascotas/{{$imagenes[$i]->imagen}}">
+                                    <img alt="galeria animal" src="../storage/mascotas/{{$imagenes[$i]->imagen}}">
                                 </a>
                             </li>
                         @endfor
@@ -97,11 +96,11 @@
                 @for($i = 0; $i < count($imagenes); $i++)
                     @if($i == 0)
                         <div class="item active" data-slide-number="{{$i}}">
-                            <img src="../storage/mascotas/{{$imagenes[$i]->imagen}}">
+                            <img alt="mascota" src="../storage/mascotas/{{$imagenes[$i]->imagen}}">
                         </div>
                     @else
                         <div class="item " data-slide-number="{{$i}}">
-                            <img src="../storage/mascotas/{{$imagenes[$i]->imagen}}">
+                            <img alt="mascota" src="../storage/mascotas/{{$imagenes[$i]->imagen}}">
                         </div>
                     @endif
                 @endfor

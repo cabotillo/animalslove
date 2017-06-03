@@ -3,72 +3,73 @@
 @section('content')
 
 <div class="container">
+    <h1>Formulario de contacto</h1>
 
-    <div class="row col-md-8 col-md-offset-2">
-        @if(isset($mensaje))
-            <div class="alert alert-success">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                {{ $mensaje }}
-            </div>
-        @endif
-        <h1>Formulario de contacto</h1>
-                <form role="form" action="{{route('contacto')}}" method="post">
-                    {{ csrf_field() }}
 
-                    @if (Auth::guest())
-
-                    <input type="hidden" value="invitado" name="usu">
-                    <div class="nombre form-group{{ $errors->has('nombre') ? ' has-error' : '' }}">
-                        <label class="control-label">Nombre *</label>
-                        <input class="form-control" type="text" name="nombre">
-                        @if ($errors->has('nombre'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('nombre') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-
-                    <div class=" form-group{{ $errors->has('correo') ? ' has-error' : '' }}">
-                        <label class="control-label">Correo Electrónico *</label>
-                        <input class="form-control" type="text" name="correo">
-                        @if ($errors->has('correo'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('correo') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                    @else <input type="hidden" value="usuario" name="usu"> @endif
-                    <div class=" form-group{{ $errors->has('asunto') ? ' has-error' : '' }}">
-                        <label class="control-label">Asunto</label>
-                        <input class="form-control" type="text" name="asunto">
-                        @if ($errors->has('asunto'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('asunto') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-
-                    <div class="form-group {{ $errors->has('cuerpo') ? ' has-error' : '' }}">
-                        <label class="control-label">Mensaje *</label>
-                        <textarea class="form-control" name="cuerpo" value="{{old('cuerpo')}}"></textarea>
-                        @if ($errors->has('cuerpo'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('cuerpo') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                    <div class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
-                        <label for="g-recaptcha-response" class="col-md-4 control-label">Captcha</label>
-                        <div class="col-md-6">
-                            {!! \Recaptcha::render() !!}
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <input type="submit" class="btn btn-primary" value="Enviar Mensaje">
-                    </div>
-                </form>
-            </div>
+    <form action="{{route('contacto')}}" method="post">
+        {{ csrf_field() }}
+    @if(isset($mensaje))
+        <div class="alert alert-success">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            {{ $mensaje }}
         </div>
+    @endif
+
+        @if (Auth::guest())
+
+        <input type="hidden" value="invitado" name="usu">
+        <div class="col-md-6 nombre form-group{{ $errors->has('nombre') ? ' has-error' : '' }}">
+            <label class="control-label">Nombre *</label>
+            <input class="form-control" type="text" name="nombre" value="{{old('nombre')}}">
+            @if ($errors->has('nombre'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('nombre') }}</strong>
+                </span>
+            @endif
+        </div>
+
+        <div class="col-md-6 form-group{{ $errors->has('correo') ? ' has-error' : '' }}">
+            <label class="control-label">Correo Electrónico *</label>
+            <input class="form-control" type="text" name="correo" value="{{old('correo')}}">
+            @if ($errors->has('correo'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('correo') }}</strong>
+                </span>
+            @endif
+        </div>
+        @else <input type="hidden" value="usuario" name="usu"> @endif
+        <div class="col-md-12 form-group{{ $errors->has('asunto') ? ' has-error' : '' }}">
+            <label class="control-label">Asunto *</label>
+            <input class="form-control" type="text" name="asunto" value="{{old('asunto')}}">
+            @if ($errors->has('asunto'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('asunto') }}</strong>
+                </span>
+            @endif
+        </div>
+
+        <div class="col-md-12 form-group {{ $errors->has('cuerpo') ? ' has-error' : '' }}">
+            <label class="control-label">Mensaje *</label>
+            <textarea class="form-control" name="cuerpo">{{old('cuerpo')}}</textarea>
+            @if ($errors->has('cuerpo'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('cuerpo') }}</strong>
+                </span>
+            @endif
+        </div>
+
+        <div class="form-group" >
+            <div class="col-md-12{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
+                <label class="control-label">Captcha</label>
+                    {!! \Recaptcha::render() !!}
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-6 bntEnviar"><input type="submit" class="btn btn-primary" value="Enviar Mensaje"></div>
+        </div>
+
+
+    </form>
+</div>
 @endsection
 
 @section('scripts')

@@ -21,7 +21,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">Añadir Publicación</div>
             <div class="panel-body">
-                <form role="form" action="{{route('nuevapublicacion')}}" method="post">
+                <form action="{{route('nuevapublicacion')}}" method="post">
                     {{ csrf_field() }}
                     <div class="col-md-6 form-group{{ $errors->has('mascota') ? ' has-error' : '' }}">
                         <label class="control-label">Mascota</label>
@@ -55,7 +55,7 @@
 
                     <div class="col-md-12 form-group {{ $errors->has('cuerpo') ? ' has-error' : '' }}">
                         <label class="control-label">Mas información</label>
-                        <textarea class="form-control" name="cuerpo" value="{{old('cuerpo')}}"></textarea>
+                        <textarea class="form-control" name="cuerpo">{{old('cuerpo')}}</textarea>
                         @if ($errors->has('cuerpo'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('cuerpo') }}</strong>

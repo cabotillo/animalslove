@@ -70,3 +70,7 @@ body > div.container > div > div > div > div.panel-body > ul{
 table{
     text-align: center;
 }
+
+.bntEnviar{
+    margin-top: 15px;
+}

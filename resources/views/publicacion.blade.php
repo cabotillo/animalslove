@@ -5,7 +5,7 @@
         <h1 class="text-center">{{$publicacion->titulo}}</h1>
         <h2 class="text-center">{{$publicacion->cuerpo}}</h2>
 
-        <a href="{{'../chat/',$usuario->login}}{{$usuario->login}}"><button class="form-control">Chat</button></a>
+        <a href="{{'../chat/',$usuario->login}}{{$usuario->login}}" class="btn btn-info form-control">Chat</a>
 </div>
 
 @endsection

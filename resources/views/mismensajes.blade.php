@@ -14,14 +14,16 @@
         <ul class="DMInbox-conversations">
         @foreach($chats as $c)
             <li class="li">
-                <a href="{{'mensajes/',$c->login}}{{$c->login}}"><div class="row chat">
-                    <div class="col-lg-2">
-                      <img class="img-responsive" src="storage/{{$c->avatar}}" alt="">
+                <a href="{{'mensajes/',$c->login}}{{$c->login}}">
+                    <div class="row chat">
+                        <div class="col-lg-2">
+                         <img class="img-responsive" src="storage/{{$c->avatar}}" alt="">
+                        </div>
+                        <div class="col-lg-10">
+                            <span class="L text">{{$c->login}}</span><span class="C text"></span><span class="R text"></span>
+                        </div>
                     </div>
-                    <div class="col-lg-10">
-                        <span class="L text">{{$c->login}}</span><span class="C text"></span><span class="R text"></span>
-                    </div>
-                </div></a>
+                </a>
 
             </li>
     @endforeach
@@ -52,7 +54,7 @@
             margin:0 auto;
         }
 
-        span{
+        a div div span{
             font-size: x-large;
         }
         a:link{

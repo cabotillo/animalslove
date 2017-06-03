@@ -27,11 +27,11 @@
                             @if($m->disponible == 1)<tr class="success">@else<tr class="danger">@endif
                                 <td>{{$m->nombre}}</td>
                                 <td><a href="{{'mascota/',$m->id}}{{$m->id}}" class="btn btn-info"><span>Ver Mascota</span></a></td>
-                                <td><a href="{{'editar/mascota/',$m->id}}{{$m->id}}"><input type="submit" name="editar" class="btn btn-warning" value="Editar"></a></td>
+                                <td><a href="{{'editar/mascota/',$m->id}}{{$m->id}}" class="btn btn-warning">Editar</a></td>
                                 @if($m->disponible == 1)
-                                    <td><a href="{{'eliminarMascota/',$m->id}}{{$m->id}}"><input type="submit" name="eliminar" class="btn btn-danger" value="X"></a></td>
+                                    <td><a href="{{'eliminarMascota/',$m->id}}{{$m->id}}" class="btn btn-danger">X</a></td>
                                 @else
-                                    <td><a href="{{'eliminarMascota/',$m->id}}{{$m->id}}"><input type="submit" name="eliminar" class="btn btn-success" value="X"></a></td>
+                                    <td><a href="{{'eliminarMascota/',$m->id}}{{$m->id}}" class="btn btn-success">X</a></td>
                                 @endif
 
                             </tr>
@@ -56,9 +56,9 @@
                         <td>{{$p->titulo}}</td>
                         <td><a href="{{'publicacion/',$p->id}}{{$p->id}}" class="btn btn-info"><span>Ver Publicacion</span></a></td>
                             @if($p->disponible == 1)
-                                <td><a href="{{'eliminarPublicacion/',$p->id}}{{$p->id}}"><input type="submit" name="eliminar" class="btn btn-danger" value="X"></a></td>
+                                <td><a href="{{'eliminarPublicacion/',$p->id}}{{$p->id}}" class="btn btn-danger">X</a></td>
                             @else
-                                <td><a href="{{'eliminarPublicacion/',$p->id}}{{$p->id}}"><input type="submit" name="eliminar" class="btn btn-success" value="X"></a></td>
+                                <td><a href="{{'eliminarPublicacion/',$p->id}}{{$p->id}}" class="btn btn-success">X</a></td>
                             @endif
 
                         </tr>
