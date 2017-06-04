@@ -104,29 +104,9 @@
     A:link, A:visited, A:active {
          color:#636b6f;
     }
-    .form-group {
-        margin-bottom: 15px !important;
-    }
-
     #mascotas{
         text-align: center;
         align-items:center;
-    }
-
-    .macho{
-        border: 1px solid lightskyblue;margin: 15px;
-    }
-    .hembra{
-        border: 1px solid lightpink;margin: 15px;
-    }
-    .mascota{
-        width: 17%;
-        min-height: 200px;
-        min-width: 250px;
-    }
-
-    .img-responsive{
-        margin:auto;
     }
 
 </style>

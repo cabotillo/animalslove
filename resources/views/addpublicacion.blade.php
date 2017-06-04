@@ -16,7 +16,7 @@
             </div>
         @endif
     @endif
-    <div class="row col-md-10">
+    <div class="row">
 
         <div class="panel panel-default">
             <div class="panel-heading">Añadir Publicación</div>

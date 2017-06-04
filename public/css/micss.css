@@ -74,3 +74,31 @@ table{
 .bntEnviar{
     margin-top: 15px;
 }
+
+.macho{
+    border: 1px solid lightskyblue;margin: 15px;
+}
+.hembra{
+    border: 1px solid lightpink;margin: 15px;
+}
+.mascota{
+    width: 17%;
+    min-height: 200px;
+    min-width: 250px;
+}
+
+.img-responsive{
+    margin:auto;
+}
+
+#btnMensaje{
+    margin-bottom: 10px;
+}
+
+.noleido{
+    border:1px solid red;
+}
+
+.leido{
+    border:1px solid #66afe9;
+}

@@ -494,10 +494,11 @@ class EditarPerfil extends Controller
         $num = DB::table('mascotas')->where('id',$id)->value('disponible');
 
         $d = $num==1?'0':'1';
-        $mensaje = $num==1?'Tu mascota ha sido eliminada con éxito':'Tu mascota ahora esta disponible';
+        $mensaje = $num==1?'Tu mascota ha sido ocultada con éxito':'Tu mascota ahora esta disponible';
 
         try{
             DB::table('mascotas')->where('id',$id)->update(['disponible' => $d]);
+            DB::table('publicaciones')->where('mascota_id',$id)->update(['disponible' => $d]);
             Session::flash('message', $mensaje);
             return redirect()->action('EditarPerfil@administrar');
 

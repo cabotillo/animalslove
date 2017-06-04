@@ -21,6 +21,8 @@
     <link href="{{asset('css/app.css')}}" rel="stylesheet">
     <link href="{{asset('css/bootstrap.icon-large.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
+    <link rel="shortcut icon" href="../../public/storage/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../../public/storage/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
     <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
@@ -73,6 +75,7 @@
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/home') }}">
                         {{ config('app.name', 'AnimalsLove') }}
+
                     </a>
                 </div>
 
@@ -80,16 +83,19 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         <li class="{{ Request::path() == 'home' || '' ? 'active' : '' }}"><a href="{{ route('home') }}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> <span class="hidden-sm hidden-md">Inicio</span></a></li>
-                    @if (!Auth::guest() && Auth::user()->tipo == 2)
+                    @if (Auth::user()->tipo == 1 || Auth::user()->tipo == 2)
                         <li class="{{ Request::is('editarperfil/*') ? 'active' : '' }}"><a href="{{ route('editarperfil.cuenta')}}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> <span class="hidden-sm hidden-md">Editar Perfil</span></a></li>
-                        <li class="{{ Request::path() == 'mensajes' ? 'active' : '' }}"><a href="{{ route('mensajes') }}"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <span class="hidden-sm hidden-md">Mensajes <span class="badge" id="count"></span></span></a></li>
+                            @if(Auth::user()->tipo == 2)
+                                <li class="{{ Request::path() == 'mensajes' ? 'active' : '' }}"><a href="{{ route('mensajes') }}"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <span class="hidden-sm hidden-md">Mensajes <span class="badge" id="count"></span></span></a></li>
                         <li class="{{ Request::path() == 'nuevapublicacion' ? 'active' : '' }}"><a href="{{route('nuevapublicacion')}}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> <span class="hidden-sm hidden-md">Nueva Publicación</span></a></li>
                         <li class="{{ Request::path() == 'administrar' ? 'active' : '' }}"><a href="{{route('administrar')}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> <span class="hidden-sm hidden-md">Administrar</span></a></li>
                         <li class="{{ Request::path() == 'contacto' || '' ? 'active' : '' }}"><a href="{{ route('contacto') }}"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> <span class="hidden-sm hidden-md">Contacto</span></a></li>
 
-                    @elseif(!Auth::guest() && Auth::user()->tipo == 3)
+                    @endif
+
+                    @elseif(Auth::user()->tipo == 3)
                         <li class="{{ Request::path() == 'admin' ? 'active' : '' }}"><a href="{{route('admin')}}">Admin</a></li>
-                        @elseif(Auth::guest())
+                    @elseif(Auth::guest())
                         <li class="{{ Request::path() == 'contacto' || '' ? 'active' : '' }}"><a href="{{ route('contacto') }}"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> <span class="hidden-sm hidden-md">Contacto</span></a></li>
                     @endif
 
