@@ -84,7 +84,7 @@ class RegisterController extends Controller
         $nombre = htmlentities($data['nombre'], ENT_QUOTES, 'UTF-8', false);
         $apellidos = htmlentities($data['apellidos'], ENT_QUOTES, 'UTF-8', false);
         $login = htmlentities($data['apellidos'], ENT_QUOTES, 'UTF-8', false);
-        $login = str_replace(" ",$login);
+        $login = str_replace(" ","",$login);
         $email = htmlentities($data['apellidos'], ENT_QUOTES, 'UTF-8', false);
         $telefono = htmlentities($data['apellidos'], ENT_QUOTES, 'UTF-8', false);
 
