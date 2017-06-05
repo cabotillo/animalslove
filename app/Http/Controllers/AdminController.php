@@ -48,7 +48,7 @@ class AdminController extends Controller
 
     public function reporte($id){
 
-        $mascotas = DB::table('mascotas')->select('mascotas.id','mascotas.nombre')->join('animal', 'animal.id', '=', 'mascotas.animal_id')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->where('user_id', $id)->get();
+        $mascotas = DB::table('mascotas')->select('mascotas.id','mascotas.nombre')->where('user_id', $id)->get();
         $publicaciones = DB::table('publicaciones')->select('publicaciones.id','publicaciones.titulo')->join('tipopublicacion', 'tipopublicacion.id', '=', 'publicaciones.tipo_id')->where('user_id', $id)->get();
         $reportes = DB::table('reportes')->where('user_id', $id)->count();
         $usuario = DB::table('users')->where('id', $id)->value('login');
@@ -101,7 +101,17 @@ class AdminController extends Controller
 
         DB::table('users')->where('id',$id)->update(['tipo' =>3]);
 
-        return view('welcome')->with('mensaje', 'Le has dado permisos a el usuario');
+        Session::flash('message', 'Le has dado permisos al usuario');
+        return redirect()->action('AdminController@index');
+
+    }
+    public function adminD($id)
+    {
+
+        DB::table('users')->where('id',$id)->update(['tipo' =>1]);
+
+        Session::flash('message', 'Le has quitado los permisos al administrador');
+        return redirect()->action('AdminController@index');
 
     }
 
@@ -122,6 +132,16 @@ class AdminController extends Controller
         DB::table('users')->where('id',$id)->update(['disponible' =>0]);
 
         Session::flash('message', 'Has bloqueado al usuario correctamente');
+        return redirect()->action('AdminController@index');
+
+    }
+
+    public function bloquearD($id)
+    {
+
+        DB::table('users')->where('id',$id)->update(['disponible' =>1]);
+
+        Session::flash('message', 'Has desbloqueado al usuario correctamente');
         return redirect()->action('AdminController@index');
 
     }

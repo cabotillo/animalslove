@@ -19,7 +19,7 @@
                     <td>Editar</td>
                     <td>Reportes</td>
                     <td>Privilegios</td>
-                    <td>Eliminar</td>
+                    <td>Bloquear/Desbloquear</td>
                 </tr>
                 </thead>
                 <tbody>
@@ -32,7 +32,7 @@
                             <td>{{$u->telefono}}</td>
                             <td>{{$u->tipo}}</td>
                             <td><a href="{{'perfil/',$u->login}}{{$u->login}}" class="btn btn-success"><span>Ver Perfil</span></a></td>
-                            <td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td><a href="{{'quitaradmin/',$u->id}}{{$u->id}}" class="btn @if($u->id == Auth::user()->id) invisible @endif btn-primary">Quitar Admin</a></td><td></td>
 
                         @elseif($u->disponible== 1)<tr class="info">
                             <td>{{$u->nombre}}</td>
@@ -42,15 +42,15 @@
                             <td>{{$u->tipo}}</td>
                             <td><a href="{{'perfil/',$u->login}}{{$u->login}}" class="btn btn-success"><span>Ver Perfil</span></a></td>
                             <td><a href="{{'admin/editarcuenta/',$u->id}}{{$u->id}}" class="btn btn-warning">Editar</a></td>
-                            <td><a href="{{'reporte/',$u->id}}{{$u->id}}" class="btn btn-info"></a>Dar Toque</td>
-                            <td><a href="{{'daradmin/',$u->id}}{{$u->id}}" class="btn btn-primary @if($u->tipo == 3) invisible @endif">Dar Admin</a></td>
+                            <td><a href="{{'reporte/',$u->id}}{{$u->id}}" class="btn btn-info">Dar Toque</a></td>
+                            <td><a href="{{'daradmin/',$u->id}}{{$u->id}}" class="btn btn-primary">Dar Admin</a></td>
                             <td><a href="{{'bloquear/',$u->id}}{{$u->id}}" class="btn btn-danger">X</a></td>
                         @elseif($u->disponible== 0)<tr class="danger">
                             <td>{{$u->nombre}}</td>
                             <td>{{$u->login}}</td>
                             <td>{{$u->email}}</td>
                             <td>{{$u->telefono}}</td>
-                            <td>{{$u->tipo}}</td><td></td><td></td><td></td><td></td><td></td>
+                            <td>{{$u->tipo}}</td><td></td><td></td><td></td><td></td><td><a href="{{'desbloquear/',$u->id}}{{$u->id}}" class="btn btn-success">X</a></td>
 
 
                         @endif

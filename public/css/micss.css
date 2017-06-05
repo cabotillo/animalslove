@@ -102,3 +102,8 @@ table{
 .leido{
     border:1px solid #66afe9;
 }
+
+.btnColor{
+    background-color: #4B89AC !important;
+    border-color: #4B89AC !important;
+}

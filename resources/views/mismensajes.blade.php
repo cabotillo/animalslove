@@ -15,10 +15,10 @@
             <div @if($c->leido == 0)class="noleido"@else class="leido">@endif
                 <a href="{{'mensajes/',$c->login}}{{$c->login}}">
                     <div class="row chat">
-                        <div class="col-lg-2">
+                        <div class="col-md-2">
                          <img class="img-responsive" src="storage/{{$c->avatar}}" alt="">
                         </div>
-                        <div class="col-lg-10">
+                        <div class="col-md-10">
                             <span class="L text">{{$c->login}}</span><span class="C text">{{$c->message}}</span><span class="R text">{{$c->updated_at}}</span>
 
                         </div>

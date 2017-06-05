@@ -50,7 +50,7 @@
                                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                                 </div>
                             </div>
-                            <div class="col-lg-12">
+                            <div class="col-md-12">
                                 <input type="submit" class="btn btn-primary" value="Guardar Cambios">
                             </div>
                         </form>

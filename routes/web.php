@@ -50,8 +50,10 @@ Route::get('reporte/{id}', ['as' => 'reporte', 'uses' => 'AdminController@report
 Route::post('reporte/{id}', ['as' => 'reporte', 'uses' => 'AdminController@postReporte']);
 
 Route::get('daradmin/{id}', ['as' => 'postadmin', 'uses' => 'AdminController@admin']);
+Route::get('quitaradmin/{id}', ['as' => 'postadmin', 'uses' => 'AdminController@adminD']);
 
 Route::get('bloquear/{id}', ['as' => 'bloquear', 'uses' => 'AdminController@bloquear']);
+Route::get('desbloquear/{id}', ['as' => 'bloquear', 'uses' => 'AdminController@bloquearD']);
 Route::get('eliminarMascota/{id}', ['as' => 'bloquear', 'uses' => 'EditarPerfil@eliminarMascota']);
 Route::get('eliminarPublicacion/{id}', ['as' => 'eliminar', 'uses' => 'EditarPerfil@eliminarPublicacion']);
 
@@ -85,6 +87,12 @@ Route::post('contacto',['as' => 'contacto', 'uses' => 'ContactoController@enviar
 
 Route::get('administrar',['as' => 'administrar', 'uses' => 'EditarPerfil@administrar']);
 Route::post('administrar',['as' => 'administrar', 'uses' => 'ContactoController@postAdministrar']);
+
+Route::get('filtro',['as' => 'filtro', 'uses' => 'Vistas@getFiltro']);
+Route::post('filtro',['as' => 'filtro', 'uses' => 'HomeController@filtro']);
+
+Route::get('filtrousuarios',['as' => 'filtrousuarios', 'uses' => 'Vistas@getFiltro']);
+Route::post('filtrousuarios',['as' => 'filtrousuarios', 'uses' => 'Vistas@filtroUsuarios']);
 
 Route::resource('Imagenes', 'ImagenesController');
 Route::resource('mascota1', 'MascotaController');

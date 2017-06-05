@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
@@ -58,5 +62,42 @@ class HomeController extends Controller
 
     public  function welcome(){
         return view('welcome');
+    }
+
+    public function filtro(){
+
+        $b = Input::get('b');
+
+        $validation = Validator::make(Input::all(), [
+            'b' => 'required|min:3',
+        ]);
+
+        if ($validation->fails()) {
+            Session::flash('message', "Mínimo 3 caracteres");
+            return view('filtro')->with('provincias',DB::table('provincias')->get());
+        } else {
+
+            $mascotas = DB::table('mascotas')->where([
+                ['nombre', 'like', '%'.$b.'%'],
+            ])->get();
+
+            $usuarios = DB::table('users')->where('nombre', 'like', '%'.$b.'%')->orWhere('apellidos', 'like', '%'.$b.'%')->orWhere('login', 'like', '%'.$b.'%')->get();
+
+            $resultados = count($mascotas) + count($usuarios);
+            if($resultados!=1){
+                $mensaje = 'No hay resultados';
+            }else{
+                $mensaje = 'Resultados:';
+            }
+            $data = array(
+                'provincias' => DB::table('provincias')->get(),
+                'mascotas' => $mascotas,
+                'usuarios' => $usuarios,
+                'mensaje' => $mensaje
+            );
+
+            return view('filtro')->with($data);
+
+        }
     }
 }

@@ -48,7 +48,7 @@
                             @endif
                         </div>
 
-                        <div class="form-group">
+                        <div class="col-sm-12 col-md-6 form-group">
                             <label class="control-label">Imagen de perfil</label><br>
 
                             <div class="thumbnail col-md-6 imgcuenta">
@@ -58,7 +58,7 @@
                                 <input type="file" name="avatar" id="file">
                             </div>
                         </div>
-                        <div class="col-lg-12">
+                        <div class="col-sm-12 col-md-6">
                             <input type="submit" class="btn btn-primary" value="Guardar Cambios">
                         </div>
                     </form>

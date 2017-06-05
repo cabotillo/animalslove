@@ -23,7 +23,7 @@
     <h1>Chat con {{$usuario}}</h1>
     <form method="post" action="{{'mensajes'}}">
         {{ csrf_field() }}
-        <div class="col-lg-12" id="mensajes">
+        <div class="col-md-12" id="mensajes">
             @for($i = 0;$i < count($mensajes);$i++)
                 @if($mensajes[$i]->send_username == $usuario)
                     @if($mensajes[$i]->leido == 0)

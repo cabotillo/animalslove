@@ -17,8 +17,8 @@ class Vistas extends Controller
         $user = DB::table('users')->where('login', $login)->get();
         $id = $user[0]->id;
 
-        $tusmascotas = DB::table('mascotas')->select('mascotas.*', 'razas.*')->select('mascotas.*', 'razas.*','animal.animal')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->join('animal','animal.id', '=', 'razas.id_animal')->where('mascotas.disponible',1)->get();
-        $tuspublicaciones = DB::table('publicaciones')->select('publicaciones.*', 'tipopublicacion.tipo')->join('tipopublicacion', 'tipopublicacion.id', '=', 'publicaciones.tipo_id')->where('user_id', $id)->where('publicaciones.disponible',1)->get();
+        $tusmascotas = DB::table('mascotas')->select('mascotas.*', 'razas.*','animal.animal')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->join('animal','animal.id', '=', 'razas.id_animal')->where([['mascotas.disponible', '=' ,1],['user_id', '=',$id]])->get();
+        $tuspublicaciones = DB::table('publicaciones')->select('publicaciones.*', 'tipopublicacion.tipo')->join('tipopublicacion', 'tipopublicacion.id', '=', 'publicaciones.tipo_id')->where([['user_id', $id],['publicaciones.disponible',1]])->get();
 
         $data = array(
             'tusmascotas' => $tusmascotas,
@@ -61,7 +61,7 @@ class Vistas extends Controller
             $resultados = DB::table('mascotas')->where([
                 ['raza_id', '=', $raza],
                 ['genero', '=', $genero],
-            ])->select('mascotas.*', 'razas.raza', 'animal.animal')->select('mascotas.*', 'razas.*','animal.animal')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->join('animal','animal.id', '=', 'razas.id_animal')->get();
+            ])->select('mascotas.*', 'razas.raza', 'animal.animal')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->join('animal','animal.id', '=', 'razas.id_animal')->where('disponible',1)->get();
 
             if(empty($resultados[0])){
                 $mensaje = 'No hay resultados';
@@ -160,6 +160,36 @@ class Vistas extends Controller
             return view('publicacion')->with($data);
         }
     }
+
+    public function getFiltro(){
+
+        return view('filtro')->with('provincias',DB::table('provincias')->get());
+
+    }
+
+    public function filtroUsuarios(){
+
+
+        $this ->b = Input::get('usuario');
+        $this->p = Input::get('provincia');
+        $usuarios = DB::table('users')->where(function($query){
+            $query->where('users.provincia_id', '=',$this->p)->where('nombre', 'like', '%'.$this->b.'%')->get();
+
+        })->orWhere(function ($query){
+            $query->where('users.provincia_id', '=',$this->p)->where('apellidos', 'like', '%'.$this->b.'%')->get();
+        })->orWhere(function ($query){
+            $query->where('users.provincia_id', '=',$this->p)->where('login', 'like', '%'.$this->b.'%')->get();
+        })->get();
+
+        $data = array(
+            'provincias' => DB::table('provincias')->get(),
+            'usuarios' => $usuarios
+        );
+        return view('filtro')->with($data);
+
+    }
+
+
 }
 
 

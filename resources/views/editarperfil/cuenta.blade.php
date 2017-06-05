@@ -89,7 +89,7 @@
                                 <input type="file" name="avatar" id="file">
                             </div>
                         </div>
-                        <div class="col-lg-12">
+                        <div class="col-md-12">
                             <input type="submit" class="btn btn-primary" value="Guardar Cambios">
                         </div>
                     </form>

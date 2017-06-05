@@ -92,13 +92,36 @@
                             <li class="{{ Request::path() == 'nuevapublicacion' ? 'active' : '' }}"><a href="{{route('nuevapublicacion')}}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> <span class="hidden-sm hidden-md">Nueva Publicación</span></a></li>
                             <li class="{{ Request::path() == 'administrar' ? 'active' : '' }}"><a href="{{route('administrar')}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> <span class="hidden-sm hidden-md">Administrar</span></a></li>
                             <li class="{{ Request::path() == 'contacto' || '' ? 'active' : '' }}"><a href="{{ route('contacto') }}"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> <span class="hidden-sm hidden-md">Contacto</span></a></li>
+                                <li><form role="search" class="navbar-form navbar-left" action="{{route('filtro')}}" method="post">
+                                        {{ csrf_field() }}
+                                        <div class="form-group">
+                                            <input type="text" name="b" placeholder="Busqueda" class="form-control">
+                                            <button type="submit" class="btn btn-default btn-default btnColor"><span class="glyphicon glyphicon-search"></span></button>
+                                        </div>
+                                    </form>
+                                </li>
 
 
                         @elseif(Auth::user()->tipo == 3)
                             <li class="{{ Request::path() == 'admin' ? 'active' : '' }}"><a href="{{route('admin')}}">Admin</a></li>
+                                <li class="{{ Request::path() == 'contacto' || '' ? 'active' : '' }}"><a href="{{ route('contacto') }}"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> <span class="hidden-sm hidden-md">Contacto</span></a></li> <li><form role="search" class="navbar-form navbar-left" action="{{route('filtro')}}" method="post">
+                                        {{ csrf_field() }}
+                                        <div class="form-group">
+                                            <input type="text" name="b" placeholder="Busqueda" class="form-control">
+                                            <button type="submit" class="btn btn-default btn-default btnColor"><span class="glyphicon glyphicon-search"></span></button>
+                                        </div>
+                                    </form>
+                                </li>
                         @endif
                     @else
-                        <li class="{{ Request::path() == 'contacto' || '' ? 'active' : '' }}"><a href="{{ route('contacto') }}"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> <span class="hidden-sm hidden-md">Contacto</span></a></li>
+                        <li class="{{ Request::path() == 'contacto' || '' ? 'active' : '' }}"><a href="{{ route('contacto') }}"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> <span class="hidden-sm hidden-md">Contacto</span></a></li> <li><form role="search" class="navbar-form navbar-left" action="{{route('filtro')}}" method="post">
+                                    {{ csrf_field() }}
+                                    <div class="form-group">
+                                        <input type="text" name="b" placeholder="Busqueda" class="form-control">
+                                        <button type="submit" class="btn btn-default btn-default btnColor"><span class="glyphicon glyphicon-search"></span></button>
+                                    </div>
+                                </form>
+                            </li>
                     @endif
 
                     </ul>
@@ -134,6 +157,9 @@
                 </div>
             </div>
         </nav>
+        @if(Session::has('message'))
+            <p class="alert {{ \Illuminate\Support\Facades\Session::get('alert-class', 'alert-info') }}">{{ \Illuminate\Support\Facades\Session::get('message') }}</p>
+        @endif
     </div>
         @yield('content')
 

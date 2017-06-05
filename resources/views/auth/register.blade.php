@@ -6,7 +6,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">Register</div>
             <div class="panel-body">
-                <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}">
+                <form class="form-horizontal" method="POST" action="{{ route('register') }}">
                     {{ csrf_field() }}
 
                     <div class="col-md-6 form-group{{ $errors->has('nombre') ? ' has-error' : '' }}">

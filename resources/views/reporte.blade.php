@@ -9,7 +9,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">Reportar</div>
             <div class="panel-body">
-                <form role="form" method="post">
+                <form method="post">
                     {{ csrf_field() }}
                     <h1>El usuario {{$u}} tiene {{$r}} avisos.</h1>
                     <h2>Es suficiente con reportar al usuario</h2>
@@ -33,7 +33,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-lg-12">
+                    <div class="col-md-12">
                         <input type="submit" class="btn btn-primary" value="Dar toque al Usuario">
                     </div>
                     <input type="hidden" name="user_id" value="{{$u}}">

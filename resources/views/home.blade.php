@@ -31,7 +31,7 @@
                 </ul>
 
                 @if(Auth::user())<h3><a href="{{'perfil/',Auth::user()->login}}{{Auth::user()->login}}">Ver mi perfil</a></h3>@endif
-                <h1><small>Filtrar Mascotas</small></h1>
+                <h2><small>Filtrar Mascotas</small></h2>
                 <form method="post" action="{{route('busqueda')}}">
                     {{ csrf_field() }}
                     <label class="control-label">Animal</label>
