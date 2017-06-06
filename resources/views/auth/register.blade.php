@@ -105,7 +105,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 form-group{{ $errors->has('telefono') ? ' has-error' : '' }}">
-                        <label for="telefono" class="col-md-4 control-label">Telefono</label>
+                        <label for="telefono" class="col-md-4 control-label">Teléfono</label>
                         <div class="col-md-6">
                             <input id="telefono" type="number" class="form-control" name="telefono" value="{{ old('telefono') }}" required autofocus>
 
@@ -127,7 +127,7 @@
                     <div class="col-md-12 form-group">
                         <div class="col-md-6 col-md-offset-4">
                             <button type="submit" class="btn btn-primary">
-                                Register
+                                Registrarse
                             </button>
                         </div>
                     </div>

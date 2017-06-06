@@ -14,7 +14,7 @@
 
         <div class="row">
             <div class="col-md-2 text-center"><button type="button" id="menu"><span class="glyphicon glyphicon-align-justify"></span></button></div>
-            <h1 class="text-center">SLOGAN SUPER MEGA CHULO</h1>
+            <h1 class="text-center">Mascotas</h1>
         </div>
     </div>
 
