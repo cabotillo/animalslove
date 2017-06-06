@@ -21,11 +21,6 @@
             <div class="col-md-6">
                 <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fwww.animalslove.ml/perfil/{{$usuario[0]->login}}&layout=button&size=small&mobile_iframe=true&width=81&height=20&appId" width="81" height="20" class="facebook"></iframe>
             </div>
-
-
-
-
-
         </div>
 
         <div class="col-sm-9">
