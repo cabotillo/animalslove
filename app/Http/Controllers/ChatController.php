@@ -77,12 +77,12 @@ class ChatController extends Controller
             DB::table('mensajes')->insert([
                 'send_username' => $loginChatT,
                 'sender_username' => $login,
-                'message' => 'Hola '.$loginChatT
+                'message' => 'Hola '.$login
             ]);
             DB::table('mensajes')->insert([
                 'sender_username' => $loginChatT,
                 'send_username' => $login,
-                'message' => 'Hola '.$login
+                'message' => 'Hola '.$loginChatT
             ]);
             return redirect()->action('ChatController@cargarMensajes',[$login]);
         }

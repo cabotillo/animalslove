@@ -103,7 +103,7 @@
 
 
                         @elseif(Auth::user()->tipo == 3)
-                            <li class="{{ Request::path() == 'admin' ? 'active' : '' }}"><a href="{{route('admin')}}">Admin</a></li>
+                            <li class="{{ Request::path() == 'admin' ? 'active' : '' }}"><a href="{{route('admin')}}">Gestion de usuarios</a></li>
                         @endif
                     @else
                         <li class="{{ Request::path() == 'contacto' || '' ? 'active' : '' }}"><a href="{{ route('contacto') }}"><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span> <span class="hidden-sm hidden-md">Contacto</span></a></li> <li><form role="search" class="navbar-form navbar-left" action="{{route('filtro')}}" method="post">
@@ -149,9 +149,7 @@
                 </div>
             </div>
         </nav>
-        @if(Session::has('message'))
-            <p class="alert {{ \Illuminate\Support\Facades\Session::get('alert-class', 'alert-info') }}">{{ \Illuminate\Support\Facades\Session::get('message') }}</p>
-        @endif
+
     </div>
         @yield('content')
 
