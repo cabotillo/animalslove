@@ -144,6 +144,9 @@ class AdminController extends Controller
 
         DB::table('users')->where('id',$id)->update(['disponible' =>1]);
 
+        DB::table('mascotas')->where('user_id',$id)->update(['disponible' =>1]);
+        DB::table('publicaciones')->where('user_id',$id)->update(['disponible' =>1]);
+
         Session::flash('message', 'Has desbloqueado al usuario correctamente');
         return redirect()->action('AdminController@index');
 
