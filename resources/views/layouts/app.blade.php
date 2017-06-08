@@ -95,7 +95,7 @@
                                 <li><form role="search" class="navbar-form navbar-left" action="{{route('filtro')}}" method="post">
                                         {{ csrf_field() }}
                                         <div class="form-group">
-                                            <input type="text" name="b" id="busqueda" class="form-control">
+                                            <input type="text" name="b" id="busqueda" class="form-control" placeholder="Buscar">
                                             <button type="submit" class="btn btn-default btn-default btnColor"><span class="glyphicon glyphicon-search"></span></button>
                                         </div>
                                     </form>
@@ -109,7 +109,7 @@
                         <li class="{{ Request::path() == 'contacto' || '' ? 'active' : '' }}"><a href="{{ route('contacto') }}"><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span> <span class="hidden-sm hidden-md">Contacto</span></a></li> <li><form role="search" class="navbar-form navbar-left" action="{{route('filtro')}}" method="post">
                                     {{ csrf_field() }}
                                     <div class="form-group">
-                                        <input type="text" name="b" id="busqueda" class="form-control">
+                                        <input type="text" name="b" id="busqueda" class="form-control" placeholder="Buscar">
                                         <button type="submit" class="btn btn-default btn-default btnColor"><span class="glyphicon glyphicon-search"></span></button>
                                     </div>
                                 </form>
