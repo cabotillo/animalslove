@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="panel panel-default">
-            <div class="panel-heading">Register</div>
+            <div class="panel-heading">Registro</div>
             <div class="panel-body">
                 <form class="form-horizontal" method="POST" action="{{ route('register') }}">
                     {{ csrf_field() }}
@@ -52,7 +52,7 @@
                     </div>
 
                     <div class="col-md-6 form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                        <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                        <label for="email" class="col-md-4 control-label">Correo electrónico</label>
 
                         <div class="col-md-6">
                             <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required data-toggle="tooltip" data-placement="right" title="De 6 a 50 caracteres">
@@ -140,5 +140,16 @@
 @section('scripts')
     <script>
         $('input[title]').tooltip({'trigger':'focus'});
+
+        $("input#login, input#email, input#password").on({
+            keydown: function(e) {
+                if (e.which === 32)
+                    return false;
+            },
+            change: function() {
+                this.value = this.value.replace(/\s/g, "");
+            }
+        });
+
     </script>
 @endsection

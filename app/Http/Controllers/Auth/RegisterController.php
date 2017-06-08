@@ -81,12 +81,12 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-        $nombre = htmlentities($data['nombre'], ENT_QUOTES, 'UTF-8', false);
-        $apellidos = htmlentities($data['apellidos'], ENT_QUOTES, 'UTF-8', false);
-        $login = htmlentities($data['login'], ENT_QUOTES, 'UTF-8', false);
+        $nombre = addslashes($data['nombre']);
+        $apellidos = addslashes($data['apellidos']);
+        $login = addslashes($data['login']);
         $login = str_replace(" ","",$login);
-        $email = htmlentities($data['email'], ENT_QUOTES, 'UTF-8', false);
-        $telefono = htmlentities($data['telefono'], ENT_QUOTES, 'UTF-8', false);
+        $email = addslashes($data['email']);
+        $telefono = addslashes($data['telefono']);
 
         $user = User::create([
             'nombre' => $nombre,

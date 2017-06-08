@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Mascotas;
 use File;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
 use Image;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
@@ -98,11 +97,6 @@ class EditarPerfil extends Controller
                 $nombreFichero = $login . "." . $ext;
 
                 $file->storeAs($carpeta . $login, $nombreFichero);
-
-                //$path = public_path('usuarios\\'.$login);
-
-                //Image::make($file->getRealPath())->resize(100, 100)->save($path.".".$ext);
-
 
                 $user = Auth::user()->id;
 
@@ -218,7 +212,7 @@ class EditarPerfil extends Controller
         $validation = Validator::make(Input::all(), [
             'tamanyo' => 'required|string|max:25|in:Pequeño,Mediano,Grande,Gigante',
             'edad' => 'required|integer',
-            'img' => 'mimes:jpeg,bmp,png'
+            'img' => 'mimes:jpeg,bmp,png|max:5000'
 
         ]);
 

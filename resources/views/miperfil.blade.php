@@ -9,14 +9,17 @@
         </div>
     @endif
     <div class="row">
-
         <div class="col-sm-3">
             <h1 class="text-capitalize">{{$usuario[0]->login}}</h1>
             <img src="../storage/{{ $usuario[0]->avatar }}" class="img-responsive" alt="avatar"><br>
-            <span>Nombre: {{$usuario[0]->nombre}}&nbsp;{{$usuario[0]->apellidos}}</span><br><br>
-            @if(!Auth::guest())<div class="col-md-6">
-                <a href="{{'../chat/',$usuario[0]->login}}{{$usuario[0]->login}}" class="btn btn-info" id="btnMensaje">Mensaje</a>
-            </div>
+            <span>Nombre: {{$usuario[0]->nombre}}&nbsp;{{$usuario[0]->apellidos}}</span><br>
+            <span>Provincia: {{$pro}}</span><br><br>
+            @if(!Auth::guest())
+                @if(Auth::user()->tipo == 2 && $usuario[0]->tipo == 2)
+                <div class="col-md-6">
+                    <a href="{{'../chat/',$usuario[0]->login}}{{$usuario[0]->login}}" class="btn btn-info" id="btnMensaje">Mensaje</a>
+                </div>
+                @endif
             @endif
             <div class="col-md-6">
                 <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fwww.animalslove.ml/perfil/{{$usuario[0]->login}}&layout=button&size=small&mobile_iframe=true&width=81&height=20&appId" width="81" height="20" class="facebook"></iframe>

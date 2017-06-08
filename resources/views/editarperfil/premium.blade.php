@@ -34,13 +34,13 @@
                         </ul>
                         <form action="{{route('editarperfil.premium')}}" method="post">
                         {{ csrf_field() }}
-                            <div class="form-group {{ $errors->has('premium') ? ' has-error' : '' }}">
-                                <label for="premium">Premium</label>
-
+                            <div class="col-md-12 form-group {{ $errors->has('premium') ? ' has-error' : '' }}">
+                                <div class="col-sm-12 col-md-1"> <label for="premium">Premium</label></div>
+                                <div class="col-sm-12 col-md-3">
                                 @if (Auth::user()->tipo == '2')
-                                    <input name="premium" type="checkbox" class="form-control" checked="">
+                                    <input name="premium" id="premium" type="checkbox" class="form-control" checked="">
                                 @else
-                                    <input name="premium" type="checkbox" class="form-control">
+                                    <input name="premium" id="premium" type="checkbox" class="form-control">
                                 @endif
 
                                 @if ($errors->has('premium'))
@@ -48,10 +48,12 @@
                                             <strong>{{ $errors->first('premium') }}</strong>
                                         </span>
                                 @endif
+                                </div>
+                                <div class="col-sm-12 col-md-3">
+                                    <input type="submit" class="btn btn-primary" value="Guardar Cambios">
+                                </div>
                             </div>
-                            <div class="col-md-12">
-                                <input type="submit" class="btn btn-primary" value="Guardar Cambios">
-                            </div>
+
                         </form>
                     </div>
                 </div>

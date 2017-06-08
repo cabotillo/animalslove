@@ -16,17 +16,24 @@ class ChatController extends Controller
         $this->middleware('premium')->except('logout');
     }
     public function index(){
+        DB::enableQueryLog();
 
-        $tuschats1 = DB::table('chats')->select('users.login','users.avatar','chats.updated_at','mensajes.message','mensajes.leido')->where([
-            ['user_login_2', Auth::user()->login],
-            ['sender_username', Auth::user()->login]
-            ])->join('users','chats.user_login_1', '=', 'users.login')->join('mensajes','send_username', '=', 'users.login')->groupBy('users.login')->orderBy('chats.updated_at','DESC')->get();
+        /*$usuario = Auth::user()->login;
+        $tuschats = DB::table('chats')->where('user_login_1',$usuario)->orWhere('user_login_2',$usuario)->pluck('id');
 
-        $tuschats2 = DB::table('chats')->select('users.login','users.avatar','chats.updated_at','mensajes.message','mensajes.leido')->where([
-            ['user_login_1', Auth::user()->login],
-            ['send_username', Auth::user()->login],
-        ])->join('users','chats.user_login_2', '=', 'users.login')->join('mensajes','sender_username', '=', 'users.login')->groupBy('users.login')->orderBy('chats.updated_at','DESC')->get();
+        foreach ($tuschats as $c){
+            DB::table()
+        }*/
 
+        $tuschats1 = DB::table('chats')->select('users.login','users.avatar','chats.updated_at')
+            ->where('user_login_2', Auth::user()->login)->join('users','chats.user_login_1', '=', 'users.login')
+           ->groupBy('users.login')->orderBy('chats.updated_at','DESC')->get();
+
+        $tuschats2 = DB::table('chats')->select('users.login','users.avatar','chats.updated_at')
+            ->where('user_login_1', Auth::user()->login)->join('users','chats.user_login_2', '=', 'users.login')
+            ->groupBy('users.login')->orderBy('chats.updated_at','DESC')->get();
+
+        $queries = DB::getQueryLog();
         if(empty($tuschats1)){
             $tuschats = $tuschats2;
         }elseif (empty($tuschats2)){
@@ -34,10 +41,9 @@ class ChatController extends Controller
         }else{
             $tuschats = $tuschats1->merge($tuschats2);
         }
-
         $data = array(
-            'chats' => $tuschats
-
+            'chats' => $tuschats,
+            'q' => $queries
         );
 
         return view('mismensajes')->with($data);
@@ -62,13 +68,22 @@ class ChatController extends Controller
         ])->first();
 
         if($existe1 || $existe2){
-            return redirect('mensajes/');
+            return redirect('mensajes/'.$login);
         }else{
             DB::table('chats')->insert([
-
                 'user_login_1' => $login,
                 'user_login_2' => $loginChatT,
                 ]);
+            DB::table('mensajes')->insert([
+                'send_username' => $loginChatT,
+                'sender_username' => $login,
+                'message' => 'Hola '.$loginChatT
+            ]);
+            DB::table('mensajes')->insert([
+                'sender_username' => $loginChatT,
+                'send_username' => $login,
+                'message' => 'Hola '.$login
+            ]);
             return redirect()->action('ChatController@cargarMensajes',[$login]);
         }
     }
@@ -113,17 +128,16 @@ class ChatController extends Controller
             'message' => $txt
         );
         try{
-            DB::enableQueryLog();
 
             DB::table('mensajes')->insert($mensaje);
 
             DB::table('chats')->where([
-                    ['user_login_1', '=', $sender],
-                    ['user_login_2', '=',$login],
-                ])->orWhere([
-                    ['user_login_1', '=',$login],
-                    ['user_login_2', '=',$sender],
-                ])->update(['updated_at' => date('Y-m-d H:i:s')]);
+                ['user_login_1', '=',$sender],
+                ['user_login_2', '=',  Auth::user()->login],
+            ])->orWhere([
+                ['user_login_1', '=', Auth::user()->login],
+                ['user_login_2', '=',$sender],
+            ])->update(['updated_at' => DB::raw('NOW()')]);
 
             return redirect()->action('ChatController@cargarMensajes',[$sender,'u' => 1]);
         }catch (Exception $e){

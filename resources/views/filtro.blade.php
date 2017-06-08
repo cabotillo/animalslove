@@ -7,14 +7,14 @@
         <!--Menu Principal -->
         <div class="col-sm-12">
             <div class="row">
-                <h1 class="text-center">@if(isset($mensaje)) {{$mensaje}} @else Filtro avanzado @endif</h1>
+                <h1 class="text-center">Buscador de usuarios por provinvias</h1><br>
             </div>
 
             <form method="post" action="{{route('filtrousuarios')}}">
                 {{ csrf_field() }}
                 <div class="col-md-6">
-                    <label class="control-label">Usuario</label>
-                    <input class="form-control" type="text" name="usuario">
+                    <label class="control-label">Nombre de Usuario</label>
+                    <input class="form-control" type="text" name="usuario" placeholder="Puede estar vacío" value="@if(isset($b)){{$b}}@else{{old('usuario')}}@endif">
                 </div>
                 <div class="col-md-6">
                     <label class="control-label">Provincia</label>

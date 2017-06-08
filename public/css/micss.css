@@ -72,19 +72,23 @@ table{
 }
 
 .bntEnviar{
-    margin-top: 15px;
+    margin-top: 15px !important;
+}
+.bntEnviarB{
+    margin-bottom: 15px !important;
 }
 
 .macho{
-    border: 1px solid lightskyblue;margin: 15px;
+    border: 1px solid lightskyblue;
 }
 .hembra{
-    border: 1px solid lightpink;margin: 15px;
+    border: 1px solid lightpink;
 }
 .mascota{
     width: 17%;
     min-height: 200px;
     min-width: 250px;
+    padding: 0 !important;
 }
 
 .img-responsive{
@@ -95,15 +99,95 @@ table{
     margin-bottom: 10px;
 }
 
-.noleido{
-    border:1px solid red;
-}
-
-.leido{
-    border:1px solid #66afe9;
+#logo{
+    display: flex;
+    align-items: center;
+    margin: 7% 0px;
 }
 
 .btnColor{
     background-color: #4B89AC !important;
     border-color: #4B89AC !important;
+}
+
+#busqueda{
+    width: 80px !important;
+    display: inline;
+}
+
+.mascota {
+    min-height: 250px !important;
+}
+
+body > div.container > div > ul{
+    border: 3px solid #9BA2AB;
+    margin: 0;
+    padding: 0;
+    border-radius: 5px;
+    background-color: #006df1;
+
+}
+body > div.container > div > ul > li{
+    border-bottom: 3px solid #9BA2AB;
+
+
+
+}
+body > div.container > div > ul > li:nth-last-child(-n+1){
+    border:none;
+}
+
+#publicaciones{
+    border: 3px solid #9BA2AB;
+    border-bottom: none;
+    border-left: none;
+    margin: 0;
+    padding: 0;
+    border-radius: 5px;
+}
+.publi{
+    border-bottom: 3px solid #9BA2AB;
+    border-left: 3px solid #9BA2AB;
+}
+.publi:not(:last-child){
+    border:none;
+}
+
+li{
+    list-style-type: none;
+}
+.chat{
+    width:100%;
+    text-align:center;
+    display:flex;justify-content:center;align-items:center;
+    margin: 10px 0px;
+}
+
+
+a div div span{
+    font-size: x-large;
+}
+a:link{
+    text-decoration: none;
+}
+@media(max-width: 1199px){
+    .R{
+        float: left;
+    }
+}
+@media(max-width: 991px){
+    .R{
+        float: none;
+
+    }
+}
+body > div.container > div > ul > li > a > div > div > span{
+    color: #d4fffa;
+}
+
+body > div.container > div > ul > li > a{
+    text-decoration: none;
+}
+#portada{
+    margin: 0 auto;max-width: 500px;
 }

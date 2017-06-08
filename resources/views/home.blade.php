@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
     @if(isset($mensaje))
         <div class="alert alert-success">
@@ -8,13 +9,22 @@
             {{ $mensaje }}
         </div>
     @endif
-    <!-- 1 menu -->
+    <!-- 1 menu style="height:100px;width:200px;" -->
+
+        <div class="col-md-4" id="logo">
+            <img class="img-responsive hidden-xs hidden-sm" src="storage/logo.png" alt="portada">
+            <div class="col-md-2 text-center"><button type="button" id="menu"><span class="glyphicon glyphicon-align-justify"></span></button></div>
+        </div>
+        <div class="col-md-8">
+
+            <img class="img-responsive" src="storage/mascotas1.png" alt="portada">
+
+        </div>
 
     <div class="col-sm-12">
 
         <div class="row">
-            <div class="col-md-2 text-center"><button type="button" id="menu"><span class="glyphicon glyphicon-align-justify"></span></button></div>
-            <h1 class="text-center">Mascotas</h1>
+
         </div>
     </div>
 
@@ -62,14 +72,14 @@
                         </span>
                         @endif
                     </div>
-                    <input class="btn btn-primary" type="submit" value="Filtrar">
+                    <input class="btn btn-primary bntEnviarB" type="submit" value="Filtrar">
                 </form>
             </div>
             <div id="menumascotas" class="col-sm-9">
                 <div class="row oculto" id="mascotas">
                     @foreach($mascotas as $m)
 
-                        <a href="{{'mascota/',$m->id}}{{$m->id}}"><div class="mascota @if($m->genero == 'Macho') macho @else hembra @endif col-sm-4 col-md-3">
+                        <a href="{{'mascota/',$m->id}}{{$m->id}}"><div class="mascota @if($m->genero == 'Macho') macho @else hembra @endif col-sm-4">
                             <p>{{$m->nombre}}</p>
                                 <img alt="{{$m->nombre}}" src="storage/{{$m->avatar}}" class="img-responsive imgmascotas">
 
@@ -84,7 +94,7 @@
 
                     @foreach($publicaciones as $p)
                         <a href="{{'publicacion/',$p->id}}{{$p->id}}">
-                        <div class="col-md-6">
+                        <div class="col-md-6 publi">
                             <h4>{{$p->titulo}}</h4>
                             <p>{{$p->cuerpo}}</p>
                         </div>

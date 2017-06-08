@@ -95,14 +95,14 @@
                                 <div class="col-sm-12 form-group">
                                     <label class="control-label">Imagen de perfil</label><br>
 
-                                    <div class="thumbnail col-md-6">
+                                    <div class="thumbnail col-sm-6">
                                         <img src="" alt="avatar" id="foto">
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-sm-6">
                                         <input type="file" name="img" id="file">
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-sm-12">
                                     <input type="submit" class="btn btn-primary" value="Guardar Cambios">
                                 </div>
                             </div>

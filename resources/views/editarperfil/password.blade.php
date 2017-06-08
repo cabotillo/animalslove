@@ -29,7 +29,7 @@
                         </ul>
                         <form action="{{route('editarperfil.password')}}" method="post">
                         {{ csrf_field() }}
-                            <div class="col-sm-6 form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                            <div class="col-md-6 form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                 <label for="password" class="col-md-4 control-label">Contraseña</label>
 
                                 <div class="col-md-6">
@@ -43,7 +43,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group col-sm-6">
+                            <div class="form-group col-md-6">
                                 <label for="password-confirm" class="col-md-4 control-label">Confirmar Contraseña</label>
 
                                 <div class="col-md-6">

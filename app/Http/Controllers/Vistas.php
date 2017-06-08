@@ -16,14 +16,15 @@ class Vistas extends Controller
     {
         $user = DB::table('users')->where('login', $login)->get();
         $id = $user[0]->id;
-
+        $provincia = DB::table('provincias')->where('provincias.id',$user[0]->provincia_id)->value('provincia');
         $tusmascotas = DB::table('mascotas')->select('mascotas.*')->where([['mascotas.disponible', '=' ,1],['user_id', '=',$id]])->get();
         $tuspublicaciones = DB::table('publicaciones')->select('publicaciones.*', 'tipopublicacion.tipo')->join('tipopublicacion', 'tipopublicacion.id', '=', 'publicaciones.tipo_id')->where([['user_id', $id],['publicaciones.disponible',1]])->get();
 
         $data = array(
             'tusmascotas' => $tusmascotas,
             'tuspublicaciones' => $tuspublicaciones,
-            'usuario' => $user
+            'usuario' => $user,
+            'pro' => $provincia
 
         );
 

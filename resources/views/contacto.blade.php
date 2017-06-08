@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-    <h1>Formulario de contacto</h1>
+    <div class="col-md-12"><h1>Formulario de contacto</h1></div>
 
 
     <form action="{{route('contacto')}}" method="post">

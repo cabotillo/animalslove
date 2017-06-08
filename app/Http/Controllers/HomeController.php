@@ -73,7 +73,6 @@ class HomeController extends Controller
         ]);
 
         if ($validation->fails()) {
-            Session::flash('message', "Mínimo 3 caracteres");
             return view('filtro')->with('provincias',DB::table('provincias')->get());
         } else {
 
@@ -83,17 +82,11 @@ class HomeController extends Controller
 
             $usuarios = DB::table('users')->where('nombre', 'like', '%'.$b.'%')->orWhere('apellidos', 'like', '%'.$b.'%')->orWhere('login', 'like', '%'.$b.'%')->get();
 
-            $resultados = count($mascotas) + count($usuarios);
-            if($resultados!=1){
-                $mensaje = 'No hay resultados';
-            }else{
-                $mensaje = 'Resultados:';
-            }
             $data = array(
                 'provincias' => DB::table('provincias')->get(),
                 'mascotas' => $mascotas,
                 'usuarios' => $usuarios,
-                'mensaje' => $mensaje
+                'b' => $b
             );
 
             return view('filtro')->with($data);
