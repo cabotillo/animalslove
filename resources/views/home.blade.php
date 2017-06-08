@@ -16,9 +16,7 @@
             <div class="col-md-2 text-center"><button type="button" id="menu"><span class="glyphicon glyphicon-align-justify"></span></button></div>
         </div>
         <div class="col-md-8">
-
             <img class="img-responsive" src="storage/mascotas1.png" alt="portada">
-
         </div>
 
     <div class="col-sm-12">
@@ -41,7 +39,7 @@
                 </ul>
 
                 @if(Auth::user())<h3><a href="{{'perfil/',Auth::user()->login}}{{Auth::user()->login}}">Ver mi perfil</a></h3>@endif
-                <h2><small>Filtrar Mascotas</small></h2>
+                <h1><small>Filtrar Mascotas</small></h1>
                 <form method="post" action="{{route('busqueda')}}">
                     {{ csrf_field() }}
                     <label class="control-label">Animal</label>
@@ -106,22 +104,6 @@
     </div>
 </div>
 @endsection
-
-@section('styles')
-
-<style>
-
-    A:link, A:visited, A:active {
-         color:#636b6f;
-    }
-    #mascotas{
-        text-align: center;
-        align-items:center;
-    }
-
-</style>
-@endsection
-
 @section('scripts')
 <script>
     $(document).ready(function(){

@@ -48,23 +48,3 @@
 </div>
 
 @endsection
-
-@section('styles')
-
-    <style>
-
-        #mensajes{
-            min-height: 50px;
-        }
-        .left{
-            text-align: left;
-        }
-        .right{
-            text-align: right;
-        }
-
-        .checkV{color: #2ab27b}
-        .checkB{color: #2a88bd}
-
-    </style>
-@endsection

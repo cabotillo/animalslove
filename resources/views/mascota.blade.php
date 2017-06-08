@@ -45,7 +45,7 @@
                 @endif
                 <div class="input-group desc">
                     <br><span class="input-group-addon">{{$icono}}</span>
-                    <input type="text" class="form-control" aria-label="Raza" value="{{$mascota->raza}}" disabled>
+                    <p class="form-control infoUsu">{{$mascota->raza}}</p>
                     <span class="input-group-addon">{{$genero}}</span>
                 </div>
                 <a href="{{'../perfil/',$usuario->id}}{{$usuario->login}}" class="textDeco">

@@ -69,7 +69,7 @@ class HomeController extends Controller
         $b = Input::get('b');
 
         $validation = Validator::make(Input::all(), [
-            'b' => 'required|min:3',
+            'b' => 'required',
         ]);
 
         if ($validation->fails()) {

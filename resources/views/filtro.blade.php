@@ -19,9 +19,17 @@
                 <div class="col-md-6">
                     <label class="control-label">Provincia</label>
                     <select class="form-control" name="provincia">
-
+                        <option></option>
                         @foreach($provincias as $p)
-                            <option @if( old('provincia') == $p->id) selected="selected" @endif value="{{$p->id}}">{{$p->provincia}}</option>
+
+                                @if(isset($pro))
+
+                                <option @if($pro == $p->id) selected="selected" @endif value="{{$p->id}}">{{$p->provincia}}</option>
+                                 @else
+
+                                <option value="{{$p->id}}">{{$p->provincia}}</option>
+
+                                @endif
                         @endforeach
                     </select>
                 </div>
@@ -30,7 +38,11 @@
                 </div>
 
             </form>
-
+            @if(empty($usuarios[0]) && empty($mascotas[0]))
+                @if(isset($b))
+                    <h2 class="text-center">Usuarios no encontrados</h2>
+                    @endif
+            @endif
             @if(!empty($usuarios[0]))
 
                 <h2 class="text-center">Hay {{count($usuarios)}} usuarios:</h2>
@@ -46,7 +58,7 @@
                 </div>
             @endif
 
-
+            <div class="clearfix"></div>
             @if(!empty($mascotas[0]))
 
                 <h2 class="text-center">Hay {{count($mascotas)}} mascota(s): </h2>

@@ -184,7 +184,10 @@ class Vistas extends Controller
 
         $data = array(
             'provincias' => DB::table('provincias')->get(),
-            'usuarios' => $usuarios
+            'usuarios' => $usuarios,
+            'b' => $this->b,
+            'pro' => $this->p,
+            'n' => DB::table('provincias')->where('id', $this->p)->value('provincia')
         );
         return view('filtro')->with($data);
 

@@ -191,3 +191,24 @@ body > div.container > div > ul > li > a{
 #portada{
     margin: 0 auto;max-width: 500px;
 }
+
+#mensajes{
+    min-height: 50px;
+}
+.left{
+    text-align: left;
+}
+.right{
+    text-align: right;
+}
+
+.checkV{color: #2ab27b}
+.checkB{color: #2a88bd}
+
+A:link, A:visited, A:active {
+    color:#636b6f !important;
+}
+#mascotas{
+    text-align: center;
+    align-items:center;
+}
