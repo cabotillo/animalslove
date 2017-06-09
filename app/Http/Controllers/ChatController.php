@@ -16,14 +16,6 @@ class ChatController extends Controller
         $this->middleware('premium')->except('logout');
     }
     public function index(){
-        DB::enableQueryLog();
-
-        /*$usuario = Auth::user()->login;
-        $tuschats = DB::table('chats')->where('user_login_1',$usuario)->orWhere('user_login_2',$usuario)->pluck('id');
-
-        foreach ($tuschats as $c){
-            DB::table()
-        }*/
 
         $tuschats1 = DB::table('chats')->select('users.login','users.avatar','chats.updated_at')
             ->where('user_login_2', Auth::user()->login)->join('users','chats.user_login_1', '=', 'users.login')
@@ -77,12 +69,12 @@ class ChatController extends Controller
             DB::table('mensajes')->insert([
                 'send_username' => $loginChatT,
                 'sender_username' => $login,
-                'message' => 'Hola '.$login
+                'message' => 'Hola '.$loginChatT
             ]);
             DB::table('mensajes')->insert([
                 'sender_username' => $loginChatT,
                 'send_username' => $login,
-                'message' => 'Hola '.$loginChatT
+                'message' => 'Hola '.$login
             ]);
             return redirect()->action('ChatController@cargarMensajes',[$login]);
         }

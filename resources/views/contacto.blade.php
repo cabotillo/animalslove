@@ -3,13 +3,15 @@
 @section('content')
 
 <div class="container">
-    <div class="col-md-12"><h1>Formulario de contacto</h1></div>
-
+    <div class="col-md-12">
+        <h1>Formulario de contacto</h1>
+    </div>
+    <div class="clearfix"></div>
 
     <form action="{{route('contacto')}}" method="post">
         {{ csrf_field() }}
     @if(isset($mensaje))
-        <div class="alert alert-success">
+        <div class="alert alert-success col-md-12">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             {{ $mensaje }}
         </div>

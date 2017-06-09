@@ -28,7 +28,14 @@ class Vistas extends Controller
 
         );
 
-        return view('miperfil')->with($data);
+        if($user[0]->disponible == 0){
+
+            return redirect()->action('HomeController@index');
+
+        }else {
+
+            return view('miperfil')->with($data);
+        }
     }
 
     public function selectRaza(Request $request)
@@ -46,7 +53,7 @@ class Vistas extends Controller
         $validation = Validator::make(Input::all(), [
             'animal' => 'required|integer|exists:animal,id',
             'raza' => 'required|integer|exists:razas,id',
-            'genero' => 'required|string|max:25@|in:Hembra,Macho',
+            'genero' => 'string|max:25|in:Hembra,Macho',
         ]);
 
         if ($validation->fails()) {
@@ -54,15 +61,24 @@ class Vistas extends Controller
             return Redirect::back()->withInput()->withErrors($validation->messages());
         } else {
 
-            $animal = Input::get('animal');
+
             $raza = Input::get('raza');
             $genero = Input::get('genero');
             $mensaje = '';
 
-            $resultados = DB::table('mascotas')->where([
-                ['raza_id', '=', $raza],
-                ['genero', '=', $genero],
-            ])->select('mascotas.*', 'razas.raza', 'animal.animal')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->join('animal','animal.id', '=', 'razas.id_animal')->where('disponible',1)->get();
+            if ($genero != ''){
+                $resultados = DB::table('mascotas')->where([
+                    ['raza_id', '=', $raza],
+                    ['genero', '=', $genero],
+                ])->select('mascotas.*', 'razas.raza', 'animal.animal')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->join('animal','animal.id', '=', 'razas.id_animal')->where('disponible',1)->get();
+            }else{
+                $resultados = DB::table('mascotas')->where([
+                    ['raza_id', '=', $raza],
+                ])->select('mascotas.*', 'razas.raza', 'animal.animal')->join('razas', 'razas.id', '=', 'mascotas.raza_id')->join('animal','animal.id', '=', 'razas.id_animal')->where('disponible',1)->get();
+            }
+
+
+
 
             if(empty($resultados[0])){
                 $mensaje = 'No hay resultados';
@@ -70,7 +86,7 @@ class Vistas extends Controller
                 $mensaje = 'Mascotas encontradas: '.count($resultados);
             }
             $data = array(
-                'resultados' => $resultados,
+                'mascotas' => $resultados,
                 'mensaje'  =>$mensaje,
                 'tipo' => 'Mascotas Filtradas:',
                 'animales' => DB::table('animal')->get()
@@ -116,8 +132,6 @@ class Vistas extends Controller
                 case 'Hembra':
                 $genero = '&#9792;';
                 break;
-
-
         }
 
         $data = array(

@@ -53,7 +53,9 @@
                         <span class="input-group-addon">&#128513;</span>
                         <p class="form-control infoUsu">{{$usuario->login}}</p>
                     </div>
-                </a>
+                </a><br>
+                    <span>Edad: {{$mascota->edad}} años</span><br>
+                    <span>Tamaño: {{$mascota->tamanyo}}</span><br>
             </div>
         </div>
     @if(!empty($publicaciones->first()))

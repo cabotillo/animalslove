@@ -7,7 +7,7 @@
         <!--Menu Principal -->
         <div class="col-sm-12">
             <div class="row">
-                <h1 class="text-center">Buscador de usuarios por provinvias</h1><br>
+                <h1 class="text-center">Buscador de usuarios por provincias</h1><br>
             </div>
 
             <form method="post" action="{{route('filtrousuarios')}}">
@@ -78,40 +78,4 @@
     </div>
 </div>
 @endsection
-
-@section('scripts')
-
-    <script>
-
-    //Flitrar mascotas
-
-    $('#animal').prepend('');
-
-    $('#animal').on('change',function (e) {
-
-        var animal_id = e.target.value;
-
-        if(animal_id){
-            $.ajax({
-                type: "GET",
-                url: "{{url('filtrar')}}?animal_id=" + animal_id,
-                success: function (res) {
-                    if(res){
-                        $("#raza").empty();
-                        $.each(res, function (key, value) {
-                            $("#raza").append('<option value="' + key + '">' + value + '</option>');
-
-                        });
-                    }else{
-                        $("#raza").empty();
-                    }
-                }
-            });
-        }
-    });
-
-
-
-    </script>
-    @endsection
 
