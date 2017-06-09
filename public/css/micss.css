@@ -219,4 +219,22 @@ body > div.container > div > table > tbody > tr > td > a > span{
 }
 
 
-body > div.container > div > table > tbody > tr > td > a{color: #fff !important;}
+body > div.container > div > table > tbody > tr > td > a{
+    color: #fff !important;
+}
+
+body > div.container > div.row.col-sm-4 > div > div > a{
+    color: #FFF !important;
+}
+
+.carousel-control{
+    background: none !important;
+}
+
+#mascotas_ref > A,#publicaciones_ref > a{
+    color: #000 !important;
+}
+
+body > div.container > div > div > table > tbody > tr > td > a{
+    color: #FFF !important;
+}

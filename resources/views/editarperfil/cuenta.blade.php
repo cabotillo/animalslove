@@ -6,7 +6,7 @@
             @if($_GET['u'] == 1)
                 <div class="alert alert-success">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    Perfil actualizado correctamente con avatar
+                    Perfil actualizado correctamente
                 </div>
             @elseif($_GET['u'] == 0)
                 <div class="alert alert-danger">
