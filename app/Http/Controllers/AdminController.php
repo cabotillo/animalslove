@@ -157,7 +157,6 @@ class AdminController extends Controller
         $validation = Validator::make(Input::all(), [
             'nombre' => 'required|string|max:25',
             'apellidos' => 'required|string|max:50',
-            'email' => 'required|email|max:50',
             'telefono' => 'required|integer|regex:/[0-9]{9}/',
             'avatar' => 'mimes:jpeg,bmp,png'
         ]);
@@ -182,14 +181,12 @@ class AdminController extends Controller
                 $file->storeAs($carpeta.$login,$nombreFichero);
 
                 $nombre = Input::get('nombre');
-                $email = Input::get('email');
                 $apellidos = Input::get('apellidos');
                 $telefono = Input::get('telefono');
 
                 User::where('id', $id)->update(array(
                     'nombre' => $nombre,
                     'apellidos' => $apellidos,
-                    'email' => $email,
                     'telefono' => $telefono,
                     'avatar' => $carpeta.$login."/".$nombreFichero
                 ));
@@ -200,14 +197,12 @@ class AdminController extends Controller
             }else{
 
                 $nombre = Input::get('nombre');
-                $email = Input::get('email');
                 $apellidos = Input::get('apellidos');
                 $telefono = Input::get('telefono');
 
                 User::where('id', $id)->update(array(
                     'nombre' => $nombre,
                     'apellidos' => $apellidos,
-                    'email' => $email,
                     'telefono' => $telefono,
                 ));
 

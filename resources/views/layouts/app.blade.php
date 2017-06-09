@@ -89,7 +89,7 @@
                             @if(Auth::user()->tipo == 2)
                                 <li class="{{ Request::path() == 'mensajes' ? 'active' : '' }}"><a href="{{ route('mensajes') }}"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <span class="hidden-sm hidden-md">Mensajes <span class="badge" id="count"></span></span></a></li>
                             @endif
-                            <li class="{{ Request::path() == 'nuevapublicacion' ? 'active' : '' }}"><a href="{{route('nuevapublicacion')}}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> <span class="hidden-sm hidden-md"></span></a></li>
+                            <li class="{{ Request::path() == 'nuevapublicacion' ? 'active' : '' }}"><a href="{{route('nuevapublicacion')}}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> <span class="hidden-sm hidden-md">Publicación</span></a></li>
                             <li class="{{ Request::path() == 'administrar' ? 'active' : '' }}"><a href="{{route('administrar')}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> <span class="hidden-sm hidden-md">Administrar</span></a></li>
                             <li class="{{ Request::path() == 'contacto' || '' ? 'active' : '' }}"><a href="{{ route('contacto') }}"><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span> <span class="hidden-sm hidden-md">Contacto</span></a></li>
                                 <li><form role="search" class="navbar-form navbar-left" action="{{route('filtro')}}" method="post">

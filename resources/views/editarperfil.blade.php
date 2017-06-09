@@ -31,12 +31,7 @@
                         </div>
                         <div class="col-sm-12 col-md-6 form-group {{ $errors->has('email') ? ' has-error' : '' }}">
                             <label class="control-label">Correo Electrónico</label>
-                            <input name="email" type="text" placeholder="Correo electrónico" class="form-control" value="{{$email[0]}}">
-                            @if ($errors->has('email'))
-                                <span class="help-block">
-                                            <strong>{{ $errors->first('email') }}</strong>
-                                        </span>
-                            @endif
+                            <input type="text" disabled class="form-control" value="{{$email[0]}}">
                         </div>
                         <div class="col-sm-12 col-md-6 form-group {{ $errors->has('telefono') ? ' has-error' : '' }}">
                             <label class="control-label">Telefono</label>
@@ -54,6 +49,7 @@
                             <div class="thumbnail col-md-6 imgcuenta">
                                 <img src="../../storage/{{ $avatar[0] }}" alt="avatar" id="avatar"></img>
                             </div>
+                            <div class="clearfix"></div>
                             <div class="col-md-6">
                                 <input type="file" name="avatar" id="file">
                             </div>
