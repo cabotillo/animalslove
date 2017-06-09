@@ -45,7 +45,7 @@
             @endif
             @if(!empty($usuarios[0]))
 
-                <h2 class="text-center">Hay {{count($usuarios)}} usuarios:</h2>
+                <h2 class="text-center">Hay {{count($usuarios)}} usuario(s):</h2>
                 <div class="col-md-12">
                 @foreach($usuarios as $u)
                     <a href="{{'perfil/',$u->login}}{{$u->login}}">

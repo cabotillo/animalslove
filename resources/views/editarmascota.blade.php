@@ -50,7 +50,7 @@
                         <label class="control-label">Imagen de perfil</label><br>
 
                         <div class="thumbnail col-md-6">
-                            <img src="../../../public/storage/{{$mascota->avatar}}" alt="avatar" id="foto">
+                            <img src="../../../storage/{{$mascota->avatar}}" alt="avatar" id="foto">
                         </div>
                         <div class="col-md-6">
                             <input type="file" name="img" id="file">

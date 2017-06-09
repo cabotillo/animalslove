@@ -9,7 +9,7 @@
     <meta property="og:type"          content="Animals Love" />
     <meta property="og:title"         content="AnimalsLove" />
     <meta property="og:description"   content="Red social de mascotas para personas" />
-    <meta property="og:image"         content="https://www.animalslove.ml/storage/mascotas/1/20.jpeg" />
+    <meta property="og:image"         content="https://www.animalslove.ml/storage/mascotas1.png" />
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">

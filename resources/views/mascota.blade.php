@@ -23,7 +23,7 @@
         @if($_GET['u'] == 1)
             <div class="alert alert-success">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                La mascota ha sido editada correctamente con su avatar
+                La mascota ha sido añadida correctamente
             </div>
         @elseif($_GET['u'] == 0)
             <div class="alert alert-danger">

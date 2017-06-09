@@ -191,7 +191,7 @@ class AdminController extends Controller
                     'avatar' => $carpeta.$login."/".$nombreFichero
                 ));
 
-                Session::flash('message', 'Perfil actualizado correctamente con avatar');
+                Session::flash('message', 'Perfil actualizado correctamente');
                 return redirect()->action('AdminController@index');
 
             }else{

@@ -72,6 +72,6 @@ class ContactoController extends Controller
             Mail::to('animalslovees@gmail.com')->send(new SoporteMail($data)); //Mail para la web
 
 
-         return view('contacto')->with('mensaje','Ha sido enviado el mensaje, le responderemos en breve.');
+         return view('contacto')->with('mensaje','Su mensaje ha sido enviado, le responderemos en breve.');
     }
 }

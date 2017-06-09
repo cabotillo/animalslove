@@ -488,7 +488,7 @@ class EditarPerfil extends Controller
         $num = DB::table('mascotas')->where('id',$id)->value('disponible');
 
         $d = $num==1?'0':'1';
-        $mensaje = $num==1?'Tu mascota ha sido ocultada con éxito':'Tu mascota ahora esta disponible';
+        $mensaje = $num==1?'Tu mascota ha sido ocultada con éxito':'Tu mascota ahora está disponible';
 
         try{
             DB::table('mascotas')->where('id',$id)->update(['disponible' => $d]);
@@ -507,7 +507,7 @@ class EditarPerfil extends Controller
         $num = DB::table('publicaciones')->where('id',$id)->value('disponible');
 
         $d = $num==1?'0':'1';
-        $mensaje = $num==1?'Tu publicación ha sido eliminada con éxito':'Tu publicación ahora esta disponible';
+        $mensaje = $num==1?'Tu publicación ha sido ocultada con éxito':'Tu publicación ahora está disponible';
 
         try{
             DB::table('publicaciones')->where('id',$id)->update(['disponible' => $d]);

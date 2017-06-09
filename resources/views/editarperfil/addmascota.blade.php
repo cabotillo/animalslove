@@ -69,7 +69,7 @@
                                     @endif
                                 </div>
                                 <div class="col-sm-6 form-group {{ $errors->has('genero') ? ' has-error' : '' }}">
-                                    <label class="control-label">Genero</label>
+                                    <label class="control-label">Género</label>
                                     <select class="form-control" name="genero" id="genero">
                                         <option value="Macho">Macho</option>
                                         <option value="Hembra">Hembra</option>

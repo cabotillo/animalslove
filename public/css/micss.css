@@ -212,3 +212,11 @@ A:link, A:visited, A:active {
     text-align: center;
     align-items:center;
 }
+
+
+body > div.container > div > table > tbody > tr > td > a > span{
+    color: #fff;
+}
+
+
+body > div.container > div > table > tbody > tr > td > a{color: #fff !important;}
